@@ -1,0 +1,5 @@
+En este directorio se deben insertar las variables del entorno para los diferentes entornos
+de desarrollo
+
+.env.production
+.env.develop
