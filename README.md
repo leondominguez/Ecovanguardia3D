@@ -1,6 +1,6 @@
-# React + Vite
+# EcoVanguardia 3D
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un portal dedicado a abordar las problemáticas ambientales más urgentes de nuestro tiempo. Enfocados en el agua, exploramos la contaminación del agua, la escasez de recursos hídricos y la acidificación de los océanos. A través de investigaciones profundas y soluciones innovadoras, buscamos concienciar y ofrecer respuestas viables para preservar este valioso recurso. Únete a nosotros en esta misión crucial para asegurar un futuro sostenible para las generaciones venideras.
 
 Currently, two official plugins are available:
 
