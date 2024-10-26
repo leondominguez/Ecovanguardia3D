@@ -1,0 +1,86 @@
+/* Modal.css */
+
+/* Fondo de overlay del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Contenedor del modal más grande */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;             /* Ahora ocupa el 90% del ancho de la pantalla */
+  max-width: 1500px;      /* Ajusta este valor para controlar el ancho máximo */
+  height: 90%;            /* Ocupa el 80% de la altura de la pantalla */
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Botón de cierre */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #ff5f5f;
+}
+
+/* Cuerpo del modal con dos columnas */
+.modal-body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Columna de la imagen más grande */
+.modal-image {
+  width: 50%;
+  height: 100%;              /* Ocupa toda la altura del modal */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Columna de texto */
+.modal-text {
+  width: 50%;
+  padding: 2rem;
+  overflow-y: auto;          /* Permite hacer scroll si el texto es largo */
+  background-color: #e0f7fa;
+  color: #2d6a4f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-text h2 {
+  font-size: 2rem;           /* Texto del título más grande */
+  color: #2d6a4f;
+  margin-bottom: 1rem;
+}
+
+.modal-text p {
+  color: #3a5a40;
+  font-size: 1.1rem;         /* Tamaño de fuente más grande para el texto */
+  line-height: 1.6;
+}
