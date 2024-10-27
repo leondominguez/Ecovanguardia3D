@@ -1,13 +1,14 @@
+import React, { useRef } from 'react';
 import TurtleCarey from '../../components/turtle/Turtle-carey';
 import "./Login.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-//import Octopus from "../../components/turtle/Turtle-carey";
 import { Suspense } from "react";
-
-// import { BoxGeometry } from 'three';
+import Camera1 from '../../components/cameras/camera1';
 
 const Login = () => {
+  const camera1Ref = useRef();
+
   return (
     <div className="login-container">
       <div className="login-section">
@@ -23,10 +24,12 @@ const Login = () => {
         <Canvas className="customCanvas">
           <Suspense fallback={null}>
             <ambientLight intensity={10} />
-            <directionalLight position={[5, 5, 5]} intensity={10} />
-            <pointLight position={[10, 10, 10]} intensity={1} />
-            <TurtleCarey />
-            <OrbitControls />
+            <directionalLight position={[1, 10, -5]} intensity={10} />
+            <pointLight position={[0,0,0]} intensity={1} />
+            <Camera1 ref={camera1Ref} />
+            <TurtleCarey position={[0,0,0]} rotation={[Math.PI / 2, 3.15, 4.7]}/>
+            <axesHelper arg={[5]}/>
+            <OrbitControls target={[0,0,0]} />
           </Suspense>
         </Canvas>
       </div>
