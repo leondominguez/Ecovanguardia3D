@@ -11,7 +11,7 @@ const Camera1 = React.forwardRef((props, ref) => {
   // Use useFrame to log the camera position in each frame
   useFrame(() => {
     if (cameraRef.current) {
-      console.log('Camera position:', cameraRef.current.position);
+      //console.log('Camera position:', cameraRef.current.position);
       if (helperRef.current) {
         helperRef.current.update();
       }
@@ -33,7 +33,7 @@ const Camera1 = React.forwardRef((props, ref) => {
       <PerspectiveCamera
         ref={cameraRef}
         makeDefault
-        position={[1.6, 12, -146]} // Ajusta la posición inicial de la cámara
+        position={[1.6, 12, -146]} // Ajusta la posición inicial de la cámara para alejar o acercar el zoom del modelo. importante para saber si se estan viendo.
         {...props}
       />
       {cameraRef.current && <primitive object={new CameraHelper(cameraRef.current)} ref={helperRef} />}
