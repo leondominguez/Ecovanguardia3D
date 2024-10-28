@@ -1,0 +1,62 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: end; /* Alinea logo a la izquierda y links a la derecha */
+    align-items: center;
+    background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%);
+    padding: 0px 60px;
+    align-content: center;
+  }
+  
+  .navbar-logo img {
+    width: 40px; /* Tamaño del logo */
+  }
+  
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 50px; /* Espaciado entre elementos de la lista */
+  }
+  
+  .navbar-links li {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .navbar-links a:hover {
+    color: #2c3e50; /* Mantén el color igual */
+    text-decoration: none; /* Evita el subrayado */
+  }
+  
+  .navbar-links .active {
+    font-weight: bold;
+  }
+  
+  .status-dot {
+    height: 8px;
+    width: 8px;
+    background-color: #4caf50 !important; /* Color del punto verde */
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .navbar-icon {
+    margin-left: 20px; /* Espaciado entre links y el icono */
+  }
+  
+  .icon-profile {
+    width: 24px;
+    height: 24px;
+    background-color: #4caf50 !important; /* Color del icono verde */
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
