@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import TurtleCarey from '../../components/turtle/Turtle-carey';
-import "./Login.css";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
 import Camera1 from '../../components/cameras/camera1';
 import DeepSea from '../../components/staggings/deepsea/DeepSea';
+import "./Login.css";
 
 const Login = () => {
   const camera1Ref = useRef();
@@ -24,15 +23,20 @@ const Login = () => {
         <a href="#">Inicia sesión con correo electrónico y contraseña.</a>
       </div>
       <div className="canvas-login">
-        <Canvas className="customCanvas">
+        <Canvas
+          className="customCanvas"
+          gl={{ powerPreference: "high-performance" }}//antialias: false, alpha: false, powerPreference: "high-performance"  ajustes para optimizar redimiento de renderizado en portatiles o dispositivos moviles
+          camera={{ position: [0, 5, 10], fov: 75 }}
+          pixelRatio={window.devicePixelRatio}
+        >
           <Suspense fallback={null}>
-            <DeepSea/>
-            <ambientLight intensity={10} />
-            <directionalLight position={[1, 10, -5]} intensity={10} />
-            <pointLight position={[0,0,0]} intensity={1} />
+            <DeepSea />
+            <ambientLight intensity={1} />
+            <directionalLight position={[1, 10, -5]} intensity={1} />
+            <pointLight position={[0, 0, 0]} intensity={1} />
             <Camera1 ref={camera1Ref} />
-            <TurtleCarey position={[0,0,0]}/>
-            <axesHelper arg={[5]}/>
+            <TurtleCarey position={[0, 0, 0]} />
+            <axesHelper args={[5]} />
             <OrbitControls />
           </Suspense>
         </Canvas>
