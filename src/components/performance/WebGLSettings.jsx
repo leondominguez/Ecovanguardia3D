@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
 
 const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
-  const { gl } = useThree();
+  const { gl, set } = useThree();
 
   useEffect(() => {
     // Configurar el pixelRatio
@@ -19,13 +19,24 @@ const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
     const handleContextLost = (event) => {
       event.preventDefault();
       console.warn('WebGL context lost. Attempting to restore...');
-      // Aquí puedes intentar restaurar el contexto o recargar la página
+
+      // Intentar restaurar el contexto con WebGL 1.0
+      const canvas = gl.domElement;
+      const newContext = canvas.getContext('webgl', { antialias: false, powerPreference: 'high-performance' });
+
+      if (newContext) {
+        set({ gl: newContext });
+        console.log('WebGL 1.0 context restored.');
+      } else {
+        console.error('Failed to restore WebGL context.');
+      }
     };
+
     gl.domElement.addEventListener('webglcontextlost', handleContextLost, false);
     return () => {
       gl.domElement.removeEventListener('webglcontextlost', handleContextLost, false);
     };
-  }, [gl]);
+  }, [gl, set]);
 
   return null;
 };
