@@ -11,7 +11,7 @@ const DeepSea = () => {
           shadowAttenuation: 0.2,
           height: 20,
           width: 20,
-          scale: 1,
+          scale: 0.1,
         }}
         files={['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']}
         path="/scenes/deep-sea/cubemap/"
