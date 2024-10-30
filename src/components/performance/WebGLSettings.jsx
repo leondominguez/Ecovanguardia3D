@@ -9,10 +9,9 @@ const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
     gl.setPixelRatio(pixelRatio || window.devicePixelRatio || 1);
 
     // Configurar las preferencias de rendimiento
-    gl.getContextAttributes().powerPreference = powerPreference || 'default';
-
-    // Configurar el antialias
-    gl.getContextAttributes().antialias = antialias || false;
+    const contextAttributes = gl.getContextAttributes();
+    contextAttributes.powerPreference = powerPreference || 'default';
+    contextAttributes.antialias = antialias || false;
   }, [gl, pixelRatio, powerPreference, antialias]);
 
   useEffect(() => {
@@ -22,6 +21,14 @@ const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
 
       // Intentar restaurar el contexto con WebGL 1.0
       const canvas = gl.domElement;
+
+      // Eliminar el contexto existente
+      const existingContext = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      if (existingContext) {
+        existingContext.getExtension('WEBGL_lose_context').loseContext();
+      }
+
+      // Crear un nuevo contexto WebGL 1.0
       const newContext = canvas.getContext('webgl', { antialias: false, powerPreference: 'high-performance' });
 
       if (newContext) {
