@@ -1,0 +1,29 @@
+#root {
+  background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%);
+  width: 100%;
+  height: 100%;
+}
+.title-eco {
+  color: #63c548;
+}
+.title-vanguardia {
+  color: #23566e;
+}
+.eslogan {
+  color: #23566e;
+}
+.invitacion {
+  color: #23566e;
+}
+.CopyHome {
+  text-align: center;
+  padding-top: 4rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.title-eco,
+.title-vanguardia {
+  display: inline; /* O inline-block */
+  margin: 2px; /* Elimina márgenes para evitar espacios */
+}

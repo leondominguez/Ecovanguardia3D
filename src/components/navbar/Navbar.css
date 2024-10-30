@@ -3,8 +3,8 @@
     display: flex;
     justify-content: end; /* Alinea logo a la izquierda y links a la derecha */
     align-items: center;
-    background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%);
-    padding: 0px 60px;
+    /* background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%); */
+    background-color: #bfd9ec;
     align-content: center;
   }
   
@@ -58,5 +58,8 @@
     background-color: #4caf50 !important; /* Color del icono verde */
     border-radius: 50%;
     display: inline-block;
+  }
+  .navbar-logo{
+    padding-right: 53.5rem;
   }
   
