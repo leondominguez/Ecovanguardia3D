@@ -25,4 +25,9 @@ dist-ssr
 # .gitignore enviroment variables
 # Ignorar solo el archivo .env dentro de environment
 *.env
+<<<<<<< HEAD
 components/home/
+=======
+.env-develop
+.env-production
+>>>>>>> a9ffcedabf948e2d5394872f7c7b16806ec7783a
