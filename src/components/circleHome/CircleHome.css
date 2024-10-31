@@ -8,7 +8,7 @@
 }
 
 .circle {
-    background-color: rgba(255, 255, 255, 0.9); /* Color blanco con transparencia */
+    background-color: rgba(254, 254, 254, 0.8); /* Color blanco con transparencia */
     width: 180px;
     height: 180px;
     border-radius: 50%;
@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Efecto de sombra */
+    opacity: 0.86; /* Valor de 0 (completamente transparente) a 1 (completamente opaco) */
     
 }
 
