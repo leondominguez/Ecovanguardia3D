@@ -40,7 +40,7 @@
 .modal-3d-view {
   width: 50%; /* La mitad para el modelo 3D */
   height: 100%; /* Ocupa toda la altura disponible */
-  background-image: url('http://via.placeholder.com/100'); /* Asegúrate de cambiar la ruta a la imagen real */
+  background-color:#e6f7f8 /* Asegúrate de cambiar la ruta a la imagen real */
 }
 
 .modal-text {
