@@ -9,6 +9,8 @@ const TurtleCarey = (props) => {
     <group {...props} dispose={null}>
       <group>
         <mesh
+          castShadow
+          receiveShadow
           rotation={[Math.PI / 2.6, 3.15, 5.3]}
           name="10042_Sea_Turtle_V1"
           geometry={nodes["10042_Sea_Turtle_V1"].geometry}

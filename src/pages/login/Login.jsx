@@ -28,8 +28,8 @@ const Login = () => {
           className="customCanvas"
           camera={{ position: [0, 5, 10], fov: 75 }}
         >
-          <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
-          <Suspense fallback={null}>
+            <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
+            <Suspense fallback={null}>
             <DeepSea />
             <ambientLight intensity={1} />
             <directionalLight position={[1, 10, -5]} intensity={1} />
