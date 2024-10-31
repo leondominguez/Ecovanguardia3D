@@ -65,7 +65,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('https://via.placeholder.com/150'); /* Asegúrate de cambiar la ruta a la imagen real */
+    background-color: #D6E7F2; /* Asegúrate de cambiar la ruta a la imagen real */
     background-size: cover;
     flex-grow: 1;
     box-sizing: border-box;
