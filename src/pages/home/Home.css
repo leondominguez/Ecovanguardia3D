@@ -22,7 +22,7 @@
 }
 .CopyHome {
   text-align: center;
-  padding-top: 4rem;
+  padding-top: 5rem;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -30,7 +30,7 @@
 .title-eco,
 .title-vanguardia {
   display: inline; /* O inline-block */
-  margin: 2px; /* Elimina márgenes para evitar espacios */
+  margin: px; /* Elimina márgenes para evitar espacios */
 }
 
 .horizontal-container {
@@ -48,7 +48,7 @@
   bottom: 0;
   left: 0;
   width: 100vw; /* Ajusta el video para que ocupe el 100% del viewport */
-  height: 50vh; /* Ajusta el video para que ocupe el 60% del viewport */
+  height: 60vh; /* Ajusta el video para que ocupe el 60% del viewport */
   object-fit: cover; /* Asegura que el video esté detrás del contenido */
 }
 

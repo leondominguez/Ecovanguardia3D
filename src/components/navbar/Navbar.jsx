@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom"; 
 
 export const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
@@ -59,8 +60,11 @@ export const Navbar = () => {
           </li>
         </ul>
         <div className="navbar-icon">
-          <span className="icon-profile"></span>
+          <Link to="/login">
+            <img src="/assets/icons/icon-profile.png" alt="Profile Icon" className="icon-profile" />
+          </Link>
         </div>
+   
       </nav>
     </>
   );

@@ -10,7 +10,7 @@
   }
   
   .navbar-logo img {
-    width: 40px; /* Tamaño del logo */
+    width: 70px; /* Tamaño del logo */
     padding-left: 20px;
   }
   
@@ -55,9 +55,9 @@
   }
   
   .icon-profile {
-    width: 24px;
-    height: 24px;
-    background-color: #4caf50 !important; /* Color del icono verde */
+    width: 35px;
+    height: 35px;
+    background-color: #31be35 !important; /* Color del icono verde */
     border-radius: 50%;
     display: inline-block;
   }
