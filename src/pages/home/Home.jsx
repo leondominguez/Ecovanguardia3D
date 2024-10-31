@@ -77,7 +77,7 @@ function Home() {
         <div className="video-container">
           <video
             className="background-video"
-            src="src/assets/videos/5607745-uhd_3840_2160_30fps.mp4"
+            src="/assets/videos/5607745-uhd_3840_2160_30fps.mp4"
             autoPlay
             loop
             muted
