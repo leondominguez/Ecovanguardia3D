@@ -26,8 +26,9 @@
   right: 10px;
   background: transparent;
   border: none;
-  font-size: 18px;
+  font-size: 40px;
   cursor: pointer;
+  color: #08212c;
 }
 
 .modal-body {

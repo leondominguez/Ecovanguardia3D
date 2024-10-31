@@ -31,7 +31,7 @@ const WaterAcidification = () => {
         <Physics>
           <Plane />
           <Box />
-          <IsleDelfino scale={[0.001, 0.001, 0.001]} position={[10, 1, -50]} /> {/* Ajusta el tamaño del modelo si es necesario */}
+          <IsleDelfino scale={[0.001, 0.001, 0.001]} position={[10, 0, -50]} /> {/* Ajusta el tamaño del modelo si es necesario */}
         </Physics>
       </Suspense>
       <LogCameraPosition />
