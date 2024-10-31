@@ -1,3 +1,4 @@
+// Water-acidification.jsx
 import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls } from '@react-three/drei';
@@ -9,6 +10,16 @@ import Camera1 from '../../components/cameras/camera1';
 
 // Extiende las geometrías necesarias
 extend({ BoxGeometry, PlaneGeometry });
+
+const content = (
+  <div>
+    <h2 style={{ textAlign: 'left' }}><strong>¿Que Es La Acificicacion De Los Oceanos?</strong></h2>
+    <p style={{ textAlign: 'left' }}>La acidificación de los océanos es el proceso por el cual los océanos se vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la atmósfera.</p>
+    <p style={{ textAlign: 'left' }}><strong>Causas: </strong>La quema de combustibles fósiles y la deforestación aumentan los niveles de CO₂, que es absorbido por los océanos.</p>
+    <p style={{ textAlign: 'left' }}><strong>Problemas: </strong>Esto afecta la vida marina, debilitando corales y moluscos, y alterando las cadenas alimenticias.</p>
+    <p style={{ textAlign: 'left' }}><strong>Soluciones: </strong>Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el uso de energías renovables. Un reto crucial para nuestro planeta. 🌍</p>
+  </div>
+);
 
 const WaterAcidification = () => {
   const camera1Ref = useRef();
@@ -67,3 +78,4 @@ const LogCameraPosition = () => {
 };
 
 export default WaterAcidification;
+export { content as waterAcidificationContent };
