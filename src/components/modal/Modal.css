@@ -12,9 +12,8 @@
 
 .modal-content {
   position: relative;
-  width: 80%;
-  max-width: 1500px;
-  height: 80vh; /* Asegura que tenga una altura consistente */
+  width: 95%; /* Ajusta el ancho del modal */
+  height: 95vh; /* Ajusta la altura del modal */
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -38,13 +37,13 @@
 }
 
 .modal-3d-view {
-  width: 50%; /* La mitad para el modelo 3D */
+  width: 75%; /* La mitad para el modelo 3D */
   height: 100%; /* Ocupa toda la altura disponible */
-  background-color:#e6f7f8 /* Asegúrate de cambiar la ruta a la imagen real */
+  background-color: #e6f7f8; /* Asegúrate de cambiar la ruta a la imagen real */
 }
 
 .modal-text {
-  width: 50%; /* La otra mitad para el texto */
+  width: 40%; /* La otra mitad para el texto */
   padding: 20px;
   background-color: #e6f7f8;
   display: flex;
