@@ -1,4 +1,4 @@
-import CircleHome from "../../components/circleHome/circleHome";
+import CircleHome from "../../components/circleHome/CircleHome";
 import { Navbar } from "../../components/navbar/Navbar";
 import "./Home.css";
 import { useState } from "react";
