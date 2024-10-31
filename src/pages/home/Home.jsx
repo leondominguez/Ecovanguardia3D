@@ -1,4 +1,4 @@
-import CircleHome from "../../components/circleHome/circleHome"; //circulos de la pagina principal
+import CircleHome from "../../components/circleHome/CircleHome";
 import { Navbar } from "../../components/navbar/Navbar";
 import "./Home.css";
 import { useState } from "react";
@@ -37,6 +37,7 @@ function Home() {
         </div>
 
         <div className="horizontal-container">
+
           <CircleHome //water pollution
             logo="src/assets/icons/sea-life-fish-svgrepo-com.svg"
             slogan="Contaminación <br /> Del agua"
@@ -75,15 +76,19 @@ function Home() {
         </div>
 
         <div className="video-container">
-          <video
-            className="background-video"
-            src="src/assets/videos/5607745-uhd_3840_2160_30fps.mp4"
-            autoPlay
-            loop
-            muted
-          ></video>
+          <video  className="background-video"
+          src="src/assets/videos/5607745-uhd_3840_2160_30fps.mp4"
+          autoPlay
+          loop
+          muted
+        ></video>
+        
         </div>
 
+
+
+
+        
         {modalData && (
           <Modal
             title={modalData.title}

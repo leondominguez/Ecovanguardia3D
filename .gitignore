@@ -27,3 +27,4 @@ dist-ssr
 *.env
 .env-develop
 .env-production
+git config core.ignorecase false
