@@ -1,15 +1,17 @@
 /* Navbar Styles */
 .navbar {
     display: flex;
-    justify-content: end; /* Alinea logo a la izquierda y links a la derecha */
+    justify-content:space-around; /* Alinea logo a la izquierda y links a la derecha */
     align-items: center;
     /* background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%); */
     background-color: #bfd9ec;
     align-content: center;
+
   }
   
   .navbar-logo img {
     width: 40px; /* Tamaño del logo */
+    padding-left: 20px;
   }
   
   .navbar-links {
@@ -59,7 +61,5 @@
     border-radius: 50%;
     display: inline-block;
   }
-  .navbar-logo{
-    padding-right: 53.5rem;
-  }
+  
   
