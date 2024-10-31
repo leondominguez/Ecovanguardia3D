@@ -1,0 +1,58 @@
+.home {
+  background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%);
+  width: 100%;
+  min-height: 100vh; /* Asegura que ocupe al menos el 100% del viewport */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+.title-eco {
+  color: #63c548;
+}
+.title-vanguardia {
+  color: #23566e;
+}
+.eslogan {
+  color: #23566e;
+}
+.invitacion {
+  color: #23566e;
+}
+.CopyHome {
+  text-align: center;
+  padding-top: 4rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.title-eco,
+.title-vanguardia {
+  display: inline; /* O inline-block */
+  margin: 2px; /* Elimina márgenes para evitar espacios */
+}
+
+.horizontal-container {
+  display: flex;
+  gap: 40px; 
+  justify-content: center; 
+  align-items: center; 
+  padding-top: 19px;
+  height: 20vh;
+  
+}
+
+.background-video {
+
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* Ajusta el video para que ocupe el 100% del viewport */
+  height: 50vh; /* Ajusta el video para que ocupe el 60% del viewport */
+  object-fit: cover; /* Asegura que el video esté detrás del contenido */
+}
+
+.CopyHome, .horizontal-container {
+  position: relative;/* Mantener estos elementos sobre el video */
+  
+}

@@ -1,5 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import SwimMove1 from "../motions/SwinMove1";
+
 const TurtleCarey = (props) => {
   const { nodes, materials } = useGLTF("/models-3d/turtle/turtle.glb");
 
@@ -8,6 +9,8 @@ const TurtleCarey = (props) => {
     <group {...props} dispose={null}>
       <group>
         <mesh
+          castShadow
+          receiveShadow
           rotation={[Math.PI / 2.6, 3.15, 5.3]}
           name="10042_Sea_Turtle_V1"
           geometry={nodes["10042_Sea_Turtle_V1"].geometry}
