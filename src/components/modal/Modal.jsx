@@ -1,22 +1,20 @@
+// Modal.jsx
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Modal.css';
 
-function Modal({ title, content, onClose, ModelComponent }) {
+const Modal = ({ title, content, onClose, ModelComponent }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>X</button>
-
+        <button className="close-button" onClick={onClose}>&times;</button>
         <div className="modal-body">
-          {/* Sección del modelo 3D */}
           <div className="modal-3d-view">
-            <ModelComponent /> {/* Renderiza el modelo 3D */}
+            {ModelComponent && <ModelComponent />}
           </div>
-
-          {/* Sección de texto */}
           <div className="modal-text">
             <h2>{title}</h2>
-            <p>{content}</p>
+            <div>{content}</div> {/* Renderiza el contenido como un elemento React */}
           </div>
         </div>
       </div>
@@ -26,7 +24,7 @@ function Modal({ title, content, onClose, ModelComponent }) {
 
 Modal.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.node.isRequired, // Cambia a PropTypes.node para aceptar elementos React
   onClose: PropTypes.func.isRequired,
   ModelComponent: PropTypes.elementType.isRequired,
 };

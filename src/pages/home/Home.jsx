@@ -5,7 +5,7 @@ import { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import WaterShortage from "../../pages/problematics/Water-shortage"; // Importa el componente del modelo
 import WaterPollution from "../../pages/problematics/Water-pollution"; // Importa el componente del modelo
-import WaterAcidification from "../../pages/problematics/Water-acidification"; // Importa el componente del modelo
+import WaterAcidification, { waterAcidificationContent } from "../../pages/problematics/Water-acidification"; // Importa el componente del modelo
 
 function Home() {
   const [modalData, setModalData] = useState(null);
@@ -66,8 +66,8 @@ function Home() {
             slogan="Acidificación <br /> de los Océanos"
             onClick={() =>
               openModal(
-                "Acidificación del agua",
-                "La acidificación del agua es un problema ambiental que afecta a los ecosistemas marinos...",
+                "",//ojito le pase el titulo vacio para que no se muestre en el modal ya que hay redundancia de titulo
+                waterAcidificationContent, //pasa el contenido de texto al modal traido desde el componente water-acidification
                 WaterAcidification // Pasa el componente del modelo 3D
               )
             }
