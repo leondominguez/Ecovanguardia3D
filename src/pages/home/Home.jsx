@@ -43,7 +43,7 @@ function Home() {
             onClick={() =>
               openModal(
                 "Contaminación del agua",
-                "La contaminación del agua es un problema grave que afecta a la vida acuática y a la salud humana...",
+                "La contaminación del agua es una crisis devastadora que envenena ríos y océanos, causa enfermedades y destruye ecosistemas, dejando a millones sin acceso a agua limpia y poniendo en peligro la vida en el planeta.",
                 WaterPollution // Pasa el componente del modelo 3D
               )
             }

@@ -2,6 +2,7 @@ import { Suspense, useRef } from "react";
 import { Canvas,useFrame } from "@react-three/fiber";
 import { OrbitControls,PerspectiveCamera } from "@react-three/drei"; // Importa el modelo de contaminación del agua
 import Buzo from "../../components/models-3d-component/buzo/Buzo";
+import WebGLSettings from '../../components/performance/WebGLSettings';
 
 const WaterPollution = () => {
   const camera = useRef();
@@ -16,6 +17,7 @@ const WaterPollution = () => {
         position={[0.2,0.6,3.6]}
         fov={75} // Ajusta el campo de visión de la cámara
       />
+      <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
       <Suspense>
         <directionalLight position={[5, 3, -5]} intensity={2} />
         <ambientLight  position={[0, 0, 0]} intensity={0.5} />
@@ -23,27 +25,16 @@ const WaterPollution = () => {
         <Buzo scale={1} />
         <OrbitControls enableZoom={true} />
       </Suspense>
-      <LogCameraPosition />
     </Canvas>
-    // <Suspense fallback={<div>Loading...</div>}>
-    //   <ambientLight intensity={0.5} />
-    //   <pointLight position={[10, 10, 10]} />
-
-    //   <Buzo scale={1} />
-    //   <OrbitControls enableZoom={true} />
-
-    //   {/* <Octopus scale={1} /> Ajusta el tamaño del modelo si es necesario */}
-    // </Suspense>
-    //  {/* Permite rotar y hacer zoom */}
   );
 };
 
 
-const LogCameraPosition = () => {
-  useFrame(({ camera }) => {
-    console.log(`Camera position: x=${camera.position.x}, y=${camera.position.y}, z=${camera.position.z}`);
-  });
-  return null;
-};
+// const LogCameraPosition = () => {
+//   useFrame(({ camera }) => {
+//     // console.log(`Camera position: x=${camera.position.x}, y=${camera.position.y}, z=${camera.position.z}`);
+//   });
+//   return null;
+// };
 
 export default WaterPollution;

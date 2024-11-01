@@ -36,7 +36,7 @@ const Login = () => {
             <pointLight position={[0, 0, 0]} intensity={1} />
             <Camera1 ref={camera1Ref} />
             <TurtleCarey position={[0, 0, 0]} />
-            <axesHelper args={[5]} />
+            {/* <axesHelper args={[5]} /> */}
             <OrbitControls />
           </Suspense>
         </Canvas>
