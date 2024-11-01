@@ -11,6 +11,7 @@
 }
 
 .modal-content {
+  color: #23566e;
   position: relative;
   width: 97%; /* Ajusta el ancho del modal */
   height: 97vh; /* Ajusta la altura del modal */
@@ -28,7 +29,7 @@
   border: none;
   font-size: 40px;
   cursor: pointer;
-  color: #08212c;
+  color: #17bcd9;
 }
 
 .modal-body {

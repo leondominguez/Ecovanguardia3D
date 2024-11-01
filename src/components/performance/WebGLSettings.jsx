@@ -17,7 +17,7 @@ const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
   useEffect(() => {
     const handleContextLost = (event) => {
       event.preventDefault();
-      console.warn('WebGL context lost. Attempting to restore...');
+      
 
       // Intentar restaurar el contexto con WebGL 1.0
       const canvas = gl.domElement;
@@ -33,9 +33,7 @@ const WebGLSettings = ({ pixelRatio, powerPreference, antialias }) => {
 
       if (newContext) {
         set({ gl: newContext });
-        console.log('WebGL 1.0 context restored.');
-      } else {
-        console.error('Failed to restore WebGL context.');
+        
       }
     };
 
