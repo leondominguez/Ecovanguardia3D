@@ -7,14 +7,16 @@ body {
   position: relative;
 }
 
-.overlay-text {
+.overlay-3dtext-landing {
   position: absolute;
   top: 50%; /* Ajusta la posición vertical */
   left: 50%; /* Ajusta la posición horizontal */
   transform: translate(-50%, -50%); /* Centra el texto */
-  color: white;
-  font-size: 20px;
-  z-index: 10; /* Asegura que el texto esté por encima del canvas */
+  color: rgb(204, 46, 46);
+  font-weight: bolder;
+  font-size: 30px;
+  padding: 3%;
+  z-index: 5; /* Asegura que el texto esté por encima del canvas */
 }
 
 .burbujas-mar{

@@ -4,10 +4,10 @@ import "./Landing.css";
 import Logoimage from "/images/logos/gotaLogo.png";
 import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
 import WebGLSettings from "../../components/performance/WebGLSettings";
-import TurtleCarey from "../../components/turtle/Turtle-carey";
+
 import Camera1 from "../../components/cameras/camera1";
 import SeaSimulation from "../../components/html-3d-example/sea-simulation/seaSimulation.jsx";
-import { OrbitControls } from "@react-three/drei";
+
 
 import { useNavigate } from "react-router-dom";
 
