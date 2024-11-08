@@ -4,9 +4,12 @@ import "./Landing.css";
 import Logoimage from "/images/logos/gotaLogo.png";
 import { OrbitControls } from "@react-three/drei";
 import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
-import DeepSea from "../../components/staggings/deepsea/DeepSea";
+import WebGLSettings from "../../components/performance/WebGLSettings";
 import TurtleCarey from "../../components/turtle/Turtle-carey";
 import Camera1 from "../../components/cameras/camera1";
+import SeaSimulation from "../../components/html-3d-example/sea-simulation/seaSimulation.jsx";
+
+import { useNavigate } from "react-router-dom";
 import Drop from "../../components/models-3d-component/drop/Drop";
 import { DirectionalLightHelper } from "three";
 import { useHelper } from "@react-three/drei";
@@ -15,7 +18,7 @@ function LightWithHelper() {
   const lightRef = useRef();
   const target = useRef();
 
-  useHelper(lightRef, DirectionalLightHelper, 5, "red");
+  // useHelper(lightRef, DirectionalLightHelper, 5, "red");
 
   return (
     <>
@@ -31,6 +34,22 @@ function LightWithHelper() {
 }
 
 function Landing() {
+  const navigate = useNavigate();
+ 
+  const handleButtonClick = () => {
+    navigate("/home");
+  };
+
+  useEffect(() => {
+    // const canvas = document.getElementById("myCanvas");
+    // const ctx = canvas.getContext("2d");
+    // // Ajusta el tamaño del canvas
+    // canvas.width = canvas.offsetWidth;
+    // canvas.height = canvas.offsetHeight;
+    // // Dibuja algo en el canvas (puedes personalizar esto)
+    // ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }, []);
   const [counter, setCounter] = useState(0);
   const dropRef = useRef();
   useEffect(() => {
@@ -59,6 +78,7 @@ function Landing() {
 
   return (
     <div className="landing">
+      
       <div className="contenedor1">
         <Canvas
           camera={{ position: [0, 0, 15], fov: 50 }}
@@ -77,22 +97,31 @@ function Landing() {
           <span className="vanguardia">VANGUARDIA</span>
         </h1>
         <h2 className="eslogan">Pequeños cambios, grandes impactos</h2>
-        <h3 className="invitacion">
-          Elige un tema y sumérgete en la aventura ecovanguardista
-        </h3>
+
+        <p></p>
+        <p></p>
+        <p></p>
+        
       </div>
 
+      {/* <div className="contenedor2">
+      </div>
+       */}
       <div className="canvas-container">
         <Canvas id="myCanvas">
+        <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
           <Camera1 />
-          <Suspense fallback={null}>
-            <BubblesSimulation />
-            <DeepSea />
-            <TurtleCarey />
+           <Suspense fallback={null}>
+           <directionalLight position={[10, 10, -5]} intensity={5} />
+           
           </Suspense>
         </Canvas>
+        <div className="seaContainer">
+        <SeaSimulation/>
+        </div>
+       
 
-        <button className="boton">boton</button>
+        <button className="boton" onClick={handleButtonClick}>boton</button>
       </div>
     </div>
   );

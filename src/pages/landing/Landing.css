@@ -1,102 +1,114 @@
 .landing {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y:visible;
-  }
-  
-  .contenedor1 {
-    margin-bottom: 1%;
-    flex: 5.5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: lightblue; /* Fondo azul claro */
-    overflow: hidden;
-    
-  }
- 
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
-  .contenedor2 {
-    margin-top: -5%;
-    clip-path: ellipse(80% 100% at 50% 100%); /* Curva en la parte superior */
-    display: flex;
-    flex: 2;
-    align-items: center;
-    justify-content: center;
-    background-color: #1a1a1a;
-    position: relative;
-    /* background-image: url('https://via.placeholder.com/800x100'); */
+.contenedor1 {
+  margin-bottom: 1%;
+  flex: 4.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightblue; /* Fondo azul claro */
+  overflow: hidden;
+  z-index: 2;
+}
 
-  }
-  
- 
-  .canvas-container {
-    margin-top: -4%;/* Ajusta este valor según sea necesario para superponer los contenedores */
-    clip-path: ellipse(150% 100% at 50% 100%);
-    flex: 7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative; /* Necesario para la posición absoluta del botón */
-    overflow: hidden;
-  }
-  
-  #myCanvas {
-    width: 100%;
-    height: 100%;
-    /* background-image: url('https://via.placeholder.com/800x600'); Imagen de placeholder */
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .boton {
-    position: absolute; /* Posición absoluta dentro del canvas */
-    bottom: 20px; /* Ajusta según sea necesario */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #1a1a1a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-  }
+/*
+.contenedor2 {
+  margin-top: -5%;
+  clip-path: ellipse(80% 100% at 50% 100%); Curva en la parte superior
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  position: relative;
+  background-image: url('https://via.placeholder.com/800x100');
+}
+*/
 
-  .logo {
-    width: 180px; /* Ajusta el tamaño del logo según sea necesario */
-    height: auto;
-    padding: 0%;
-    
-  }
-  
-  .titulo {
-    font-size: 3em;
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .eco {
-    color: green; /* Color para "ECO" */
-    font-weight: bold;
-  }
-  
-  .vanguardia {
-    color: blue; /* Color para "VANGUARDIA" */
-    font-weight: bold;
-  }
-  
-  .eslogan {
-    font-size: 1.5em;
-    margin: 1px 0;
-  }
-  
-  .invitacion {
-    font-size: 1.2em;
-    margin-bottom: 4%;
-  }
+.canvas-container {
+  margin-top: -5%; /* Ajusta este valor según sea necesario para superponer los contenedores */
+  clip-path: ellipse(130% 100% at 50% 100%);
+  flex: 6.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Necesario para la posición absoluta del botón */
+  overflow: hidden;
+  z-index: 2; /* Asegura que el canvas esté en un nivel superior */
+}
+
+#myCanvas {
+  width: 100%;
+  height: 100%;
+  /* background-image: url('https://via.placeholder.com/800x600'); Imagen de placeholder */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 3;
+}
+.seaContainer{
+  margin-top: -15%; /* Ajusta este valor según sea necesario para superponer los contenedores */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Asegúrate de que el SeaSimulation esté en un nivel inferior */
+}
+
+
+.boton {
+  position: absolute; /* Posición absoluta dentro del canvas */
+  bottom: 20px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  z-index: 5; /* Asegura que el botón esté en un nivel superior */
+}
+
+.logo {
+  width: 180px; /* Ajusta el tamaño del logo según sea necesario */
+  height: auto;
+  padding: 0%;
+}
+
+.titulo {
+  font-size: 3em;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eco {
+  color: #63c548; /* Color para "ECO" */
+  font-weight: bold;
+}
+
+.vanguardia {
+  color: #23566e; /* Color para "VANGUARDIA" */
+  font-weight: bold;
+}
+
+.eslogan {
+  color:#23566e;
+  font-size: 1.5em;
+  margin: 1px 0;
+}
+
+.invitacion {
+  font-size: 1.2em;
+  margin-bottom: 4%;
+}
