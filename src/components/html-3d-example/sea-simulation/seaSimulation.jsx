@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import vertexShader from './vertexShader.glsl';
 import fragmentShader from './fragmentShader.glsl';
+import './seaSimulation.css'; // Asegúrate de importar el archivo CSS
+import BubblesSimulation from '../BubblesSimulation';
+import { Canvas } from '@react-three/fiber';
 
 const SeaSimulation = () => {
   const containerRef = useRef(null);
@@ -24,7 +27,9 @@ const SeaSimulation = () => {
 
       timeUniform = {
         iGlobalTime: { type: 'f', value: 0.1 },
-        iResolution: { type: 'v2', value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+        iResolution: { type: 'v', value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        waveSpeed: { type: 'f', value: 0.9 },
+        waveHeight: { type: 'f', value: 1.0 }
       };
 
       const material = new THREE.ShaderMaterial({
@@ -33,8 +38,7 @@ const SeaSimulation = () => {
         fragmentShader: fragmentShader
       });
 
-    //   const water = new THREE.Mesh(new THREE.PlaneGeometry(window.innerWidth, window.innerHeight, 40), material);
-    const water = new THREE.Mesh(new THREE.PlaneGeometry(100, 100, 20, 20), material);
+      const water = new THREE.Mesh(new THREE.PlaneGeometry(100, 100, 20, 20), material);
       scene.add(water);
 
       const geometry = new THREE.SphereGeometry(10, 16, 16);
@@ -50,7 +54,7 @@ const SeaSimulation = () => {
     };
 
     const render = () => {
-      timeUniform.iGlobalTime.value += clock.getDelta();
+      timeUniform.iGlobalTime.value += clock.getDelta() * timeUniform.waveSpeed.value;
       renderer.render(scene, camera);
       requestAnimationFrame(render);
     };
@@ -71,7 +75,18 @@ const SeaSimulation = () => {
   }, []);
 
   return (
-    <div ref={containerRef} id="container"></div>
+    <div ref={containerRef} id="container">
+      <div className='burbujas-mar'>
+        <Canvas className='canvas-burbujas'>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <BubblesSimulation distance={1800} position={[0, 0, -100]} />
+        </Canvas>
+      </div>
+      <div className="overlay-text">
+        Texto 2D superpuesto
+      </div>
+    </div>
   );
 };
 

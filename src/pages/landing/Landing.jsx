@@ -56,9 +56,7 @@ function Landing() {
           <Camera1 />
            <Suspense fallback={null}>
            <directionalLight position={[10, 10, -5]} intensity={5} />
-            <BubblesSimulation position={[0, 0, -200]} />
-            <TurtleCarey />
-            <OrbitControls/>
+           
           </Suspense>
         </Canvas>
         <div className="seaContainer">

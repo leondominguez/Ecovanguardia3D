@@ -4,8 +4,8 @@ uniform vec2 iResolution;
 const int NUM_STEPS = 8;
 const float PI = 3.1415;
 const float EPSILON = 1e-3;
-const int ITER_GEOMETRY = 3;
-const int ITER_FRAGMENT = 5;
+const int ITER_GEOMETRY = 2;
+const int ITER_FRAGMENT = 3;
 const float SEA_HEIGHT = 0.6;
 const float SEA_CHOPPY = 1.0;
 const float SEA_SPEED = 1.0;
@@ -67,7 +67,7 @@ float specular(vec3 n,vec3 l,vec3 e,float s) {
 vec3 getSkyColor(vec3 e) {
   e.y = max(e.y, 0.0);
   vec3 ret;
-  ret.x = pow(1.0 - e.y, 2.0);
+  ret.x = pow(1.0 - e.y, 7.5);
   ret.y = 1.0 - e.y;
   ret.z = 0.6+(1.0 - e.y) * 0.4;
   return ret;
@@ -183,7 +183,7 @@ void main() {
   SEA_TIME = iGlobalTime * SEA_SPEED; // Initialize here
 
   vec2 uv = gl_FragCoord.xy / iResolution.xy;
-  uv = uv * 1.8 - 1.0;
+  uv = uv * 1.9 - 1.0;
   uv.x *= iResolution.x / iResolution.y;    
   float time = iGlobalTime * 0.3;
 
