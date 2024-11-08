@@ -54,7 +54,8 @@ function Landing() {
         <Canvas id="myCanvas">
         <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
           <Camera1 />
-          <Suspense fallback={null}>
+           <Suspense fallback={null}>
+           <directionalLight position={[10, 10, -5]} intensity={5} />
             <BubblesSimulation position={[0, 0, -200]} />
             <TurtleCarey />
             <OrbitControls/>
