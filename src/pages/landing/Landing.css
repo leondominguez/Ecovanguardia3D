@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-y:visible;
   }
   
   .contenedor1 {
     margin-bottom: 1%;
-    flex: 4.5;
+    flex: 5.5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,13 +27,13 @@
     justify-content: center;
     background-color: #1a1a1a;
     position: relative;
-    background-image: url('https://via.placeholder.com/800x100');
+    /* background-image: url('https://via.placeholder.com/800x100'); */
 
   }
   
  
   .canvas-container {
-    margin-top: -5%;/* Ajusta este valor según sea necesario para superponer los contenedores */
+    margin-top: -4%;/* Ajusta este valor según sea necesario para superponer los contenedores */
     clip-path: ellipse(150% 100% at 50% 100%);
     flex: 7;
     display: flex;
@@ -45,7 +46,7 @@
   #myCanvas {
     width: 100%;
     height: 100%;
-    background-image: url('https://via.placeholder.com/800x600'); /* Imagen de placeholder */
+    /* background-image: url('https://via.placeholder.com/800x600'); Imagen de placeholder */
     background-size: cover;
     background-position: center;
   }
