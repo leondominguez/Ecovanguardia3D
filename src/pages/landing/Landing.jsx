@@ -55,7 +55,7 @@ function Landing() {
         <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
           <Camera1 />
           <Suspense fallback={null}>
-            <BubblesSimulation onClick={handleButtonClick}/>
+            <BubblesSimulation position={[0, 0, -200]} />
             <TurtleCarey />
             <OrbitControls/>
           </Suspense>
