@@ -9,7 +9,16 @@ import Camera1 from "../../components/cameras/camera1";
 import SeaSimulation from "../../components/html-3d-example/sea-simulation/seaSimulation.jsx";
 import { OrbitControls } from "@react-three/drei";
 
+import { useNavigate } from "react-router-dom";
+
 function Landing() {
+
+  const navigate = useNavigate();
+ 
+  const handleButtonClick = () => {
+    navigate("/home");
+  };
+
   useEffect(() => {
     // const canvas = document.getElementById("myCanvas");
     // const ctx = canvas.getContext("2d");
@@ -31,7 +40,7 @@ function Landing() {
           <span className="vanguardia">VANGUARDIA</span>
         </h1>
         <h2 className="eslogan">Pequeños cambios, grandes impactos</h2>
-        
+
         <p></p>
         <p></p>
         <p></p>
@@ -46,8 +55,8 @@ function Landing() {
         <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
           <Camera1 />
           <Suspense fallback={null}>
-            <BubblesSimulation />
-            <TurtleCarey/>
+            <BubblesSimulation onClick={handleButtonClick}/>
+            <TurtleCarey />
             <OrbitControls/>
           </Suspense>
         </Canvas>
@@ -55,9 +64,8 @@ function Landing() {
         <SeaSimulation/>
         </div>
        
-     
 
-        <button className="boton">boton</button>
+        <button className="boton" onClick={handleButtonClick}>boton</button>
       </div>
     </div>
   );
