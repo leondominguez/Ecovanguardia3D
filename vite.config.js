@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { loadEnv } from 'vite';
 import path from 'path';
+import glsl from 'vite-plugin-glsl';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -9,7 +10,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, path.resolve(__dirname, 'env'));
 
   return {
-    plugins: [react()],
+    plugins: [react(),glsl()],
     define: {
       // Permite acceder a las variables de entorno en el código usando import.meta.env
       'process.env': env,
