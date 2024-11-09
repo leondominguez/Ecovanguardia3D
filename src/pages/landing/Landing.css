@@ -42,7 +42,7 @@
 */
 
 .canvas-container {
-  margin-top: -4%; /* Ajusta este valor según sea necesario para superponer los contenedores */
+  margin-top: -5%; /* Ajusta este valor según sea necesario para superponer los contenedores */
   clip-path: ellipse(130% 100% at 50% 100%);
   flex: 6.5;
   display: flex;
