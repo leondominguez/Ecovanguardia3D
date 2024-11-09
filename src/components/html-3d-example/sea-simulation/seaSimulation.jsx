@@ -100,7 +100,7 @@ const SeaSimulation = () => {
         </Canvas>
       </div>
       <div className="overlay-3dtext-landing">
-        Texto 2D superpuesto
+        Texto 2D superpuesto!
       </div>
     </div>
   );
