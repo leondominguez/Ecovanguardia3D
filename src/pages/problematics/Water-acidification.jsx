@@ -13,12 +13,22 @@ extend({ BoxGeometry, PlaneGeometry });
 
 const content = (
   <div>
-    <h2 style={{ textAlign: 'left' }}><strong>¿Que Es La Acificicacion De Los Oceanos?</strong></h2>
-    <p style={{ textAlign: 'left' }}>La acidificación de los océanos es el proceso por el cual los océanos se vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la atmósfera.</p>
-    <p style={{ textAlign: 'left' }}><strong>Causas: </strong>La quema de combustibles fósiles y la deforestación aumentan los niveles de CO₂, que es absorbido por los océanos.</p>
-    <p style={{ textAlign: 'left' }}><strong>Problemas: </strong>Esto afecta la vida marina, debilitando corales y moluscos, y alterando las cadenas alimenticias.</p>
-    <p style={{ textAlign: 'left' }}><strong>Soluciones: </strong>Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el uso de energías renovables. Un reto crucial para nuestro planeta. 🌍</p>
-  </div>
+  <p style={{ textAlign: 'left' }}>
+    La acidificación de los océanos es el proceso por el cual los océanos se vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la atmósfera.
+  </p>
+  <p style={{ textAlign: 'left' }}>
+    <h3>Causas:</h3>
+    La quema de combustibles fósiles y la deforestación aumentan los niveles de CO₂, que es absorbido por los océanos.
+  </p>
+  <p style={{ textAlign: 'left' }}>
+    <h3>Problemas:</h3>
+    Esto afecta la vida marina, debilitando corales y moluscos, y alterando las cadenas alimenticias.
+  </p>
+  <p style={{ textAlign: 'left' }}>
+    <h3>Soluciones:</h3>
+    Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el uso de energías renovables. Un reto crucial para nuestro planeta. 🌍
+  </p>
+</div>
 );
 
 const WaterAcidification = () => {
@@ -45,7 +55,7 @@ const WaterAcidification = () => {
           <IsleDelfino scale={[0.001, 0.001, 0.001]} position={[10, 0, -50]} /> {/* Ajusta el tamaño del modelo si es necesario */}
         </Physics>
       </Suspense>
-      <LogCameraPosition />
+      
     </Canvas>
   );
 };
@@ -70,12 +80,12 @@ const Box = () => {
   );
 };
 
-const LogCameraPosition = () => {
-  useFrame(({ camera }) => {
-    console.log(`Camera position: x=${camera.position.x}, y=${camera.position.y}, z=${camera.position.z}`);
-  });
-  return null;
-};
+// const LogCameraPosition = () => {
+//   useFrame(({ camera }) => {
+//     // console.log(`Camera position: x=${camera.position.x}, y=${camera.position.y}, z=${camera.position.z}`);
+//   });
+//   return null;
+// };
 
 export default WaterAcidification;
 export { content as waterAcidificationContent };

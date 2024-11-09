@@ -43,7 +43,7 @@ function Home() {
             onClick={() =>
               openModal(
                 "Contaminación del agua",
-                "La contaminación del agua es un problema grave que afecta a la vida acuática y a la salud humana...",
+                "La contaminación del agua es una crisis devastadora que envenena ríos y océanos, causa enfermedades y destruye ecosistemas, dejando a millones sin acceso a agua limpia y poniendo en peligro la vida en el planeta.",
                 WaterPollution // Pasa el componente del modelo 3D
               )
             }
@@ -55,7 +55,7 @@ function Home() {
             onClick={() =>
               openModal(
                 "Escasez del agua",
-                "La escasez de agua es un problema global que afecta a millones de personas...",
+                "La escasez de agua es una crisis mundial que afecta a millones de personas. Esta problemática surge cuando la demanda de agua supera la disponibilidad de fuentes seguras. Factores como el crecimiento poblacional, el cambio climático, la contaminación y el uso insostenible de recursos han intensificado esta situación. La falta de acceso a agua limpia y segura no solo impacta la salud y el bienestar de las personas, sino también la economía, la agricultura y los ecosistemas. Es crucial tomar medidas de conservación, uso eficiente y protección de nuestros recursos hídricos para asegurar un futuro sostenible.",
                 WaterShortage // Pasa el componente del modelo 3D
               )
             }
@@ -66,7 +66,7 @@ function Home() {
             slogan="Acidificación <br /> de los Océanos"
             onClick={() =>
               openModal(
-                "",//ojito le pase el titulo vacio para que no se muestre en el modal ya que hay redundancia de titulo
+                "¿Que Es La Acificicacion De Los Oceanos?",//ojito le pase el titulo vacio para que no se muestre en el modal ya que hay redundancia de titulo
                 waterAcidificationContent, //pasa el contenido de texto al modal traido desde el componente water-acidification
                 WaterAcidification // Pasa el componente del modelo 3D
               )
