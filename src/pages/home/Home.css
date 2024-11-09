@@ -48,7 +48,7 @@
   bottom: 0;
   left: 0;
   width: 100vw; /* Ajusta el video para que ocupe el 100% del viewport */
-  height: 60vh; /* Ajusta el video para que ocupe el 60% del viewport */
+  height: 70vh; /* Ajusta el video para que ocupe el 60% del viewport */
   object-fit: cover; /* Asegura que el video esté detrás del contenido */
 }
 

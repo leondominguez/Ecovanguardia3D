@@ -10,7 +10,7 @@ const float SEA_HEIGHT = 0.6;
 const float SEA_CHOPPY = 1.0;
 const float SEA_SPEED = 1.0;
 const float SEA_FREQ = 0.16;
-const vec3 SEA_BASE = vec3(0.1,0.19,0.22);
+const vec3 SEA_BASE = vec3(0.1,0.1,0.22);
 const vec3 SEA_WATER_COLOR = vec3(0.8,0.9,0.6);
 mat2 octave_m = mat2(1.6,1.2,-1.2,1.6);
 
@@ -75,7 +75,7 @@ vec3 getSkyColor(vec3 e) {
 
 float sea_octave(vec2 uv, float choppy) {
   uv += noise(uv);         
-  vec2 wv = 1.0 - abs(sin(uv));
+  vec2 wv = 1.6 - abs(sin(uv));
   vec2 swv = abs(cos(uv));    
   wv = mix(wv, swv, wv);
   return pow(1.0 - pow(wv.x * wv.y, 0.65), choppy);
@@ -183,7 +183,7 @@ void main() {
   SEA_TIME = iGlobalTime * SEA_SPEED; // Initialize here
 
   vec2 uv = gl_FragCoord.xy / iResolution.xy;
-  uv = uv * 1.9 - 1.0;
+  uv = uv * 2.3 - 1.0;
   uv.x *= iResolution.x / iResolution.y;    
   float time = iGlobalTime * 0.3;
 

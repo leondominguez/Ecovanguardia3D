@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import vertexShader from './vertexShader.glsl';
 import fragmentShader from './fragmentShader.glsl';
-import './seaSimulation.css'; // Asegúrate de importar el archivo CSS
+import './SeaSimulation.css'; // Asegúrate de importar el archivo CSS
 import BubblesSimulation from '../BubblesSimulation';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import Text3D from '../../text3d/Text3D';
 
 const SeaSimulation = () => {
@@ -19,7 +19,7 @@ const SeaSimulation = () => {
       clock = new THREE.Clock();
 
       camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-      camera.position.set(20, 10, 20);
+      camera.position.set(0, 10, 30);
       camera.lookAt(scene.position);
       scene.add(camera);
 
@@ -76,14 +76,14 @@ const SeaSimulation = () => {
   }, []);
 
   return (
-    
     <div ref={containerRef} id="container">
       <div className='burbujas-mar'>
         <Canvas className='canvas-burbujas'>
           <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <BubblesSimulation distance={1800} position={[0, 0, -100]} />
-          <Text3D text="HTML 3D" position={[-1.9, 0, -10]} color={"blue"} size={2} depth={0.5} /> 
+          <pointLight position={[10, 10, -1000]} />
+          <BubblesSimulation distance={1800} position={[0, 10, -5000]} />
+          
+          <Text3D text="HTML 3D" position={[-5, -10, -30]} color={"#63c548"} size={2} depth={0.5} /> 
 
           <directionalLight
             castShadow

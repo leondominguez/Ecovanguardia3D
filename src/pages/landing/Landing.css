@@ -3,10 +3,21 @@
   flex-direction: column;
   height: 100vh;
 }
+.contenedor0 {
+  padding: 0;
+  box-sizing: border-box;
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightblue; /* Fondo azul claro */
+  overflow: hidden;
+  z-index: 2;
+}
 
 .contenedor1 {
-  margin-bottom: 1%;
-  flex: 4.5;
+  flex: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +42,7 @@
 */
 
 .canvas-container {
-  margin-top: -5%; /* Ajusta este valor según sea necesario para superponer los contenedores */
+  margin-top: -4%; /* Ajusta este valor según sea necesario para superponer los contenedores */
   clip-path: ellipse(130% 100% at 50% 100%);
   flex: 6.5;
   display: flex;
@@ -61,6 +72,16 @@
   z-index: 0; /* Asegúrate de que el SeaSimulation esté en un nivel inferior */
 }
 
+.canvas-logo3d {
+  margin-top: 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  z-index: 1; 
+}
+
 
 .boton {
   position: absolute; /* Posición absoluta dentro del canvas */
@@ -85,8 +106,8 @@
 }
 
 .titulo {
-  font-size: 3em;
-  margin: 10px 0;
+  font-size: 4em;
+  margin: 0%;
   display: flex;
   align-items: center;
   justify-content: center;
