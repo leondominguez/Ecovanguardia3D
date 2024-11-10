@@ -4,10 +4,10 @@ import "./Landing.css";
 // import Logoimage from "/images/logos/gotaLogo.png";
 import { OrbitControls } from "@react-three/drei";
 // import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
-import WebGLSettings from "../../components/performance/WebGLSettings";
-import SeaSimulation from "../../components/models-3d-component/sea-simulation/SeaSimulation.jsx";
+import WebGLSettings from "../../components/performance/WebGLSettings.jsx";
 import { useNavigate } from "react-router-dom";
-import Drop from "../../components/models-3d-component/drop/Drop";
+import Drop from "../../components/models-3d-component/drop/Drop.jsx";
+import SeaSimulation from "../../components/models-3d-component/sea-simulation/seaSimulation.jsx";
 // // import { DirectionalLightHelper } from "three";
 // // import { useHelper } from "@react-three/drei";
 
