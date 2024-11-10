@@ -13,9 +13,11 @@ import PointLight from '../../components/lights/PointLight';
 import DirectionalLight from '../../components/lights/DirectionalLight';
 import AmbientLight from '../../components/lights/AmbientLight';
 import BubblesSimulation from '../../components/models-3d-component/bubbles-simulation/BubblesSimulation';
+import SchoolFish1 from '../../components/models-3d-component/school-fish1/SchoolFish1';
+
 const Login = () => {
   const turtleRef = useRef();
-
+  const fishRef = useRef();
   return (
     <div className="login-container">
       <div className="login-section">
@@ -42,7 +44,7 @@ const Login = () => {
           />
           <Suspense fallback={null}>
             <DeepSea />
-            <AmbientLight intensity={100} color="blue" />
+            <AmbientLight intensity={0} color="blue" />
             <DeepSea
               receiveShadow={true}
               shadowBias={0.001}
@@ -54,7 +56,7 @@ const Login = () => {
             />
             <DirectionalLight
               position={[200, 800, 200]}
-              intensity={25}
+              intensity={0}
               castShadow={true} // Activa las sombras
               showHelper={false}
               shadowProps={{
@@ -69,7 +71,7 @@ const Login = () => {
             />
             <PointLight
               position={[260, 800, 325]}
-              intensity={100}
+              intensity={0}
               color={"white"}
               showHelper={false}
               castShadow={true} // Activa las sombras
@@ -129,6 +131,15 @@ const Login = () => {
               position={[100, 200, 300]}
             />
             esto permite modificar la ruta de las texturas del cubemap.
+
+            <SchoolFish1
+              ref={fishRef}
+              animationName="swim"
+              showAnimationsList={true}
+              activateAllAnimations={true}
+              position={[1, -1.5, -100]}
+              scale={[20, 20, 20]}
+            />
             <OrbitControls enableRotate={true} target={[0, 0, 0]} /> /* Habilita
             la rotación de la cámara */
           </Suspense>

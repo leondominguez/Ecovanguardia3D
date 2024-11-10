@@ -2,7 +2,19 @@ import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react
 import { useGLTF, useAnimations } from '@react-three/drei';
 import SwimMove1 from "../../motions/SwinMove1";
 
-const TurtleCarey = forwardRef(({ animationName, rotation = [Math.PI / 2, 0, 0], ...props }, ref) => {
+/*
+    Este componente recibe las siguientes props:
+    <TurtleCarey
+        ref={turtleRef}
+        animationName="swim"
+        showAnimationsList={true}
+        activateAllAnimations={true}
+        position={[0, 0, 0]}
+        scale={[1, 1, 1]}
+      />
+ */
+
+const TurtleCarey = forwardRef(({ animationName, showAnimationsList = false, activateAllAnimations = false, rotation = [Math.PI / 2, 0, 0], ...props }, ref) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/models-3d/turtle/turtle.glb");
   const { actions } = useAnimations(animations, group);
@@ -10,23 +22,39 @@ const TurtleCarey = forwardRef(({ animationName, rotation = [Math.PI / 2, 0, 0],
   useImperativeHandle(ref, () => group.current);
 
   useEffect(() => {
-    if (actions && animationName) {
-      const action = actions[animationName];
-      if (action) {
-        action.reset().fadeIn(0.5).play();
+    if (actions) {
+      if (activateAllAnimations) {
+        Object.keys(actions).forEach((key) => {
+          const action = actions[key];
+          if (action) {
+            action.reset().fadeIn(0.5).play();
+          }
+        });
         return () => {
-          action.fadeOut(0.5);
+          Object.keys(actions).forEach((key) => {
+            const action = actions[key];
+            if (action) {
+              action.fadeOut(0.5);
+            }
+          });
         };
+      } else if (animationName) {
+        const action = actions[animationName];
+        if (action) {
+          action.reset().fadeIn(0.5).play();
+          return () => {
+            action.fadeOut(0.5);
+          };
+        }
       }
     }
-  }, [actions, animationName]);
+  }, [actions, animationName, activateAllAnimations]);
 
   useEffect(() => {
-    // Listar las animaciones disponibles
-    if (animations) {
+    if (showAnimationsList && animations) {
       console.log("Animaciones de tortuga disponibles:", animations.map(anim => anim.name));
     }
-  }, [animations]);
+  }, [animations, showAnimationsList]);
 
   return (
     <group ref={group} {...props} dispose={null}>
