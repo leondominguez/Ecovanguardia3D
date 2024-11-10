@@ -1,12 +1,25 @@
-.container {
+.container{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
-    height: 230px;
+    height: 200px;
+    transition: all 0.4s ease; /* Transición suave */
 }
 
+.circle:hover {
+    opacity: 1; /* Hace que el círculo sea completamente opaco al pasar el mouse sobre él */
+    width: 200px;
+    height: 200px;
+    transition: all 0.3s ease; /* Transición suave */
+    color: #535bf2;
+    filter: drop-shadow(0 0 2em #16ddb2f8); /* Añade una sombra de color azul */
+}
+
+.circle.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa); /* Añade una sombra de color azul claro */
+}
 .circle {
     background-color: rgba(254, 254, 254, 0.8); /* Color blanco con transparencia */
     width: 180px;

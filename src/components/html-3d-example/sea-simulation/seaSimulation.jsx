@@ -79,6 +79,8 @@ const SeaSimulation = () => {
     <div ref={containerRef} id="container">
       <div className='burbujas-mar'>
         <Canvas className='canvas-burbujas'>
+
+          
           <ambientLight />
           <pointLight position={[10, 10, -1000]} />
           <BubblesSimulation distance={1800} position={[0, 10, -5000]} />

@@ -6,7 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 // import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
 import WebGLSettings from "../../components/performance/WebGLSettings";
 
-import Camera1 from "../../components/cameras/camera1";
+import CameraDebuger from '../../components/Debug/CameraDebuger'; // Importa el nuevo componente
 import SeaSimulation from "../../components/html-3d-example/sea-simulation/SeaSimulation.jsx";
 
 import { useNavigate } from "react-router-dom";
@@ -72,6 +72,7 @@ function Landing() {
           <LightWithHelper />
           <ambientLight position={[0, 0, 0]} intensity={0.5} />
           <Suspense>
+            
             <OrbitControls enableZoom={false} enableRotate={false} />
             <Drop ref={dropRef} />
           </Suspense>

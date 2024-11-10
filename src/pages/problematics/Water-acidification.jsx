@@ -6,7 +6,8 @@ import { Physics, useBox, usePlane } from '@react-three/cannon';
 import { BoxGeometry, PlaneGeometry } from 'three';
 import IsleDelfino from '../../components/models-3d-component/isle-delfino/Isle-defino'; // Importa el modelo de acidificación del agua
 import WebGLSettings from '../../components/performance/WebGLSettings'; // Importa el nuevo componente
-import Camera1 from '../../components/cameras/camera1';
+import CameraDebuger from '../../components/Debug/CameraDebuger';
+
 
 // Extiende las geometrías necesarias
 extend({ BoxGeometry, PlaneGeometry });
@@ -32,7 +33,7 @@ const content = (
 );
 
 const WaterAcidification = () => {
-  const camera1Ref = useRef();
+  const CameraDebugerRef = useRef();
 
   return (
     <Canvas style={{ width: '100%', height: '100%' }}>
@@ -45,7 +46,7 @@ const WaterAcidification = () => {
       <Suspense fallback={null}>
         <directionalLight position={[10, 10, -5]} intensity={0.01} />
         <pointLight position={[0, 0, 0]} intensity={1} />
-        <Camera1 ref={camera1Ref} />
+        <CameraDebuger ref={CameraDebugerRef} />
         <axesHelper args={[20]} />
         <OrbitControls enableZoom={true} /> {/* Permite rotar y hacer zoom */}
         <ambientLight intensity={0.01} position={[0, 0, 0]} />

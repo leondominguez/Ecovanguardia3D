@@ -3,7 +3,7 @@ import { PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { CameraHelper, DirectionalLight } from 'three';
 
-const Camera1 = React.forwardRef((props, ref) => {
+const CameraDebuger = React.forwardRef((props, ref) => {
   const cameraRef = useRef();
   const helperRef = useRef();
   const lightRef = useRef();
@@ -11,7 +11,7 @@ const Camera1 = React.forwardRef((props, ref) => {
   // Use useFrame to log the camera position in each frame
   useFrame(() => {
     if (cameraRef.current) {
-      //console.log('Camera position:', cameraRef.current.position);
+      console.log('Camera position:', cameraRef.current.position);
       if (helperRef.current) {
         helperRef.current.update();
       }
@@ -26,6 +26,7 @@ const Camera1 = React.forwardRef((props, ref) => {
   React.useImperativeHandle(ref, () => ({
     camera: cameraRef.current,
     light: lightRef.current,
+    
   }));
 
   return (
@@ -42,4 +43,4 @@ const Camera1 = React.forwardRef((props, ref) => {
   );
 });
 
-export default Camera1;
+export default CameraDebuger;

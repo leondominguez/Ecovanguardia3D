@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import SubmarineModel from '../../components/submarine/Submarine'; // Importa el modelo del submarino
+import SubmarineModel from '../../components/models-3d-component/submarine/Submarine'; // Importa el modelo del submarino
 import DeepSea from '../../components/staggings/deepsea/DeepSea'; // Importa el fondo submarino
 import WebGLSettings from '../../components/performance/WebGLSettings';
 const WaterShortage = () => {
