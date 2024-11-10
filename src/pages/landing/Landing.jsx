@@ -5,7 +5,7 @@ import "./Landing.css";
 import { OrbitControls } from "@react-three/drei";
 // import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
 import WebGLSettings from "../../components/performance/WebGLSettings";
-import SeaSimulation from "../../components/html-3d-example/sea-simulation/SeaSimulation";
+import SeaSimulation from "../../components/models-3d-component/sea-simulation/seaSimulation";
 import { useNavigate } from "react-router-dom";
 import Drop from "../../components/models-3d-component/drop/Drop";
 // // import { DirectionalLightHelper } from "three";

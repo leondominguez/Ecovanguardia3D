@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import vertexShader from './vertexShader.glsl';
 import fragmentShader from './fragmentShader.glsl';
 import './SeaSimulation.css'; // Asegúrate de importar el archivo CSS
-import BubblesSimulation from '../BubblesSimulation';
+import BubblesSimulation from '../../models-3d-component/bubbles-simulation/BubblesSimulation'; // Importa el componente BubblesSimulation
 import { Canvas, useFrame } from '@react-three/fiber';
 import Text3D from '../../text3d/Text3D';
 

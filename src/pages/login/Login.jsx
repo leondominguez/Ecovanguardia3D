@@ -12,7 +12,7 @@ import CameraOrbitalLight from '../../components/cameras/CameraOrbitalLight';
 import PointLight from '../../components/lights/PointLight';
 import DirectionalLight from '../../components/lights/DirectionalLight';
 import AmbientLight from '../../components/lights/AmbientLight';
-import BubblesSimulation from '../../components/html-3d-example/BubblesSimulation';
+import BubblesSimulation from '../../components/models-3d-component/bubbles-simulation/BubblesSimulation';
 const Login = () => {
   const turtleRef = useRef();
 
