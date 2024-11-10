@@ -11,8 +11,8 @@ import SeaSimulation from "../../components/html-3d-example/sea-simulation/SeaSi
 
 import { useNavigate } from "react-router-dom";
 import Drop from "../../components/models-3d-component/drop/Drop";
-// // import { DirectionalLightHelper } from "three";
-// // import { useHelper } from "@react-three/drei";
+// import { DirectionalLightHelper } from "three";
+// import { useHelper } from "@react-three/drei";
 
 function LightWithHelper() {
   const lightRef = useRef();
@@ -38,25 +38,22 @@ function Landing() {
 
   const [counter, setCounter] = useState(0);
   const dropRef = useRef();
+
   useEffect(() => {
-    // Función para manejar el evento wheel
     const handleWheel = (event) => {
-      event.preventDefault(); // Evita el scroll predeterminado
+      event.preventDefault();
       if (dropRef.current) {
-        // Ajusta la velocidad de rotación aquí
         const rotationSpeed = 0.65;
         if (event.deltaY < 0) {
-          dropRef.current.rotation.y -= rotationSpeed; // Rota hacia la izquierda
+          dropRef.current.rotation.y -= rotationSpeed;
         } else {
-          dropRef.current.rotation.y += rotationSpeed; // Rota hacia la derecha
+          dropRef.current.rotation.y += rotationSpeed;
         }
       }
     };
 
-    // Añadir el listener al evento wheel
     window.addEventListener("wheel", handleWheel, { passive: false });
 
-    // Eliminar el listener cuando el componente se desmonte
     return () => {
       window.removeEventListener("wheel", handleWheel);
     };
@@ -65,41 +62,32 @@ function Landing() {
   return (
     <div className="landing">
       <div className="contenedor0">
-        <Canvas className="canvas-logo3d"
-          camera={{ position: [0, 0, 15], fov:35 }}
-        
-        >
+        {/* Desactiva temporalmente el modelo 3D */}
+        {/* 
+        <Canvas className="canvas-logo3d" camera={{ position: [0, 0, 15], fov: 35 }}>
           <LightWithHelper />
           <ambientLight position={[0, 0, 0]} intensity={0.5} />
           <Suspense>
             <OrbitControls enableZoom={false} enableRotate={false} />
             <Drop ref={dropRef} />
           </Suspense>
-        </Canvas>
-      </div>
-        <div className="contenedor1">
-          <h1 className="titulo">
-            <span className="eco">ECO</span>
-            <span className="vanguardia">VANGUARDIA</span>
-          </h1>
-          <h2 className="eslogan">Pequeños cambios, grandes impactos</h2>
-          <p><br /></p>
-          <p><br /></p>
-          <p></p>
-        
+        </Canvas> 
+        */}
       </div>
 
-      {/* <div className="contenedor2">
+      <div className="contenedor1">
+        <h1 className="titulo">
+          <span className="eco">ECO</span>
+          <span className="vanguardia">VANGUARDIA</span>
+        </h1>
+        <h2 className="eslogan">Pequeños cambios, grandes impactos</h2>
       </div>
-       */}
+
+      {/* Desactiva temporalmente el modelo 3D y simulación */}
+      {/* 
       <div className="canvas-container">
         <Canvas id="myCanvas">
-          <WebGLSettings
-            pixelRatio={window.devicePixelRatio}
-            powerPreference="high-performance"
-            antialias={false}
-          />
-        
+          <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
           <Suspense fallback={null}>
             <directionalLight position={[10, 10, -5]} intensity={5} />
           </Suspense>
@@ -107,11 +95,12 @@ function Landing() {
         <div className="seaContainer">
           <SeaSimulation />
         </div>
-
-        <button className="boton" onClick={handleButtonClick}>
-          boton
-        </button>
       </div>
+      */}
+
+      <button className="boton" onClick={handleButtonClick}>
+        Ir a Home
+      </button>
     </div>
   );
 }
