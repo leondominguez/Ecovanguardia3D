@@ -7,7 +7,7 @@ import DeepSea from '../../components/staggings/deepsea/DeepSea';
 import WebGLSettings from '../../components/performance/WebGLSettings'; // Importa el nuevo componente
 import "./Login.css";
 import { AxesHelper, Camera } from 'three';
-import CameraFrontal from '../../components/cameras/cameraFrontal';
+import CameraFrontal from '../../components/cameras/CameraFrontal';
 import CameraOrbitalLight from '../../components/cameras/CameraOrbitalLight';
 import PointLight from '../../components/lights/PointLight';
 import DirectionalLight from '../../components/lights/DirectionalLight';
