@@ -1,23 +1,31 @@
-import React, { useRef, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import TurtleCarey from '../../components/models-3d-component/turtle/Turtle-carey';
-import CameraDebuger from '../../components/Debug/CameraDebuger';
-import DeepSea from '../../components/staggings/deepsea/DeepSea';
-import WebGLSettings from '../../components/performance/WebGLSettings'; // Importa el nuevo componente
+import React, { useRef, Suspense, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
+import TurtleCarey from "../../components/models-3d-component/turtle/Turtle-carey";
+import CameraDebuger from "../../components/Debug/CameraDebuger";
+import DeepSea from "../../components/staggings/deepsea/DeepSea";
+import WebGLSettings from "../../components/performance/WebGLSettings"; // Importa el nuevo componente
 import "./Login.css";
-import { AxesHelper, Camera } from 'three';
-import CameraFrontal from '../../components/cameras/CameraFrontal';
-import CameraOrbitalLight from '../../components/cameras/CameraOrbitalLight';
-import PointLight from '../../components/lights/PointLight';
-import DirectionalLight from '../../components/lights/DirectionalLight';
-import AmbientLight from '../../components/lights/AmbientLight';
-import BubblesSimulation from '../../components/models-3d-component/bubbles-simulation/BubblesSimulation';
-import SchoolFish1 from '../../components/models-3d-component/school-fish1/SchoolFish1';
+import { AxesHelper, Camera } from "three";
+import CameraOrbitalLight from "../../components/cameras/CameraOrbitalLight";
+import PointLight from "../../components/lights/PointLight";
+import DirectionalLight from "../../components/lights/DirectionalLight";
+import AmbientLight from "../../components/lights/AmbientLight";
+import BubblesSimulation from "../../components/models-3d-component/bubbles-simulation/BubblesSimulation";
+import SchoolFish1 from "../../components/models-3d-component/school-fish1/SchoolFish1";
+import Doryfish from "../../components/models-3d-component/dory/Doryfish";
+
+
 
 const Login = () => {
   const turtleRef = useRef();
-  const fishRef = useRef();
+  const doryRef = useRef();
+  const fishRefs = {
+    bank1: useRef(),
+    bank2: useRef(),
+    bank3: useRef(),
+  };
+
   return (
     <div className="login-container">
       <div className="login-section">
@@ -43,10 +51,9 @@ const Login = () => {
             antialias={false}
           />
           <Suspense fallback={null}>
-            <DeepSea />
-            <AmbientLight intensity={0} color="blue" />
+            <AmbientLight intensity={2} color="yellow" />
             <DeepSea
-              receiveShadow={true}
+              receiveShadow={false}
               shadowBias={0.001}
               shadowResolution={1024}
               shadowAttenuation={0.5}
@@ -56,8 +63,8 @@ const Login = () => {
             />
             <DirectionalLight
               position={[200, 800, 200]}
-              intensity={0}
-              castShadow={true} // Activa las sombras
+              intensity={5}
+              castShadow={false} // Activa las sombras
               showHelper={false}
               shadowProps={{
                 "shadow-mapSize-width": 1024,
@@ -74,7 +81,7 @@ const Login = () => {
               intensity={0}
               color={"white"}
               showHelper={false}
-              castShadow={true} // Activa las sombras
+              castShadow={false} // Activa las sombras
               shadowProps={{
                 "shadow-mapSize-width": 1024,
                 "shadow-mapSize-height": 1024,
@@ -85,21 +92,21 @@ const Login = () => {
                 "shadow-camera-bottom": -10,
               }}
             />
-            {/* <CameraFrontal position={[0, 0, 80]} rotation={[0, 0, 0]} fov={75} showHelper={true} /> /*establecer showHelper en true para mostrar el CameraHelper */}
+            {/* <CameraFrontal position={[0, 0, 80]} rotation={[0, 0, 0]} fov={75} showHelper={false} /> /*establecer showHelper en false para mostrar el CameraHelper */}
             <CameraOrbitalLight //point, spot, directional
               position={[30, 30, 100]}
               targetRef={turtleRef}
               fov={75}
-              showCameraHelper={true}
+              showCameraHelper={false}
               lightType="directional"
               lightProps={{
                 color: "white",
-                intensity: 10,
-                distance: 100,
+                intensity: 5,
+                distance: 130,
                 angle: Math.PI / 4,
-                penumbra: 0.5,
-                decay: 1,
-                showHelper: true,
+                penumbra: 2.5,
+                decay: 5,
+                showHelper: false,
               }}
               shadowProps={{
                 "shadow-mapSize-width": 1024,
@@ -111,17 +118,37 @@ const Login = () => {
                 "shadow-camera-bottom": -10,
               }}
             />
-            /*establecer showHelper en true para mostrar el CameraHelper */
+            /*establecer showHelper en false para mostrar el CameraHelper */
             <TurtleCarey
               ref={turtleRef}
               position={[0, 0, 0]}
               rotation={[Math.PI / 2, 0, Math.PI]}
               animationName={"rig|rig|swim_rig"}
             />
+            <Doryfish
+              ref={doryRef}
+              animationName="rig|rig|swim"
+              showAnimationsList={false}
+              activateAllAnimations={false}
+              position={[42, 42, 0]}
+              scale={[0.5, 0.5, 0.5]}
+              rotation={[Math.PI / 0.5, -0.6, 0]}
+            />
+
+          {/* <CardumenMotion
+            ModelFish={Doryfish}
+            fishCount={10}
+            position={[0, 0, 0]}
+            animationName="swim"
+            showAnimationsList={true}
+            activateAllAnimations={true}
+            rotation={[Math.PI / 2, 0, Math.PI]}
+          /> */}
+
             <axesHelper args={[5000]} /> Agrega un AxesHelper con un tamaño de 5
             unidades para ayudar a visualizar los ejes.
             <BubblesSimulation
-              cubemapPath="/scenes/deep-sea/cubemap/"
+              cubemapPath="/scenes/deep-sea/cubemap/" // esto permite modificar la ruta de las texturas del cubemap.
               bubbleCount={1000}
               speed={0.0001}
               refractionRatio={0.9}
@@ -130,16 +157,24 @@ const Login = () => {
               distance={2500}
               position={[100, 200, 300]}
             />
-            esto permite modificar la ruta de las texturas del cubemap.
-
             <SchoolFish1
-              ref={fishRef}
+              ref={fishRefs.bank1}
               animationName="swim"
-              showAnimationsList={true}
+              showAnimationsList={false}
               activateAllAnimations={true}
-              position={[1, -1.5, -100]}
+              position={[0, 0, -200]}
               scale={[20, 20, 20]}
             />
+              <SchoolFish1
+              ref={fishRefs.bank2}
+              animationName="swim"
+              showAnimationsList={false}
+              activateAllAnimations={true}
+              position={[150, -150, -100]}
+              scale={[20, 20, 20]}
+            />
+ 
+          
             <OrbitControls enableRotate={true} target={[0, 0, 0]} /> /* Habilita
             la rotación de la cámara */
           </Suspense>
@@ -150,7 +185,6 @@ const Login = () => {
 };
 
 export default Login;
-
 
 /*Interpretación de los valores de rotación
 En el ejemplo anterior, la rotación [Math.PI / 2, 0, Math.PI] se aplica a la tortuga. Aquí está la interpretación de estos valores:

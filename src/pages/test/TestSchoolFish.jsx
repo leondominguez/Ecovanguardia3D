@@ -20,8 +20,8 @@ const TestSchoolFish = () => {
         <axesHelper args={[5000]}/>
         <SchoolFish1
           ref={fishRef}
-          animationName="swim"
-          showAnimationsList={true}
+          //animationName="yellowtang boneAction.001"
+          showAnimationsList={false}
           activateAllAnimations={true}
           position={[1, -1.5, 0]}
           scale={[1, 1, 1]}
