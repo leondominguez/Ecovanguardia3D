@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import vertexShader from './vertexShader.glsl';
-import fragmentShader from './fragmentShader.glsl';
-import './SeaSimulation.css'; // Asegúrate de importar el archivo CSS
-import BubblesSimulation from '../bubbles-simulation/BubblesSimulation'; // Importa el componente BubblesSimulation
-import { Canvas, useFrame } from '@react-three/fiber';
-import Text3D from '../../text3d/Text3D';
+import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
+import vertexShader from "./vertexShader.glsl";
+import fragmentShader from "./fragmentShader.glsl";
+import "./SeaSimulation.css"; // Asegúrate de importar el archivo CSS
+import BubblesSimulation from "../bubbles-simulation/BubblesSimulation"; // Importa el componente BubblesSimulation
+import { Canvas, useFrame } from "@react-three/fiber";
+import Text3D from "../../text3d/Text3D";
 
 const SeaSimulation = () => {
   const containerRef = useRef(null);
@@ -18,7 +18,12 @@ const SeaSimulation = () => {
       scene = new THREE.Scene();
       clock = new THREE.Clock();
 
-      camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
+      camera = new THREE.PerspectiveCamera(
+        30,
+        window.innerWidth / window.innerHeight,
+        1,
+        10000
+      );
       camera.position.set(0, 10, 30);
       camera.lookAt(scene.position);
       scene.add(camera);
@@ -27,19 +32,25 @@ const SeaSimulation = () => {
       scene.add(axis);
 
       timeUniform = {
-        iGlobalTime: { type: 'f', value: 0.1 },
-        iResolution: { type: 'v', value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-        waveSpeed: { type: 'f', value: 0.9 },
-        waveHeight: { type: 'f', value: 1.0 }
+        iGlobalTime: { type: "f", value: 0.1 },
+        iResolution: {
+          type: "v",
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
+        waveSpeed: { type: "f", value: 0.9 },
+        waveHeight: { type: "f", value: 1.0 },
       };
 
       const material = new THREE.ShaderMaterial({
         uniforms: timeUniform,
         vertexShader: vertexShader,
-        fragmentShader: fragmentShader
+        fragmentShader: fragmentShader,
       });
 
-      const water = new THREE.Mesh(new THREE.PlaneGeometry(100, 100, 20, 20), material);
+      const water = new THREE.Mesh(
+        new THREE.PlaneGeometry(100, 100, 20, 20),
+        material
+      );
       scene.add(water);
 
       const geometry = new THREE.SphereGeometry(10, 16, 16);
@@ -55,7 +66,8 @@ const SeaSimulation = () => {
     };
 
     const render = () => {
-      timeUniform.iGlobalTime.value += clock.getDelta() * timeUniform.waveSpeed.value;
+      timeUniform.iGlobalTime.value +=
+        clock.getDelta() * timeUniform.waveSpeed.value;
       renderer.render(scene, camera);
       requestAnimationFrame(render);
     };
@@ -66,31 +78,37 @@ const SeaSimulation = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
     init();
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener("resize", onResize);
       container.removeChild(renderer.domElement);
     };
   }, []);
 
   return (
     <div ref={containerRef} id="container">
-      <div className='burbujas-mar'>
-        <Canvas className='canvas-burbujas'>
-
-          
+      <div className="burbujas-mar">
+        <Canvas className="canvas-burbujas">
           <ambientLight />
           <pointLight position={[10, 10, -1000]} />
-          <BubblesSimulation distance={1800} position={[0, 10, -5000]} />
-          
-          <Text3D text="HTML 3D" position={[-5, -10, -30]} color={"#63c548"} size={2} depth={0.5} /> 
+          {/* <BubblesSimulation distance={1800} position={[0, 10, -5000]} /> */}
+
+          <Text3D className="text3d"
+            text="Sumérgete En Esta Aventura"
+            position={[-20, -6, -30]}
+            frontColor={"#40E0D0"} // Color del frente
+            sideColor={"#5C677D"} // Color del resto
+            size={3}
+            depth={0.5}
+          />
 
           <directionalLight
+            color={"white"}
             castShadow
-            position={[10, 10, 0]}
-            intensity={5}
+            position={[10, 5, 20]}
+            intensity={1}
             shadow-mapSize-width={1024}
             shadow-mapSize-height={1024}
             shadow-camera-far={50}
@@ -102,7 +120,12 @@ const SeaSimulation = () => {
         </Canvas>
       </div>
       <div className="overlay-3dtext-landing">
-        Texto 2D superpuesto!
+        Nuestro portal aborda las problemáticas ambientales urgentes,
+        enfocándose en la contaminación del agua, la escasez de recursos
+        hídricos y la acidificación de los océanos. Con investigaciones
+        profundas y soluciones innovadoras, buscamos concienciar y ofrecer
+        respuestas viables para preservar este valioso recurso. Únete a nosotros
+        para asegurar un futuro sostenible para las generaciones venideras.
       </div>
     </div>
   );

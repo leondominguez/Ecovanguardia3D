@@ -17,11 +17,10 @@
 }
 
 .contenedor1 {
-  flex: 2;
+  flex: 2.5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: lightblue; /* Fondo azul claro */
   overflow: hidden;
   z-index: 2;
@@ -106,7 +105,7 @@
 }
 
 .titulo {
-  font-size: 4em;
+  font-size: 3.5em;
   margin: 0%;
   display: flex;
   align-items: center;

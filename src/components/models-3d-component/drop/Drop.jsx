@@ -8,7 +8,7 @@ const Drop = forwardRef((props, ref) => {
   );
 
   return (
-    <group {...props} dispose={null} rotation={[0, 1.8, 0]} scale={[9, 9, 9]} ref={ref}>
+    <group {...props} dispose={null} rotation={[0, 1.8, 0]} scale={[8, 8, 8]} ref={ref}>
       <group>
         <mesh
           castShadow

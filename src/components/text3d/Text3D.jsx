@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { extend, useThree } from '@react-three/fiber';
+import { extend, useThree, useFrame } from '@react-three/fiber';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 extend({ TextGeometry });
 
-const Text3D = ({ text, position, color = 0xffffff, size = 1, depth = 0.2 }) => {
+const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, size = 1, depth = 0.2 }) => {
   const meshRef = useRef();
   const { scene } = useThree();
 
@@ -17,22 +17,42 @@ const Text3D = ({ text, position, color = 0xffffff, size = 1, depth = 0.2 }) => 
         font: font,
         size: size,
         depth: depth,
-        curveSegments: 10,
+        curveSegments: 3,
         bevelEnabled: true,
-        bevelThickness: 0.1,
-        bevelSize: 0.02,
+        bevelThickness: 1.0,
+        bevelSize: 0.07,
         bevelOffset: 0,
-        bevelSegments: 5,
+        bevelSegments: 3,
       });
 
-      const textMaterial = new THREE.MeshStandardMaterial({ color: color }); // Cambia a MeshStandardMaterial para sombras
-      const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+      // Crear materiales para el frente y el resto del texto
+      const frontMaterial = new THREE.MeshStandardMaterial({ color: frontColor });
+      const sideMaterial = new THREE.MeshStandardMaterial({ color: sideColor });
+
+      // Crear un array de materiales
+      const materials = [frontMaterial, sideMaterial];
+
+      const textMesh = new THREE.Mesh(textGeometry, materials);
       textMesh.position.set(...position);
       textMesh.castShadow = true; // Habilita sombras para el texto
       textMesh.receiveShadow = true; // Habilita recepción de sombras para el texto
-      meshRef.current.add(textMesh);
+
+      // Limpiar el contenido anterior del grupo
+      if (meshRef.current) {
+        meshRef.current.clear();
+        meshRef.current.add(textMesh);
+      }
     });
-  }, [text, position, color, size, depth]);
+  }, [text, position, frontColor, sideColor, size, depth]);
+
+  // Animar el texto para crear un efecto de ola
+  useFrame(({ clock }) => {
+    if (meshRef.current) {
+      meshRef.current.children.forEach((child, index) => {
+        child.position.y = position[1] + Math.sin(clock.getElapsedTime() + index) * 0.5;
+      });
+    }
+  });
 
   return <group ref={meshRef} />;
 };

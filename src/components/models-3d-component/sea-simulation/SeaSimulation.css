@@ -9,15 +9,20 @@ body {
 
 .overlay-3dtext-landing {
   position: absolute;
-  top: 50%; /* Ajusta la posición vertical */
+  top: 40%; /* Ajusta la posición vertical */
   left: 50%; /* Ajusta la posición horizontal */
   transform: translate(-50%, -50%); /* Centra el texto */
-  color: rgb(204, 46, 46);
-  font-weight: bolder;
-  font-size: 30px;
+  color: #33415C ;
+  text-align: center;
+  font-weight:normal;
+  font-size: 20px;
+  text-shadow:azure 5px 10px 10px;	
   padding: 3%;
   z-index: 5; /* Asegura que el texto esté por encima del canvas */
+  width: 90%; /* Ajusta el tamaño del cuadro de texto */
+  max-width: 1000px; /* Establece un ancho máximo */
 }
+
 
 .burbujas-mar{
   position: absolute;

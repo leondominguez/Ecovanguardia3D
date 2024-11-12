@@ -80,7 +80,7 @@ function Landing() {
             <span className="eco">ECO</span>
             <span className="vanguardia">VANGUARDIA</span>
           </h1>
-          <h2 className="eslogan">Pequeños cambios, grandes impactos</h2>
+          <h2 className="eslogan">Pequeños Cambios, Grandes Impactos</h2>
           <p><br /></p>
           <p><br /></p>
           <p></p>
@@ -92,14 +92,14 @@ function Landing() {
        */}
       <div className="canvas-container">
         <Canvas id="myCanvas">
-          <WebGLSettings
+          {/* <WebGLSettings
             pixelRatio={window.devicePixelRatio}
             powerPreference="high-performance"
             antialias={false}
-          />
+          /> */}
         
           <Suspense fallback={null}>
-            <directionalLight position={[10, 10, -5]} intensity={5} />
+            {/* <directionalLight position={[10, 10, -5]} intensity={15} /> */}
           </Suspense>
         </Canvas>
         <div className="seaContainer">

@@ -7,6 +7,7 @@ import { BoxGeometry, PlaneGeometry } from 'three';
 import IsleDelfino from '../../components/models-3d-component/isle-delfino/Isle-defino'; // Importa el modelo de acidificación del agua
 import WebGLSettings from '../../components/performance/WebGLSettings'; // Importa el nuevo componente
 import CameraDebuger from '../../components/Debug/CameraDebuger';
+import SkyBlueSun from '../../components/staggings/sky-blue-sun/SkyBlueSun'; // Importa el nuevo componente
 
 
 // Extiende las geometrías necesarias
@@ -37,24 +38,36 @@ const WaterAcidification = () => {
 
   return (
     <Canvas style={{ width: '100%', height: '100%' }}>
-      <PerspectiveCamera
+      {/* <PerspectiveCamera
         makeDefault
         position={[2.7, 7.7, 49]} // Ajusta la posición de la cámara según necesites
-        fov={0} // Ajusta el campo de visión de la cámara
-      />
+        fov={75} // Ajusta el campo de visión de la cámara
+      /> */}
       <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={false} />
       <Suspense fallback={null}>
-        <directionalLight position={[10, 10, -5]} intensity={0.01} />
-        <pointLight position={[0, 0, 0]} intensity={1} />
-        <CameraDebuger ref={CameraDebugerRef} />
-        <axesHelper args={[20]} />
-        <OrbitControls enableZoom={true} /> {/* Permite rotar y hacer zoom */}
+      <SkyBlueSun
+              receiveShadow={false}
+              shadowBias={0.001}
+              shadowResolution={1024}
+              shadowAttenuation={0.5}
+              height={20}
+              width={20}
+              scale={0.1}
+            />
+        {/* <directionalLight position={[10, 10, -5]} intensity={0.01} /> */}
+        <axesHelper args={[2000]} />
+        {/* <OrbitControls enableZoom={true} /> */}
+
+        <OrbitControls
+  
+      />
         <ambientLight intensity={0.01} position={[0, 0, 0]} />
-        <Physics>
+        {/* <Physics>
           <Plane />
           <Box />
-          <IsleDelfino scale={[0.001, 0.001, 0.001]} position={[10, 0, -50]} /> {/* Ajusta el tamaño del modelo si es necesario */}
-        </Physics>
+          
+        </Physics> */}
+        <IsleDelfino scale={[0.001, 0.001, 0.001]} position={[0, 0, 0]} /> {/* Ajusta el tamaño del modelo si es necesario */}
       </Suspense>
       
     </Canvas>

@@ -6,7 +6,7 @@ const IsleDelfino = (props) => {
     return (
       <group {...props} dispose={null}>
         <group name="Sketchfab_Scene">
-          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 2.7]}>
+          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
             <group name="Collada_visual_scene_group">
               <group name="SEA">
                 <mesh
