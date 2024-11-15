@@ -14,6 +14,7 @@ import AmbientLight from "../../components/lights/AmbientLight";
 import BubblesSimulation from "../../components/models-3d-component/bubbles-simulation/BubblesSimulation";
 import SchoolFish1 from "../../components/models-3d-component/school-fish1/SchoolFish1";
 import Doryfish from "../../components/models-3d-component/dory/Doryfish";
+import StagginLoader from "../../components/staggings/StagginLoader";
 
 
 
@@ -25,6 +26,7 @@ const Login = () => {
     bank2: useRef(),
     bank3: useRef(),
   };
+
 
   return (
     <div className="login-container">
@@ -45,22 +47,38 @@ const Login = () => {
       </div>
       <div className="canvas-login">
         <Canvas className="customCanvas" shadows>
-          <WebGLSettings
+          {/* <WebGLSettings
             pixelRatio={window.devicePixelRatio}
             powerPreference="high-performance"
             antialias={false}
-          />
+          /> */}
           <Suspense fallback={null}>
             <AmbientLight intensity={2} color="yellow" />
-            <DeepSea
-              receiveShadow={false}
-              shadowBias={0.001}
-              shadowResolution={1024}
-              shadowAttenuation={0.5}
-              height={20}
-              width={20}
-              scale={0.1}
-            />
+            {/* <DeepSea
+            receiveShadow={true}
+            shadowBias={0.001}
+            shadowResolution={1024}
+            shadowAttenuation={0.5}
+            height={20}
+            width={20}
+            scale={0.1}
+            environmentPath="/scenes/deep-sea/cubemap/"
+            background={true}
+          /> */}
+          
+          <StagginLoader
+        receiveShadow={true}
+        shadowBias={0.001}
+        shadowResolution={2048}
+        shadowAttenuation={0.5}
+        height={20}
+        width={20}
+        scale={0.1}
+        environmentPath="/scenes/deep-sea/cubemap/" // se le debe pasar un path a un cubemap
+        background={true}
+      />
+
+
             <DirectionalLight
               position={[200, 800, 200]}
               intensity={5}
@@ -165,14 +183,7 @@ const Login = () => {
               position={[0, 0, -200]}
               scale={[20, 20, 20]}
             />
-              <SchoolFish1
-              ref={fishRefs.bank2}
-              animationName="swim"
-              showAnimationsList={false}
-              activateAllAnimations={true}
-              position={[150, -150, -100]}
-              scale={[20, 20, 20]}
-            />
+      
  
           
             <OrbitControls enableRotate={true} target={[0, 0, 0]} /> /* Habilita

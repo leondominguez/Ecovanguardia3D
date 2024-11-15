@@ -5,7 +5,7 @@ import React, {
   useImperativeHandle,
 } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import FishSchoolMotion from "../../motions/FishSchoolMotion";
+import FishSchoolMotion from "../../config/animations/FishSchoolMotion";
 
 /*
     Este componente recibe las siguientes props:
@@ -85,12 +85,9 @@ const SchoolFish1 = forwardRef(
 
     const fishModels = [
       nodes.yellow,
-      nodes.whitebrown,
+      nodes.grouper001,
 
     ];
-
-
-
 
     useEffect(() => {
       if (showAnimationsList && animations) {

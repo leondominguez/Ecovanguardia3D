@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
-import SwimMove1 from "../../motions/SwinMove1";
+import SwimMove1 from "../../config/animations/SwinMove1";
 
 /*
     Este componente recibe las siguientes props:
