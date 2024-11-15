@@ -37,7 +37,7 @@ function Home() {
         </div>
 
         <div className="horizontal-container">
-          <CircleHome //water pollution
+          <CircleHome className="circle"//water pollution
             logo="/assets/icons/sea-life-fish-svgrepo-com.svg"
             slogan="Contaminación <br /> Del agua"
             onClick={() =>
@@ -49,7 +49,7 @@ function Home() {
             }
           />
 
-          <CircleHome //water shortange
+          <CircleHome className="circle" //water shortange
             logo="/assets/icons/faucet-svgrepo-com.svg"
             slogan="Escasez <br /> Del agua"
             onClick={() =>
@@ -61,7 +61,7 @@ function Home() {
             }
           />
 
-          <CircleHome //water acidification
+          <CircleHome className="circle" //water acidification
             logo="/assets/icons/sea-svgrepo-com.svg"
             slogan="Acidificación <br /> de los Océanos"
             onClick={() =>
