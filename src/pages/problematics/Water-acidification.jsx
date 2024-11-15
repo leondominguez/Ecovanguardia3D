@@ -39,7 +39,7 @@ const content = (
       <h3>Soluciones:</h3>
       <p>
         Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el
-        uso de energías renovables. Un reto crucial para nuestro planeta. 🌍
+        uso de energías renovables. Un reto crucial para nuestro  planeta. 🌍
       </p>
     </div>
   </div>
