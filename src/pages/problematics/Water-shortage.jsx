@@ -31,7 +31,7 @@ const WaterShortage = () => {
         <primitive object={new DirectionalLightHelper(directionalLightRef.current, 5)} />
       )}
 
-      {/* Ejes de referencia */}
+      {/* Ejes de referencdia */}
       <primitive object={new AxesHelper(5)} />
 
       {/* Plano para recibir sombras */}
