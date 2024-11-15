@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useGLTF, useAnimations, Html } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
-export function SubmarineModel(props) {
+const  SubmarineModel=(props) =>{
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/models-3d/submarine/atlantic_explorer_submarine.glb');
   const { actions } = useAnimations(animations, group);

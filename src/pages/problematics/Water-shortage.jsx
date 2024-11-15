@@ -2,7 +2,7 @@ import React, { Suspense, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { DirectionalLightHelper, AxesHelper } from 'three';
-import SubmarineModel from '../../components/models-3d-component/submarine/submarine';
+import SubmarineModel from '../../components/models-3d-component/submarine/Submarine';
 
 const WaterShortage = () => {
   const directionalLightRef = useRef();
