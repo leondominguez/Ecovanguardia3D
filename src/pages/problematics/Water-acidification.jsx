@@ -10,6 +10,7 @@ import RotationControl from "../../components/config/controls/motion-controls/Ro
 import DirectionalLight from "../../components/lights/DirectionalLight";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import WebGLSettings from "../../components/performance/SetPixelRatio";
 
 // Extiende las geometrías necesarias
 extend({ BoxGeometry, PlaneGeometry });
@@ -60,6 +61,7 @@ const WaterAcidification = () => {
 
   return (
     <Canvas shadows style={{ width: "100%", height: "100%" }}>
+       <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={true} />
       <Html position={[0, 3, -0.99]} style={{ pointerEvents: "auto" }}>
         <h1
           style={{
@@ -74,7 +76,7 @@ const WaterAcidification = () => {
         <button
           onClick={handleButtonClick}
           style={{
-            display: "block",
+            display: "flex",
             margin: "10px auto",
             padding: "10px",
             fontSize: "16px",
@@ -84,7 +86,6 @@ const WaterAcidification = () => {
             borderRadius: "50%",
             width: "50px",
             height: "50px",
-            display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -112,7 +113,8 @@ const WaterAcidification = () => {
             }}
           >
             <p style={{ marginBottom: "20px" }}>
-              La acidificación de los océanos es el proceso por el cual los océanos se vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la atmósfera.
+              Bienvenido! has llegado a la isla Delfin, los lugareños le dicen DolphinTerra, EN la isla se encuentra el equipo de EcoVanguardia. que te enseñara sobre la acidificación de los océanos.
+              que afecta esta Islas y sus habitantes. ¿Deseas continuar?
             </p>
             <button
               onClick={handleAcceptClick}
@@ -130,6 +132,7 @@ const WaterAcidification = () => {
         )}
       </Html>
       <Suspense fallback={null}>
+   
         <axesHelper args={[2000]} />
         <ambientLight intensity={0.5} />
         <DirectionalLight
