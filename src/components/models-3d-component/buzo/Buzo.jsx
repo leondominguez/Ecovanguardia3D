@@ -36,7 +36,7 @@ const Buzo = (props) => {
   useFrame(() => {
     nodes.Object_5.position.set(position[0], position[1], position[2]);
   });
-  const initialBubbles = Array.from({ length: Math.random() * 10 }, () => ({
+  const initialBubbles = Array.from({ length:10 }, () => ({
     position: [
       position[0] + Math.random() * 1.5 - 0.75, // Posición X basada en la posición del buzo
       position[1] + Math.random() * -1.5, // Posición Y basada en la posición del buzo
