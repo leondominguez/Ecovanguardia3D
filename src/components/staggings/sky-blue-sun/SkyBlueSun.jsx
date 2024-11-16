@@ -27,13 +27,16 @@ export default SkyBlueSun;
 
 
 /* forma de uso
-            <SkyBlueSun
-              receiveShadow={false}
-              shadowBias={0.001}
-              shadowResolution={1024}
-              shadowAttenuation={0.5}
-              height={20}
-              width={20}
-              scale={0.1}
-            />
-*/
+      <StagginLoader
+        receiveShadow={true}
+        shadowBias={0.001}
+        shadowResolution={1024}
+        shadowAttenuation={0.5}
+        height={20}
+        width={20}
+        scale={0.1}
+        environmentPath="/scenes/staggin/cubemap/"  se le debe pasar un path a ubn cubemap
+        background={true}
+      />
+      
+  */

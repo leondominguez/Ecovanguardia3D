@@ -40,7 +40,7 @@
 }
 
 .modal-3d-view {
-  width: 75%; /* La mitad para el modelo 3D */
+  width: 90%; /* La mitad para el modelo 3D */
   height: 100%; /* Ocupa toda la altura disponible */
   background-color: #e6f7f8; /* Asegúrate de cambiar la ruta a la imagen real */
 }
@@ -55,6 +55,7 @@
 }
 .modal-text p {
   font-weight: normal; /* Asegúrate de que los párrafos tengan un peso de fuente normal */
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
 }
 
 .modal-text h3 {
