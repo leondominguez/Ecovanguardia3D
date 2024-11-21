@@ -133,14 +133,14 @@ const WaterAcidification = () => {
       </Html>
       <Suspense fallback={null}>
    
-        <axesHelper args={[2000]} />
+        {/* <axesHelper args={[2000]} /> */}
         <ambientLight intensity={0.5} />
         <DirectionalLight
           position={[150, 80, -130]} // Define la posición de la luz en el espacio 3D
           intensity={5} // Define la intensidad de la luz
           color="white" // Define el color de la luz
           castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-          showHelper={true} // Muestra un helper visual para la luz direccional
+          showHelper={false} // Muestra un helper visual para la luz direccional
           shadowProps={{
             shadowMapWidth: 5000, // Define el ancho del mapa de sombras
             shadowMapHeight: 0, // Define la altura del mapa de sombras
@@ -177,7 +177,7 @@ const WaterAcidification = () => {
           position={[0, 0, 70]}
           fov={100}
         />
-        <KeyboardControl cameraRef={cameraRef} movementSpeed={0.5} />
+        <KeyboardControl cameraRef={cameraRef} movementSpeed={0.2} />
       </Suspense>
     </Canvas>
   );

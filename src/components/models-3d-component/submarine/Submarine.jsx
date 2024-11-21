@@ -71,7 +71,7 @@ const  SubmarineModel=(props) =>{
   return (
     <group ref={group} {...props} dispose={null}>
       {/* Elementos HTML flotantes */}
-      <Html position={[0, 3, 0]}>
+      {/* <Html position={[0, 3, 0]}>
         <h1 style={{ color: 'white', textAlign: 'center' }}>Submarino en acción</h1>
         <button
           onClick={() => alert('¡Botón presionado!')}
@@ -86,7 +86,7 @@ const  SubmarineModel=(props) =>{
         >
           Interactuar
         </button>
-      </Html>
+      </Html> */}
 
       {/* Modelo 3D cargado desde el GLTF */}
       <group

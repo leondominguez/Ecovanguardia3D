@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { DirectionalLightHelper, AxesHelper } from 'three';
 import SubmarineModel from '../../components/models-3d-component/submarine/Submarine';
+import { Html } from '@react-three/drei';
 
 const WaterShortage = () => {
   const directionalLightRef = useRef();
@@ -14,6 +15,25 @@ const WaterShortage = () => {
       camera={{ position: [0, 5, 15], fov: 50 }}
       style={{ width: '100%', height: '100%' }}
     >
+
+<Html position={[0, 3, 0]}>
+        <h1 style={{ color: 'white', textAlign: 'center' }}>Submarino en acción</h1>
+        <button
+          onClick={() => alert('¡Botón presionado!')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
+        >
+          Interactuar
+        </button>
+      </Html>
+
+
       {/* Fondo azul oscuro para simular el ambiente submarino */}
       <color attach="background" args={['#001f3f']} />
 
@@ -32,7 +52,7 @@ const WaterShortage = () => {
       )}
 
       {/* Ejes de referencdia */}
-      <primitive object={new AxesHelper(5)} />
+      {/* <primitive object={new AxesHelper(5)} /> */}
 
       {/* Plano para recibir sombras */}
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -3, 0]}>

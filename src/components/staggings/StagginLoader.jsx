@@ -40,3 +40,20 @@ const StagginLoader = ({
 };
 
 export default StagginLoader;
+
+/* forma de usar o llamare el componente
+
+import StagginLoader from '../components/staggings/StagginLoader';
+
+        <StagginLoader
+          receiveShadow={true}
+          shadowBias={0.01}
+          shadowResolution={2048}
+          shadowAttenuation={0.5}
+          height={20}
+          width={20}
+          scale={0.1}
+          environmentPath="/scenes/sky-blue-sun/cubemap/" // se le debe pasar un path a un cubemap
+          background={true}
+        />
+*/

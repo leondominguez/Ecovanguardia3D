@@ -99,6 +99,7 @@ const SchoolFish1 = forwardRef(
     }, [animations, showAnimationsList]);
 
     return (
+      
 <group ref={group} {...props} dispose={null}>
 <FishSchoolMotion fishModels={fishModels}fishCount={20}/>
       <group name="Scene">
@@ -279,8 +280,9 @@ const SchoolFish1 = forwardRef(
           </group>
         </group>
       </group>
+    
     </group>
-
+   
     );
   }
 );
