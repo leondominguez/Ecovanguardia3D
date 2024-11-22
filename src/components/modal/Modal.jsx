@@ -18,6 +18,7 @@ const Modal = ({ title, content, onClose, ModelComponent }) => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

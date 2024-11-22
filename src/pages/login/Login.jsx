@@ -163,7 +163,7 @@ const Login = () => {
             rotation={[Math.PI / 2, 0, Math.PI]}
           /> */}
 
-            <axesHelper args={[5000]} /> Agrega un AxesHelper con un tamaño de 5
+            {/* <axesHelper args={[5000]} /> Agrega un AxesHelper con un tamaño de 5 */}
             unidades para ayudar a visualizar los ejes.
             <BubblesSimulation
               cubemapPath="/scenes/deep-sea/cubemap/" // esto permite modificar la ruta de las texturas del cubemap.

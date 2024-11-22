@@ -5,7 +5,7 @@ import { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import WaterShortage from "../../pages/problematics/Water-shortage"; // Importa el componente del modelo
 import WaterPollution from "../../pages/problematics/Water-pollution"; // Importa el componente del modelo
-import WaterAcidification, { waterAcidificationContent } from "../../pages/problematics/Water-acidification"; // Importa el componente del modelo
+import WaterAcidification, { waterAcidificationContent } from "../problematics/water-acidification/Water-acidification"; // Importa el componente del modelo
 
 function Home() {
   const [modalData, setModalData] = useState(null);
