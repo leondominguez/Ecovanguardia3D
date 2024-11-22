@@ -6,6 +6,7 @@ import "./SeaSimulation.css"; // Asegúrate de importar el archivo CSS
 import BubblesSimulation from "../bubbles-simulation/BubblesSimulation"; // Importa el componente BubblesSimulation
 import { Canvas, useFrame } from "@react-three/fiber";
 import Text3D from "../../text3d/Text3D";
+import WebGLSettings from "../../performance/WebGLSettings";
 
 const SeaSimulation = () => {
   const containerRef = useRef(null);
@@ -48,12 +49,12 @@ const SeaSimulation = () => {
       });
 
       const water = new THREE.Mesh(
-        new THREE.PlaneGeometry(100, 100, 20, 20),
+        new THREE.PlaneGeometry(50, 50, 10, 10),
         material
       );
       scene.add(water);
 
-      const geometry = new THREE.SphereGeometry(10, 16, 16);
+      const geometry = new THREE.SphereGeometry(5, 10, 1);
       const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
       const sphere = new THREE.Mesh(geometry, sphereMaterial);
       scene.add(sphere);
@@ -65,9 +66,15 @@ const SeaSimulation = () => {
       render();
     };
 
+    // const render = () => {
+    //   timeUniform.iGlobalTime.value +=
+    //     clock.getDelta() * timeUniform.waveSpeed.value;  // se comenta para optimizar rendimiento
+    //   renderer.render(scene, camera);
+    //   requestAnimationFrame(render);
+    // };
+
     const render = () => {
-      timeUniform.iGlobalTime.value +=
-        clock.getDelta() * timeUniform.waveSpeed.value;
+      timeUniform.iGlobalTime.value += clock.getDelta() * timeUniform.waveSpeed.value;
       renderer.render(scene, camera);
       requestAnimationFrame(render);
     };
@@ -91,6 +98,7 @@ const SeaSimulation = () => {
     <div ref={containerRef} id="container">
       <div className="burbujas-mar">
         <Canvas className="canvas-burbujas">
+        <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={true} />
           <ambientLight />
           <pointLight position={[10, 10, -1000]} />
           {/* <BubblesSimulation distance={1800} position={[0, 10, -5000]} /> */}
@@ -106,16 +114,16 @@ const SeaSimulation = () => {
 
           <directionalLight
             color={"white"}
-            castShadow
+            //castShadow
             position={[10, 5, 20]}
-            intensity={1}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-camera-far={50}
-            shadow-camera-left={-50}
-            shadow-camera-right={10}
-            shadow-camera-top={10}
-            shadow-camera-bottom={-10}
+            intensity={0.8}
+            // shadow-mapSize-width={1024}
+            // shadow-mapSize-height={1024}
+            // shadow-camera-far={50}
+            // shadow-camera-left={-50}
+            // shadow-camera-right={10}
+            // shadow-camera-top={10}
+            // shadow-camera-bottom={-10} //se comentan para probar mejor rendimiento
           />
         </Canvas>
       </div>

@@ -1,19 +1,18 @@
 uniform float iGlobalTime;
 uniform vec2 iResolution;
 
-const int NUM_STEPS = 4;
+const int NUM_STEPS = 8;
 const float PI = 3.1415;
 const float EPSILON = 1e-3;
-const int ITER_GEOMETRY = 1;
-const int ITER_FRAGMENT = 2;
+const int ITER_GEOMETRY = 2;
+const int ITER_FRAGMENT = 3;
 const float SEA_HEIGHT = 0.6;
 const float SEA_CHOPPY = 1.0;
-const float SEA_SPEED = 0.5;
+const float SEA_SPEED = 1.0;
 const float SEA_FREQ = 0.16;
 const vec3 SEA_BASE = vec3(0.1,0.1,0.22);
 const vec3 SEA_WATER_COLOR = vec3(0.8,0.9,0.6);
 mat2 octave_m = mat2(1.6,1.2,-1.2,1.6);
-precision mediump float;
 
 float SEA_TIME; // No initializer here!
 
@@ -44,7 +43,7 @@ float hash( vec2 p ) {
 float noise( in vec2 p ) {
   vec2 i = floor(p);
   vec2 f = fract(p);	
-  vec2 u = f * f * (2.0 - 1.0 * f);
+  vec2 u = f * f * (3.0 - 2.0 * f);
   return -1.0 + 2.0 * mix(
     mix(
       hash(i + vec2(0.0,0.0)
@@ -65,7 +64,7 @@ float specular(vec3 n,vec3 l,vec3 e,float s) {
   return pow(max(dot(reflect(e,n),l),0.0),s) * nrm;
 }
 
-vec3 getSkyColor(vec3 e) { //color de cielo
+vec3 getSkyColor(vec3 e) {
   e.y = max(e.y, 0.0);
   vec3 ret;
   ret.x = pow(1.0 - e.y, 7.5);
@@ -115,7 +114,7 @@ float map_detailed(vec3 p) {
       d += sea_octave((uv-SEA_TIME) * freq, choppy);
       h += d * amp;        
       uv *= octave_m;
-      freq *= 1.5; 
+      freq *= 1.9; 
       amp *= 0.22;
       choppy = mix(choppy,1.0,0.2);
     }
@@ -183,8 +182,8 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
 void main() {
   SEA_TIME = iGlobalTime * SEA_SPEED; // Initialize here
 
-  vec2 uv = gl_FragCoord.xy / iResolution.xy; // altura en pantalla
-  uv = uv * 2.0 - 0.5;
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  uv = uv * 2.3 - 1.0;
   uv.x *= iResolution.x / iResolution.y;    
   float time = iGlobalTime * 0.3;
 

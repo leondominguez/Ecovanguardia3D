@@ -5,6 +5,7 @@ import "./Landing.css";
 import { OrbitControls } from "@react-three/drei";
 // import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
 import WebGLSettings from "../../components/performance/WebGLSettings.jsx";
+import SetPixelRatio from "../../components/performance/SetPixelRatio.jsx";
 import { useNavigate } from "react-router-dom";
 import Drop from "../../components/models-3d-component/drop/Drop.jsx";
 import SeaSimulation from "../../components/models-3d-component/sea-simulation/SeaSimulation.jsx";
@@ -60,12 +61,15 @@ function Landing() {
   }, []);
 
   return (
+
     <div className="landing">
+      
       <div className="contenedor0">
         <Canvas className="canvas-logo3d"
-          camera={{ position: [0, 0, 15], fov:35 }}
         
-        >
+          camera={{ position: [0, 0, 15], fov:35 }}>
+    <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={true} />
+    <SetPixelRatio ratio={window.devicePixelRatio} />
           <LightWithHelper />
           <ambientLight position={[0, 0, 0]} intensity={0.5} />
           <Suspense>
