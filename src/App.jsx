@@ -10,7 +10,7 @@ import DoryTest from './pages/test/DoryTest';
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true }}>
       <Routes>
         <Route path="/" element={<Landing />}/>
         <Route path="/home" element={<Home />} />

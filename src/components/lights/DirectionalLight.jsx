@@ -21,7 +21,7 @@ const DirectionalLight = forwardRef(({
     }
 
     return () => {
-      if (helperRef.current) {
+      if (helperRef.current && lightRef.current) {
         lightRef.current.remove(helperRef.current);
         helperRef.current.dispose();
       }
