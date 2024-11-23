@@ -255,11 +255,11 @@ const WaterAcidification = () => {
           <KeyboardControl
             colliders
             cameraRef={cameraRef}
-            movementSpeed={4.1}
+            movementSpeed={0.1}
           />
         </Suspense>
       </Canvas>
-      <Loader />
+      <Loader />w
     </>
   );
 };
