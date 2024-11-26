@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Environment } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import * as THREE from 'three';
 
 const StagginLoader = ({
   receiveShadow = true,
@@ -13,12 +15,29 @@ const StagginLoader = ({
   background = true,
   ...props
 }) => {
-  if (!environmentPath) {
-    console.error('StagginLoader: environmentPath is required');
-    return null;
-  }
+  const { scene } = useThree();
 
-  const environmentFiles = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'];
+  useEffect(() => {
+    if (!environmentPath) {
+      console.error('StagginLoader: environmentPath is required');
+      return;
+    }
+
+    const environmentFiles = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'];
+
+    // Cargar el fondo de la escena
+    if (background) {
+      const loader = new THREE.CubeTextureLoader().setPath(environmentPath);
+      const texture = loader.load(environmentFiles, () => {
+        scene.background = texture;
+      });
+    }
+
+    return () => {
+      // Limpiar el fondo de la escena cuando el componente se desmonte
+      scene.background = null;
+    };
+  }, [environmentPath, scene, background]);
 
   return (
     <Environment
@@ -31,7 +50,7 @@ const StagginLoader = ({
         width: width,
         scale: scale,
       }}
-      files={environmentFiles}
+      files={['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']}
       path={environmentPath}
       background={background}
       {...props}
@@ -40,7 +59,6 @@ const StagginLoader = ({
 };
 
 export default StagginLoader;
-
 /* forma de usar o llamare el componente
 
 import StagginLoader from '../components/staggings/StagginLoader';
