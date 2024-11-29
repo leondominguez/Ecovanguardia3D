@@ -1,19 +1,23 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
-import { loadEnv } from 'vite';
 import path from 'path';
 import glsl from 'vite-plugin-glsl';
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Carga las variables de entorno específicas para el modo actual (development, production, etc.)
+  // Cargar variables de entorno desde el directorio 'env'
   const env = loadEnv(mode, path.resolve(__dirname, 'env'));
 
+  // // Imprimir las variables de entorno cargadas
+  // console.log('Variables de entorno cargadas:', env);
+
   return {
-    plugins: [react(),glsl()],
+    plugins: [react(), glsl()],
     define: {
       // Permite acceder a las variables de entorno en el código usando import.meta.env
-      'process.env': env,
+      'process.env': {
+        ...process.env,
+        ...env,
+      },
     },
     build: {
       rollupOptions: {
@@ -30,6 +34,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: '0.0.0.0'
-    }
+    },
+    envDir: './env', // Especifica la ruta al directorio .env
   };
 });

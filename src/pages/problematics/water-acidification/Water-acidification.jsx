@@ -13,6 +13,7 @@ import Text3D from "../../../components/text3d/Text3D";
 import Clouds from "../../../components/models-3d-component/clouds/Clouds";
 import HtmlTextDrei from "../../../components/html-3d-drei/TextHtmlDrei";
 import WaterCharacter from "../../../components/models-3d-component/water-character/WaterCharacter";
+import ChatComponent from "../../../components/chat-ia/ChatComponent";
 
 const content = (
   <div>
@@ -97,6 +98,8 @@ const WaterAcidification = () => {
             </p>
           }
         />
+        <ChatComponent position={[74.8, -6.45, 82.5]} distanceFactor={20} />
+       
 
         {/* <Html position={[74.8, -8.45, 82.5]} style={{ pointerEvents: "auto" }} distanceFactor={5}>
           <h1
@@ -280,6 +283,7 @@ const WaterAcidification = () => {
             colliders
             cameraRef={cameraRef}
             movementSpeed={0.2}
+            enabled={true}
           />
         </Suspense>
       </Canvas>
