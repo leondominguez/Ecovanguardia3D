@@ -1,11 +1,13 @@
-// KeyboardControl.jsx
+// CharacterControl.jsx
 import React, { useEffect, useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useKeyboardControls } from '@react-three/drei';
 
-const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds }) => {
-  const [moveDirection, setMoveDirection] = useState({ forward: false, backward: false, left: false, right: false, up: false, down: false });
-  const isRightMouseDown = useRef(false);
+const CharacterControl = ({ characterRef, cameraRef, movementSpeed = 0.1, jumpSpeed = 5, gravity = -9.8 }) => {
+  const [moveDirection, setMoveDirection] = useState({ forward: false, backward: false, left: false, right: false, jump: false });
+  const velocity = useRef(new THREE.Vector3());
+  const isLeftMouseDown = useRef(false);
   const pitch = useRef(0);
   const yaw = useRef(0);
 
@@ -28,11 +30,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
         setMoveDirection((prev) => ({ ...prev, right: true }));
         break;
       case ' ':
-        setMoveDirection((prev) => ({ ...prev, up: true }));
-        break;
-      case 'x':
-      case 'X':
-        setMoveDirection((prev) => ({ ...prev, down: true }));
+        setMoveDirection((prev) => ({ ...prev, jump: true }));
         break;
       default:
         break;
@@ -58,11 +56,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
         setMoveDirection((prev) => ({ ...prev, right: false }));
         break;
       case ' ':
-        setMoveDirection((prev) => ({ ...prev, up: false }));
-        break;
-      case 'x':
-      case 'X':
-        setMoveDirection((prev) => ({ ...prev, down: false }));
+        setMoveDirection((prev) => ({ ...prev, jump: false }));
         break;
       default:
         break;
@@ -70,21 +64,21 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   const handleMouseDown = (event) => {
-    if (event.button === 2) { // Right mouse button
-      isRightMouseDown.current = true;
+    if (event.button === 0) { // Left mouse button
+      isLeftMouseDown.current = true;
       document.body.requestPointerLock();
     }
   };
 
   const handleMouseUp = (event) => {
-    if (event.button === 2) { // Right mouse button
-      isRightMouseDown.current = false;
+    if (event.button === 0) { // Left mouse button
+      isLeftMouseDown.current = false;
       document.exitPointerLock();
     }
   };
 
   const handleMouseMove = (event) => {
-    if (isRightMouseDown.current && cameraRef.current) {
+    if (isLeftMouseDown.current && cameraRef.current) {
       const { movementX, movementY } = event;
       yaw.current -= movementX * 0.002;
       pitch.current -= movementY * 0.002;
@@ -108,41 +102,37 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
     };
   }, []);
 
-  useFrame(() => {
-    if (cameraRef.current) {
+  useFrame((state, delta) => {
+    if (characterRef.current && cameraRef.current) {
       const direction = new THREE.Vector3();
-      const frontVector = new THREE.Vector3(0, 0, Number(moveDirection.forward) - Number(moveDirection.backward));
+      const frontVector = new THREE.Vector3(0, 0, Number(moveDirection.backward) - Number(moveDirection.forward));
       const sideVector = new THREE.Vector3(Number(moveDirection.right) - Number(moveDirection.left), 0, 0);
-      const upVector = new THREE.Vector3(0, Number(moveDirection.up) - Number(moveDirection.down), 0);
 
       direction.addVectors(frontVector, sideVector).normalize().multiplyScalar(movementSpeed);
-      direction.add(upVector.multiplyScalar(movementSpeed));
+
+      if (moveDirection.jump && characterRef.current.position.y <= 0.5) {
+        velocity.current.y = jumpSpeed;
+      }
+
+      velocity.current.y += gravity * delta;
+      characterRef.current.position.add(direction);
+      characterRef.current.position.y += velocity.current.y * delta;
+
+      if (characterRef.current.position.y < 0) {
+        characterRef.current.position.y = 0;
+        velocity.current.y = 0;
+      }
 
       const quaternion = new THREE.Quaternion();
       quaternion.setFromEuler(new THREE.Euler(pitch.current, yaw.current, 0, 'YXZ'));
       cameraRef.current.quaternion.copy(quaternion);
 
-      cameraRef.current.position.add(cameraRef.current.getWorldDirection(new THREE.Vector3()).multiplyScalar(direction.z));
-      cameraRef.current.position.add(cameraRef.current.getWorldDirection(new THREE.Vector3()).cross(cameraRef.current.up).multiplyScalar(direction.x));
-      cameraRef.current.position.y += direction.y;
-
-      // Limitar la posición y de la cámara
-      if (cameraRef.current.position.y < minY) {
-        cameraRef.current.position.y = minY;
-      }
-
-      // Limitar la posición de la cámara dentro de los límites
-      if (bounds) {
-        const { minX, maxX, minZ, maxZ } = bounds;
-        if (cameraRef.current.position.x < minX) cameraRef.current.position.x = minX;
-        if (cameraRef.current.position.x > maxX) cameraRef.current.position.x = maxX;
-        if (cameraRef.current.position.z < minZ) cameraRef.current.position.z = minZ;
-        if (cameraRef.current.position.z > maxZ) cameraRef.current.position.z = maxZ;
-      }
+      const cameraOffset = new THREE.Vector3(0, 2, -5).applyQuaternion(cameraRef.current.quaternion);
+      cameraRef.current.position.copy(characterRef.current.position).add(cameraOffset);
     }
   });
 
   return null;
 };
 
-export default KeyBoardControl;
+export default CharacterControl;

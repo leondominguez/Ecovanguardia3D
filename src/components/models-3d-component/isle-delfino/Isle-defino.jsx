@@ -12,7 +12,7 @@ const IsleDelfino = (props) => {
             <group name="Collada_visual_scene_group">
 
               <group name="SEA"> // agua mar
-              <RigidBody type="fixed" colliders="hull" density={0.1} restitution={9.8}>
+             
                 <mesh
                   name="SEA_sea01-material"
                   castShadow
@@ -20,9 +20,9 @@ const IsleDelfino = (props) => {
                   geometry={nodes['SEA_sea01-material'].geometry}
                   material={materials.Merged_materials}
                 />
-                </RigidBody>
+                
               </group>
-
+              <RigidBody type="fixed" colliders="hull" density={0.1} restitution={9.8}>
               <group name="ILE">
                 <mesh
                   name="ILE_cliff04-material"
@@ -144,6 +144,7 @@ const IsleDelfino = (props) => {
                   material={materials.ILE_sand01}
                 />
               </group>
+              </RigidBody>
               <group name="NOK">
                 <mesh
                   name="NOK_shadow01-material"

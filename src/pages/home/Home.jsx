@@ -66,7 +66,7 @@ function Home() {
             slogan="Acidificación <br /> de los Océanos"
             onClick={() =>
               openModal(
-                "¿Que Es La Acificicacion De Los Oceanos?",//ojito le pase el titulo vacio para que no se muestre en el modal ya que hay redundancia de titulo
+                "¿Que es la Acificicacion de los Oceanos?",//ojito le pase el titulo vacio para que no se muestre en el modal ya que hay redundancia de titulo
                 waterAcidificationContent, //pasa el contenido de texto al modal traido desde el componente water-acidification
                 WaterAcidification // Pasa el componente del modelo 3D
               )
