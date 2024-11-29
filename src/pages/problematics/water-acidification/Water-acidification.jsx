@@ -11,6 +11,9 @@ import WebGLSettings from "../../../components/performance/SetPixelRatio";
 import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
 import Text3D from "../../../components/text3d/Text3D";
 import Clouds from "../../../components/models-3d-component/clouds/Clouds";
+import HtmlTextDrei from "../../../components/html-3d-drei/TextHtmlDrei";
+import WaterCharacter from "../../../components/models-3d-component/water-character/WaterCharacter";
+import ChatComponent from "../../../components/chat-ia/ChatComponent";
 
 const content = (
   <div>
@@ -46,15 +49,6 @@ const content = (
 const WaterAcidification = () => {
   const CameraDebugerRef = useRef();
   const cameraRef = useRef();
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-
-  const handleButtonClick = () => {
-    setTooltipVisible(true);
-  };
-
-  const handleAcceptClick = () => {
-    setTooltipVisible(false);
-  };
 
   return (
     <>
@@ -74,8 +68,40 @@ const WaterAcidification = () => {
           size={6}
           depth={0.5}
         />
+        <HtmlTextDrei //texto de bienvenida
+          position={[74.8, -8.45, 82.5]}
+          distanceFactor={5}
+          title="Isla Delfin"
+          content={
+            <p style={{ fontSize: "14px", fontWeight: "normal" }}>
+              <h3>Bienvenido!</h3> has llegado a la isla Delfin, los lugareños
+              le dicen DolphinTerra, En la isla se encuentra el equipo de
+              EcoVanguardia. que te enseñara sobre la acidificación de los
+              océanos. Ve y da una vuelta por los alrededores y descubre los
+              secretos de la isla. y las cosas que ecovanguardia quiere
+              enseñarte.
+            </p>
+          }
+        />
 
-        <Html position={[0, 3, -0.99]} style={{ pointerEvents: "auto" }}>
+        <HtmlTextDrei //texto de causas
+          position={[7, -6.45, 44]}
+          distanceFactor={10}
+          title="Causas"
+          content={
+            <p>
+              {" "}
+              Una de las principales problematicas que causa la acidificacion de
+              los oceanos es, la quema de combustibles fósiles y la
+              deforestación  que aumentan los niveles de CO₂, que es absorbido por
+              los océanos. y fijate aqui hay un ejemplo medios de transporte que queman combustibles.a
+            </p>
+          }
+        />
+        <ChatComponent position={[74.8, -6.45, 82.5]} distanceFactor={20} />
+       
+
+        {/* <Html position={[74.8, -8.45, 82.5]} style={{ pointerEvents: "auto" }} distanceFactor={5}>
           <h1
             style={{
               textAlign: "center",
@@ -146,7 +172,7 @@ const WaterAcidification = () => {
               </button>
             </div>
           )}
-        </Html>
+        </Html> */}
         <Suspense fallback={null}>
           <axesHelper args={[2000]} />
           <ambientLight intensity={0.5} />
@@ -172,7 +198,7 @@ const WaterAcidification = () => {
           />
           <DirectionalLight
             position={[200, 80, -140]} // Define la posición de la luz en el espacio 3D
-            intensity={1.5} // Define la intensidad de la luz
+            intensidad={1.5} // Define la intensidad de la luz
             color="white" // Define el color de la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
             showHelper={false} // Muestra un helper visual para la luz direccional
@@ -190,9 +216,9 @@ const WaterAcidification = () => {
             }}
           />
 
-<DirectionalLight
+          <DirectionalLight
             position={[90, 150, 80]} // Define la posición de la luz en el espacio 3D
-            intensity={1} // Define la intensidad de la luz
+            intensidad={1} // Define la intensidad de la luz
             color="white" // Define el color de la luz
             castShadow={false} // Habilita la capacidad de la luz para proyectar sombras
             showHelper={false} // Muestra un helper visual para la luz direccional
@@ -210,23 +236,24 @@ const WaterAcidification = () => {
             }}
           />
 
-          <Physics debug>
+          <Physics>
             <IsleDelfino
               castShadow
               receiveShadow
               scale={[0.001, 0.001, 0.001]}
               position={[0, 0, 0]}
             />
+
+            <WaterCharacter position={[74.8, -9.45, 83.5]} scale={[1, 1, 1]} />
           </Physics>
 
           <Clouds
-          
             seed={2} // Semilla para la generación aleatoria de la nube, asegura que la misma nube aparezca cada vez.
             scale={4} // Escala general de los segmentos de la nube, haciendo que la nube parezca más grande o más pequeña.
             volume={5} // Grosor o volumen de los segmentos de la nube, creando una apariencia más densa.
             color="white" // Color de la nube, se establece en "hotpink" en lugar del blanco por defecto.
-            fade={100} // Distancia desde la cámara hasta que los segmentos de la nube comienzan a desvanecerse, creando un efecto de desaparición gradual.
-            segments={150} // Número de segmentos o partículas que componen la nube. Un número más alto crea más detalle.
+            fade={90} // Distancia desde la cámara hasta que los segmentos de la nube comienzan a desvanecerse, creando un efecto de desaparición gradual.
+            segments={700} // Número de segmentos o partículas que componen la nube. Un número más alto crea más detalle.
             bounds={[20, 8, 8]} // Define los límites 3D o el área dentro de la cual se distribuyen los segmentos de la nube.
             position={[50, 30, 10]} // Posición de la nube en el espacio 3D, relativa al origen de la escena.
             opacity={0.5} // Nivel de transparencia de la nube, haciéndola semitransparente con un valor de 0.5.
@@ -255,11 +282,28 @@ const WaterAcidification = () => {
           <KeyboardControl
             colliders
             cameraRef={cameraRef}
-            movementSpeed={0.1}
+            movementSpeed={0.2}
+            enabled={true}
           />
         </Suspense>
       </Canvas>
-      <Loader />w
+
+      <Loader
+        containerStyles={{
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          width: "100%",
+          height: "100%",
+        }} // Estilos para el contenedor del loader
+        innerStyles={{ width: "200px", height: "50px" }} // Estilos para el contenedor interno del loader
+        barStyles={{
+          backgroundColor: "white",
+          height: "20px",
+          borderRadius: 5,
+        }} // Estilos para la barra de progreso
+        dataStyles={{ color: "white", fontSize: "26px" }} // Estilos para el texto de datos
+        dataInterpolation={(p) => `Cargando ${p.toFixed(2)}%`} // Función para interpolar los datos de carga
+        initialState={(active) => active} // Estado inicial del loader
+      />
     </>
   );
 };
