@@ -8,6 +8,7 @@ const ChatComponent = ({ position, distanceFactor, onVisibilityChange }) => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatVisible, setChatVisible] = useState(false);
+  const [isFirstInteraction, setIsFirstInteraction] = useState(true); // Estado para controlar la primera interacción
   const chatRef = useRef(null);
 
   useEffect(() => {
@@ -39,53 +40,61 @@ const ChatComponent = ({ position, distanceFactor, onVisibilityChange }) => {
     setLoading(true);
 
     try {
-      // Llamar a la API de Mistral AI
-      const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_MISTRAL_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'mistral-large-latest',
-          temperature: 0.9, // Ajustar la temperatura a un valor más alto
-          top_p: 0.9, // Ajustar top_p para obtener respuestas más detalladas
-          max_tokens: 4096, // Ajustar el número máximo de tokens a un valor razonable
-          stream: false,
-          stop: ["\n"],
-          random_seed: 0,
-          messages: updatedMessages.map(msg => ({ role: msg.sender === 'user' ? 'user' : 'assistant', content: msg.text })),
-          response_format: { type: 'text' },
-          tools: [
-            {
-              type: 'function',
-              function: {
-                name: 'string',
-                description: '',
-                parameters: {},
+      let aiMessage;
+      if (isFirstInteraction) {
+        // Primera interacción: mensaje específico
+        aiMessage = { sender: 'ai', text: 'Soy el gran sabio de la isla y responderé a tus preguntas.' };
+        setIsFirstInteraction(false);
+      } else {
+        // Interacciones posteriores: llamada a la API de Mistral AI
+        const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_MISTRAL_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: 'mistral-large-latest',
+            temperature: 0.9, // Ajustar la temperatura a un valor más alto
+            top_p: 0.9, // Ajustar top_p para obtener respuestas más detalladas
+            max_tokens: 8096, // Ajustar el número máximo de tokens a un valor razonable
+            stream: false,
+            stop: ["\n"],
+            random_seed: 0,
+            messages: updatedMessages.map(msg => ({ role: msg.sender === 'user' ? 'user' : 'assistant', content: msg.text })),
+            response_format: { type: 'text' },
+            tools: [
+              {
+                type: 'function',
+                function: {
+                  name: 'string',
+                  description: '',
+                  parameters: {},
+                },
               },
-            },
-          ],
-          tool_choice: 'auto',
-          presence_penalty: 0,
-          frequency_penalty: 0,
-          n: 1,
-          safe_prompt: false,
-        }),
-      });
+            ],
+            tool_choice: 'auto',
+            presence_penalty: 0,
+            frequency_penalty: 0,
+            n: 1,
+            safe_prompt: false,
+          }),
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error al llamar a la API de Mistral AI:', errorData);
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error al llamar a la API de Mistral AI:', errorData);
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (!data.choices || data.choices.length === 0) {
+          throw new Error('No choices returned from API');
+        }
+
+        aiMessage = { sender: 'ai', text: data.choices[0].message.content };
       }
 
-      const data = await response.json();
-      if (!data.choices || data.choices.length === 0) {
-        throw new Error('No choices returned from API');
-      }
-
-      const aiMessage = { sender: 'ai', text: data.choices[0].message.content };
       setMessages((prevMessages) => [...prevMessages, aiMessage]);
     } catch (error) {
       console.error('Error al llamar a la API de Mistral AI:', error);

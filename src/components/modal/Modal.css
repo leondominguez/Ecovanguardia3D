@@ -20,6 +20,7 @@
   border-radius: 8px;
   overflow: hidden;
   display: flex;
+  font-size: 14px; /* Ajusta el tamaño de la fuente */
 }
 
 .close-button {
@@ -46,7 +47,7 @@
 }
 
 .modal-text {
-  width: 10%; /* La otra mitad para el texto */
+  width: 15%; /* La otra mitad para el texto */
   padding: 20px;
   background-color: #e6f7f8;
   display: flex;

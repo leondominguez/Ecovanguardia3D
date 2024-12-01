@@ -2,7 +2,7 @@ import React, { useRef, Suspense, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import TurtleCarey from "../../components/models-3d-component/turtle/Turtle-carey";
-import CameraDebuger from "../../components/Debug/CameraDebuger";
+
 import DeepSea from "../../components/staggings/deepsea/DeepSea";
 import WebGLSettings from "../../components/performance/WebGLSettings"; // Importa el nuevo componente
 import "./Login.css";
@@ -152,16 +152,6 @@ const Login = () => {
               scale={[0.5, 0.5, 0.5]}
               rotation={[Math.PI / 0.5, -0.6, 0]}
             />
-
-          {/* <CardumenMotion
-            ModelFish={Doryfish}
-            fishCount={10}
-            position={[0, 0, 0]}
-            animationName="swim"
-            showAnimationsList={true}
-            activateAllAnimations={true}
-            rotation={[Math.PI / 2, 0, Math.PI]}
-          /> */}
 
             {/* <axesHelper args={[5000]} /> Agrega un AxesHelper con un tamaño de 5 */}
             unidades para ayudar a visualizar los ejes.
