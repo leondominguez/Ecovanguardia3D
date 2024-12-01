@@ -3,13 +3,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds }) => {
+const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds, enabled = true }) => {
   const [moveDirection, setMoveDirection] = useState({ forward: false, backward: false, left: false, right: false, up: false, down: false });
   const isRightMouseDown = useRef(false);
   const pitch = useRef(0);
   const yaw = useRef(0);
 
   const handleKeyDown = (event) => {
+    if (!enabled) return;
     switch (event.key) {
       case 'w':
       case 'W':
@@ -40,6 +41,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   const handleKeyUp = (event) => {
+    if (!enabled) return;
     switch (event.key) {
       case 'w':
       case 'W':
@@ -70,6 +72,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   const handleMouseDown = (event) => {
+    if (!enabled) return;
     if (event.button === 2) { // Right mouse button
       isRightMouseDown.current = true;
       document.body.requestPointerLock();
@@ -77,6 +80,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   const handleMouseUp = (event) => {
+    if (!enabled) return;
     if (event.button === 2) { // Right mouse button
       isRightMouseDown.current = false;
       document.exitPointerLock();
@@ -84,6 +88,7 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   const handleMouseMove = (event) => {
+    if (!enabled) return;
     if (isRightMouseDown.current && cameraRef.current) {
       const { movementX, movementY } = event;
       yaw.current -= movementX * 0.002;
@@ -93,11 +98,13 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('mousemove', handleMouseMove);
+    if (enabled) {
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('keyup', handleKeyUp);
+      window.addEventListener('mousedown', handleMouseDown);
+      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -106,10 +113,10 @@ const KeyBoardControl = ({ cameraRef, movementSpeed = 0.1, minY = -10, bounds })
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [enabled]);
 
   useFrame(() => {
-    if (cameraRef.current) {
+    if (enabled && cameraRef.current) {
       const direction = new THREE.Vector3();
       const frontVector = new THREE.Vector3(0, 0, Number(moveDirection.forward) - Number(moveDirection.backward));
       const sideVector = new THREE.Vector3(Number(moveDirection.right) - Number(moveDirection.left), 0, 0);

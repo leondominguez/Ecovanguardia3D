@@ -127,14 +127,14 @@ const SeaSimulation = () => {
           />
         </Canvas>
       </div>
-      <div className="overlay-3dtext-landing">
+      {/* <div className="overlay-3dtext-landing">
         Nuestro portal aborda las problemáticas ambientales urgentes,
         enfocándose en la contaminación del agua, la escasez de recursos
         hídricos y la acidificación de los océanos. Con investigaciones
         profundas y soluciones innovadoras, buscamos concienciar y ofrecer
         respuestas viables para preservar este valioso recurso. Únete a nosotros
         para asegurar un futuro sostenible para las generaciones venideras.
-      </div>
+      </div> */}
     </div>
   );
 };
