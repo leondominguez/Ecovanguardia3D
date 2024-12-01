@@ -1,19 +1,19 @@
 import React, { useRef, Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, Html, Loader } from "@react-three/drei";
+import { PerspectiveCamera, Loader } from "@react-three/drei";
 import IsleDelfino from "../../../components/models-3d-component/isle-delfino/Isle-defino"; // Importa el modelo de acidificación del agua
 import StagginLoader from "../../../components/staggings/StagginLoader"; // Importa el nuevo componente
 import KeyboardControl from "../../../components/config/controls/motion-controls/KeyBoardControl"; // Importa el nuevo componente
 import DirectionalLight from "../../../components/lights/DirectionalLight";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import WebGLSettings from "../../../components/performance/SetPixelRatio";
-import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import Text3D from "../../../components/text3d/Text3D";
 import Clouds from "../../../components/models-3d-component/clouds/Clouds";
 import HtmlTextDrei from "../../../components/html-3d-drei/TextHtmlDrei";
 import WaterCharacter from "../../../components/models-3d-component/water-character/WaterCharacter";
 import ChatComponent from "../../../components/chat-ia/ChatComponent";
+import LogCameraPosition from "../../../components/Debug/LogCameraPosition";
+import MovementInstructions from "../../../components/config/controls/motion-controls/MovementInstructions";
 
 const content = (
   <div>
@@ -21,44 +21,41 @@ const content = (
       La acidificación de los océanos es el proceso por el cual los océanos se
       vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la
       atmósfera.
+      
     </p>
+
+
     <div style={{ textAlign: "left" }}>
-      <h3>Causas:</h3>
+      <h3>El Sabio:</h3>
       <p>
-        La quema de combustibles fósiles y la deforestación aumentan los niveles
-        de CO₂, que es absorbido por los océanos.
+      Acercate a la isla y busca las localizaciones para aprender más sobre este tema.
+      si logras encontrar al gran sabio de la isla, el te enseñara mas sobre este tema.
       </p>
     </div>
-    <div style={{ textAlign: "left" }}>
-      <h3>Problemas:</h3>
-      <p>
-        Esto afecta la vida marina, debilitando corales y moluscos, y alterando
-        las cadenas alimenticias.
-      </p>
-    </div>
-    <div style={{ textAlign: "left" }}>
-      <h3>Soluciones:</h3>
-      <p>
-        Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el
-        uso de energías renovables. Un reto crucial para nuestro planeta. 🌍
-      </p>
-    </div>
+  
+    
   </div>
 );
 
 const WaterAcidification = () => {
-  const CameraDebugerRef = useRef();
   const cameraRef = useRef();
+  const [keyboardEnabled, setKeyboardEnabled] = useState(true);
+
+  const handleChatVisibilityChange = (visible) => {
+    setKeyboardEnabled(!visible);
+  };
+
 
   return (
     <>
       <Canvas shadows style={{ width: "100%", height: "100%" }}>
+    
         <WebGLSettings
           pixelRatio={window.devicePixelRatio}
           powerPreference="high-performance"
           antialias={true}
         />
-
+        /// zona de textos
         <Text3D
           className="text3d"
           text="Islas Delfin"
@@ -83,7 +80,6 @@ const WaterAcidification = () => {
             </p>
           }
         />
-
         <HtmlTextDrei //texto de causas
           position={[7, -6.45, 44]}
           distanceFactor={10}
@@ -93,88 +89,54 @@ const WaterAcidification = () => {
               {" "}
               Una de las principales problematicas que causa la acidificacion de
               los oceanos es, la quema de combustibles fósiles y la
-              deforestación  que aumentan los niveles de CO₂, que es absorbido por
-              los océanos. y fijate aqui hay un ejemplo medios de transporte que queman combustibles.a
+              deforestación que aumentan los niveles de CO₂, que es absorbido
+              por los océanos. y fijate aqui hay un ejemplo medios de transporte
+              que queman combustibles.a
             </p>
           }
         />
-        <ChatComponent position={[74.8, -6.45, 82.5]} distanceFactor={20} />
-       
-
-        {/* <Html position={[74.8, -8.45, 82.5]} style={{ pointerEvents: "auto" }} distanceFactor={5}>
-          <h1
-            style={{
-              textAlign: "center",
-              fontSize: "24px",
-              margin: "20px 0",
-              color: "white",
-            }}
-          >
-            Isla Delfin
-          </h1>
-          <button
-            onClick={handleButtonClick}
-            style={{
-              display: "flex",
-              margin: "10px auto",
-              padding: "10px",
-              fontSize: "16px",
-              cursor: "pointer",
-              backgroundColor: "rgba(255, 255, 255, 0.5)", // Fondo translúcido
-              border: "none",
-              borderRadius: "50%",
-              width: "50px",
-              height: "50px",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <FontAwesomeIcon icon={faStar} color="gold" />
-          </button>
-          {tooltipVisible && (
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                padding: "20px",
-                backgroundColor: "white",
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                zIndex: 1000,
-                maxWidth: "400px", // Ancho máximo del tooltip
-                minWidth: "200px", // Ancho mínimo del tooltip
-                width: "auto", // Ancho automático del tooltip
-                textAlign: "left", // Alineación del texto
-                whiteSpace: "pre-wrap", // Ajuste del texto dentro del contenedor
-              }}
-            >
-              <p style={{ marginBottom: "20px" }}>
-                Bienvenido! has llegado a la isla Delfin, los lugareños le dicen
-                DolphinTerra, EN la isla se encuentra el equipo de
-                EcoVanguardia. que te enseñara sobre la acidificación de los
-                océanos. que afecta esta Islas y sus habitantes. ¿Deseas
-                continuar?
-              </p>
-              <button
-                onClick={handleAcceptClick}
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  padding: "8px 13px",
-                  fontSize: "14px",
-                  cursor: "pointer",
-                }}
-              >
-                Aceptar
-              </button>
-            </div>
-          )}
-        </Html> */}
+        <HtmlTextDrei //problemas
+          position={[28.5, 11.8, -7]}
+          distanceFactor={10}
+          title="Problemas"
+          content={
+            <p>
+              {" "}
+              Esto afecta la vida marina, debilitando corales y moluscos, y alterando las cadenas alimenticias.
+            </p>
+          }
+        />{" "}
+        <HtmlTextDrei //soluciones
+          position={[-8.2, 22,-67.8]}
+          distanceFactor={10}
+          title="Soluciones"
+          content={
+            <p>
+              {" "}
+              Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el uso de energías renovables. Un reto crucial para nuestro planeta. 🌍
+            </p>
+          }
+        />
+        <HtmlTextDrei //encuentra al sabio
+          position={[74.7, -10, 8.7]}
+          distanceFactor={10}
+          title="Causas"
+          content={
+            <p>
+              {" "}
+              Aveces queremos saber mas cosas y aprender de los sabios, si
+              quieres saber mas sobre la acidificacion de los oceanos, ve y
+              busca al sabio de la isla, el te enseñara mas sobre este tema.
+            </p>
+          }
+        />
+        <ChatComponent
+          position={[75, 51.4, 8.7]}
+          distanceFactor={5}
+          onVisibilityChange={handleChatVisibilityChange}
+        />
         <Suspense fallback={null}>
-          <axesHelper args={[2000]} />
+          {/* <axesHelper args={[2000]} /> */}
           <ambientLight intensity={0.5} />
 
           <DirectionalLight
@@ -282,19 +244,20 @@ const WaterAcidification = () => {
           <KeyboardControl
             colliders
             cameraRef={cameraRef}
-            movementSpeed={0.2}
-            enabled={true}
+            movementSpeed={0.1}
+            enabled={keyboardEnabled}
           />
+             {/* <LogCameraPosition cameraRef={cameraRef} /> */} para ver la posicion de la camara
         </Suspense>
       </Canvas>
-
+      <MovementInstructions />
       <Loader
         containerStyles={{
           backgroundColor: "rgba(0, 0, 0, 0.8)",
           width: "100%",
           height: "100%",
         }} // Estilos para el contenedor del loader
-        innerStyles={{ width: "200px", height: "50px" }} // Estilos para el contenedor interno del loader
+        innerStyles={{ width: "50px", height: "50px" }} // Estilos para el contenedor interno del loader
         barStyles={{
           backgroundColor: "white",
           height: "20px",
