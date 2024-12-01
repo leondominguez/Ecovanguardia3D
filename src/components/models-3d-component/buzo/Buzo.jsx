@@ -1,26 +1,40 @@
 import { useGLTF } from "@react-three/drei";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { RigidBody } from "@react-three/rapier";
 
 const Buzo = (props) => {
   const { nodes, materials } = useGLTF("/models-3d/buzo/Ocean.glb");
   const [position, setPosition] = useState([0, 1.133, 0]);
+  const rigidBodyRef = useRef();
+  const modelRef = useRef();
   const handleKeyDown = (event) => {
-    setPosition((prevPos) => {
+    if (rigidBodyRef.current) {
+      const step = 0.01; // Aumenta el tamaño del paso para pruebas
+      let newPosition = rigidBodyRef.current.translation();
+
       switch (event.key) {
         case "ArrowUp":
-          return [prevPos[0], prevPos[1], prevPos[2] + 0.1];
+          newPosition.z -= step;
+          break;
         case "ArrowDown":
-          return [prevPos[0], prevPos[1], prevPos[2] - 0.1];
+          newPosition.z += step;
+          break;
         case "ArrowLeft":
-          return [prevPos[0] - 0.1, prevPos[1], prevPos[2]];
+          newPosition.x -= step;
+          break;
         case "ArrowRight":
-          return [prevPos[0] + 0.1, prevPos[1], prevPos[2]];
+          newPosition.x += step;
+          break;
         default:
-          return prevPos;
+          break;
       }
-    });
+
+      // Establece una nueva posición directa al RigidBody
+      rigidBodyRef.current.setTranslation(newPosition, true);
+    }
   };
+
   // Agrega y elimina el listener del teclado
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -31,12 +45,15 @@ const Buzo = (props) => {
       window.removeEventListener("wheel", handleWheel);
     };
   }, []);
-
-  // Actualiza la posición en cada frame
   useFrame(() => {
-    nodes.Object_5.position.set(position[0], position[1], position[2]);
+    if (rigidBodyRef.current && modelRef.current) {
+      const rigidBodyPosition = rigidBodyRef.current.translation();
+      modelRef.current.position.copy(rigidBodyPosition);
+    }
   });
-  const initialBubbles = Array.from({ length:10 }, () => ({
+  // Actualiza la posición en cada frame
+
+  const initialBubbles = Array.from({ length: 10 }, () => ({
     position: [
       position[0] + Math.random() * 1.5 - 0.75, // Posición X basada en la posición del buzo
       position[1] + Math.random() * -1.5, // Posición Y basada en la posición del buzo
@@ -105,19 +122,29 @@ const Buzo = (props) => {
         rotation={[-Math.PI / 2, 0, 1]}
         scale={0.1}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Watter.geometry}
-          material={materials.Ocean}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_5.geometry}
-          material={materials.Main}
-          position={position}
-        />
+        <RigidBody type="fixed" colliders="trimesh" friction={1} restitution={0}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Watter.geometry}
+            material={materials.Ocean}
+          />
+        </RigidBody>
+        <RigidBody
+          ref={rigidBodyRef}
+          type="dynamic"
+          colliders="cuboid"
+          gravityScale={2}
+          friction={1}
+        >
+          <mesh
+            ref={modelRef}
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_5.geometry}
+            material={materials.Main}
+          />
+        </RigidBody>
         {bubbles.map((bubble, i) => (
           <mesh
             key={i}
@@ -128,66 +155,87 @@ const Buzo = (props) => {
             position={bubble.position}
           />
         ))}
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7.geometry}
-          material={materials.Main}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_1.geometry}
-          material={materials["M_coral_02.001"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_2.geometry}
-          material={materials["M_coral_01.001"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_3.geometry}
-          material={materials["M_coral_02.002"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_4.geometry}
-          material={materials["M_coral.001"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_5.geometry}
-          material={materials["M_coral.002"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_6.geometry}
-          material={materials.M_coral}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_7.geometry}
-          material={materials.M_coral_01}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_8.geometry}
-          material={materials.M_coral_02}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_7_9.geometry}
-          material={materials.M_coral_03}
-        />
+        <RigidBody type="fixed" colliders="trimesh">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7.geometry}
+            material={materials.Main}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_1.geometry}
+            material={materials["M_coral_02.001"]}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_2.geometry}
+            material={materials["M_coral_01.001"]}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_3.geometry}
+            material={materials["M_coral_02.002"]}
+          />
+        </RigidBody>
+
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_4.geometry}
+            material={materials["M_coral.001"]}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_5.geometry}
+            material={materials["M_coral.002"]}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_6.geometry}
+            material={materials.M_coral}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_7.geometry}
+            material={materials.M_coral_01}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_8.geometry}
+            material={materials.M_coral_02}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_7_9.geometry}
+            material={materials.M_coral_03}
+          />
+        </RigidBody>
       </group>
     </group>
   );

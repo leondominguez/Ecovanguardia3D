@@ -111,7 +111,7 @@ function Landing() {
         </div>
 
         <button className="boton" onClick={handleButtonClick}>
-          boton
+          Continuar
         </button>
       </div>
     </div>
