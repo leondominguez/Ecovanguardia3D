@@ -14,8 +14,8 @@
 .modal-content {
   color: #23566e;
   position: relative;
-  width: 97%; /* Ajusta el ancho del modal */
-  height: 97vh; /* Ajusta la altura del modal */
+  width: 98%; /* Ajusta el ancho del modal */
+  height: 97%; /* Ajusta la altura del modal */
   background: white;
   border-radius: 8px;
   overflow: hidden;

@@ -1,0 +1,68 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalLogin-content {
+  background-color: #bfd9ec;
+  padding: 5px;
+  border-radius: 5px;
+  width: auto;
+  min-width: 30vw; /* Ajusta el ancho mínimo del contenedor */
+  max-width: 60vw; /* Ajusta el ancho máximo del contenedor */
+  height: auto;
+  min-height: 30vh; /* Ajusta la altura mínima del contenedor */
+  max-height: 70vh; /* Ajusta la altura máxima del contenedor */
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  word-wrap: break-word;
+  font-size: clamp(1rem, 3vw, 12rem); /* Tamaño dinámico del texto */
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column; /* Apila los divs en columna */
+  justify-content: space-between; /* Espacio entre los divs */
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.title-modal {
+  font-size: clamp(2rem, 1vw, 8rem); /* Tamaño dinámico del texto */
+  font-weight: bold;
+  color: #23566e;
+}
+
+.modalLogin-body {
+  margin-bottom: 20px;
+  flex-grow: 1; /* Permite que el cuerpo del modal crezca */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer {
+  margin-top: 20px;
+}
+
+.modal-accept-button {
+  padding: 10px 20px; /* Tamaño dinámico del padding */
+  line-height: 1; /* Asegura que el contenido del botón no desborde */
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: clamp(1rem, 1vw, 1rem); /* Tamaño dinámico del texto */
+  text-align: center;
+}
