@@ -6,20 +6,16 @@ import SeaSimulationTester from './pages/test/SeaSimulationTester';
 import TestSchoolFish from './pages/test/TestSchoolFish'; 
 import DoryTest from './pages/test/DoryTest';
 
-
-
 function App() {
   return (
-    <Router future={{ v7_startTransition: true }}>
-      <Routes>
-        <Route path="/" element={<Landing />}/>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/seasimulation" element={<SeaSimulationTester />} /> {/* Nueva ruta */}
-        <Route path="/testfish" element={<TestSchoolFish />}/>
-        <Route path="/testdory" element={<DoryTest />}/>
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Landing />}/>
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/seasimulation" element={<SeaSimulationTester />} /> {/* Nueva ruta */}
+      <Route path="/testfish" element={<TestSchoolFish />}/>
+      <Route path="/testdory" element={<DoryTest />}/>
+    </Routes>
   );
 }
 
