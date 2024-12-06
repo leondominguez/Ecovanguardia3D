@@ -244,15 +244,14 @@ const WaterAcidification = () => {
             movementSpeed={1.1}
             enabled={keyboardEnabled}
           />
-          <LogCameraPosition cameraRef={cameraRef} /> //para ver la posicion de
-          la camara
+        
           <SoundComponent
             url="./audios/village-at-morning-78119.mp3"
             position={[75, -8, 74]}
             maxDistance={35}
-            refDistance={10}
+            refDistance={20}
             rolloffFactor={20}
-            volume={70} //ajuste volumene
+            volume={100} //ajuste volumene
             showHelper={false} // Muestra un helper visual para el sonido
             helperScale={[10, 10, 10]} // Escala del helper visual
           />
@@ -276,6 +275,7 @@ const WaterAcidification = () => {
             showHelper={false} // Muestra un helper visual para el sonido
             helperScale={[5, 5, 5]} // Escala del helper visual
           />
+            {/* <LogCameraPosition cameraRef={cameraRef} /> //para ver la posicion de la camara */}
           {/* <axesHelper args={[2000]} /> */}
         </Suspense>
       </Canvas>
