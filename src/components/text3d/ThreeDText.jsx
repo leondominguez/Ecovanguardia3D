@@ -16,7 +16,7 @@ const ThreeDText = ({ text, color, position = [0, 0, 0] }) => {
           {
             font,
             size: 0.2, // Reducir el tamaño del texto
-            height: 0.2, // Profundidad del texto
+            depth: 0.2, // Profundidad del texto (actualizado)
             curveSegments: 12,
             bevelEnabled: true,
             bevelThickness: 0.03,

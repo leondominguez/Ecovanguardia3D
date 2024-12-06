@@ -1,7 +1,7 @@
+import React, { useState, useRef } from "react";
 import CircleHome from "../../components/circleHome/CircleHome";
 import { Navbar } from "../../components/navbar/Navbar";
 import "./Home.css";
-import { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import WaterShortage from "../../pages/problematics/Water-shortage"; // Importa el componente del modelo
 import WaterPollution from "../../pages/problematics/Water-pollution"; // Importa el componente del modelo
@@ -9,15 +9,22 @@ import WaterAcidification, { waterAcidificationContent } from "../problematics/w
 
 function Home() {
   const [modalData, setModalData] = useState(null);
+  const videoRef = useRef(null); // Referencia para el video
 
   // Función para abrir el modal con datos específicos
   const openModal = (title, content, ModelComponent) => {
     setModalData({ title, content, ModelComponent });
+    if (videoRef.current) {
+      videoRef.current.pause(); // Pausa el video cuando se abre el modal
+    }
   };
 
   // Función para cerrar el modal
   const closeModal = () => {
     setModalData(null);
+    if (videoRef.current) {
+      videoRef.current.play(); // Reproduce el video cuando se cierra el modal
+    }
   };
 
   return (
@@ -82,6 +89,7 @@ function Home() {
             autoPlay
             loop
             muted
+            ref={videoRef} // Asigna la referencia al video
           ></video>
         </div>
 

@@ -14,6 +14,7 @@ import WaterCharacter from "../../../components/models-3d-component/water-charac
 import ChatComponent from "../../../components/chat-ia/ChatComponent";
 import LogCameraPosition from "../../../components/Debug/LogCameraPosition";
 import MovementInstructions from "../../../components/config/controls/motion-controls/MovementInstructions";
+import SoundComponent from "../../../components/sounds/SoundComponent"; 
 
 const content = (
   <div>
@@ -49,7 +50,6 @@ const WaterAcidification = () => {
   return (
     <>
       <Canvas shadows style={{ width: "100%", height: "100%" }}>
-    
         <WebGLSettings
           pixelRatio={window.devicePixelRatio}
           powerPreference="high-performance"
@@ -102,18 +102,21 @@ const WaterAcidification = () => {
           content={
             <p>
               {" "}
-              Esto afecta la vida marina, debilitando corales y moluscos, y alterando las cadenas alimenticias.
+              Esto afecta la vida marina, debilitando corales y moluscos, y
+              alterando las cadenas alimenticias.
             </p>
           }
         />{" "}
         <HtmlTextDrei //soluciones
-          position={[-8.2, 22,-67.8]}
+          position={[-8.2, 22, -67.8]}
           distanceFactor={10}
           title="Soluciones"
           content={
             <p>
               {" "}
-              Reducir las emisiones de CO₂, proteger ecosistemas marinos y fomentar el uso de energías renovables. Un reto crucial para nuestro planeta. 🌍
+              Reducir las emisiones de CO₂, proteger ecosistemas marinos y
+              fomentar el uso de energías renovables. Un reto crucial para
+              nuestro planeta. 🌍
             </p>
           }
         />
@@ -136,9 +139,7 @@ const WaterAcidification = () => {
           onVisibilityChange={handleChatVisibilityChange}
         />
         <Suspense fallback={null}>
-          {/* <axesHelper args={[2000]} /> */}
           <ambientLight intensity={0.5} />
-
           <DirectionalLight
             position={[150, 80, -100]} // Define la posición de la luz en el espacio 3D
             intensity={1.5} // Define la intensidad de la luz
@@ -177,7 +178,6 @@ const WaterAcidification = () => {
               shadowRadius: 100, // Suaviza los bordes de las sombras
             }}
           />
-
           <DirectionalLight
             position={[90, 150, 80]} // Define la posición de la luz en el espacio 3D
             intensidad={1} // Define la intensidad de la luz
@@ -197,7 +197,6 @@ const WaterAcidification = () => {
               shadowRadius: 100, // Suaviza los bordes de las sombras
             }}
           />
-
           <Physics>
             <IsleDelfino
               castShadow
@@ -208,7 +207,6 @@ const WaterAcidification = () => {
 
             <WaterCharacter position={[74.8, -9.45, 83.5]} scale={[1, 1, 1]} />
           </Physics>
-
           <Clouds
             seed={2} // Semilla para la generación aleatoria de la nube, asegura que la misma nube aparezca cada vez.
             scale={4} // Escala general de los segmentos de la nube, haciendo que la nube parezca más grande o más pequeña.
@@ -223,7 +221,6 @@ const WaterAcidification = () => {
             speed={0.4} // Velocidad de animación de la nube, afectando qué tan rápido se mueven o evolucionan los segmentos.
             concentrate="inside" // Arreglo del volumen de la nube, donde los segmentos están más concentrados dentro de los límites.
           />
-
           <StagginLoader
             receiveShadow={true}
             shadowBias={0.01}
@@ -238,16 +235,48 @@ const WaterAcidification = () => {
           <PerspectiveCamera
             ref={cameraRef}
             makeDefault
-            position={[75, 5, 110]}
-            fov={100}
+            position={[80, 5, 110]}
+            fov={75}
           />
           <KeyboardControl
             colliders
             cameraRef={cameraRef}
-            movementSpeed={0.1}
+            movementSpeed={1.1}
             enabled={keyboardEnabled}
           />
-             {/* <LogCameraPosition cameraRef={cameraRef} /> */} para ver la posicion de la camara
+          <LogCameraPosition cameraRef={cameraRef} /> //para ver la posicion de
+          la camara
+          <SoundComponent
+            url="./audios/village-at-morning-78119.mp3"
+            position={[75, -8, 74]}
+            maxDistance={35}
+            refDistance={10}
+            rolloffFactor={20}
+            volume={70} //ajuste volumene
+            showHelper={false} // Muestra un helper visual para el sonido
+            helperScale={[10, 10, 10]} // Escala del helper visual
+          />
+          <SoundComponent
+            url="./audios/001467_mud-volcanos-53411.mp3"
+            position={[75, -10, 6.6]}
+            maxDistance={70}
+            refDistance={10}
+            rolloffFactor={6}
+            volume={30} //ajuste volumenen
+            showHelper={false} // Muestra un helper visual para el sonido
+            helperScale={[5, 5, 5]} // Escala del helper visual
+          />
+          <SoundComponent
+            url="./audios/MUS_100_Incarnates_WrathOfRazsageth_Hero.mp3"
+            position={[75.5, 51.6, 9.0]}
+            maxDistance={92.3}
+            refDistance={20}
+            rolloffFactor={50}
+            volume={140} //ajuste volumenen
+            showHelper={false} // Muestra un helper visual para el sonido
+            helperScale={[5, 5, 5]} // Escala del helper visual
+          />
+          {/* <axesHelper args={[2000]} /> */}
         </Suspense>
       </Canvas>
       <MovementInstructions />

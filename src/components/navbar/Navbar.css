@@ -1,65 +1,124 @@
 /* Navbar Styles */
 .navbar {
-    display: flex;
-    justify-content:space-around; /* Alinea logo a la izquierda y links a la derecha */
-    align-items: center;
-    /* background: linear-gradient(to bottom, #bfd9ec 0%, #d6e7f2 100%); */
-    background-color: #bfd9ec;
-    align-content: center;
+  display: flex;
+  justify-content: space-between; /* Alinea logo a la izquierda y links a la derecha */
+  align-items: center;
+  background-color: #bfd9ec;
+  padding: 10px 20px; /* Añade padding para un mejor espaciado */
+}
 
-  }
-  
-  .navbar-logo img {
-    width: 70px; /* Tamaño del logo */
-    padding-left: 20px;
-  }
-  
-  .navbar-links {
-    display: flex;
-    list-style: none;
-    gap: 50px; /* Espaciado entre elementos de la lista */
-  }
-  
-  .navbar-links li {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .navbar-links a:hover {
-    color: #2c3e50; /* Mantén el color igual */
-    text-decoration: none; /* Evita el subrayado */
-  }
-  
-  .navbar-links .active {
-    font-weight: bold;
-  }
-  
-  .status-dot {
-    height: 8px;
-    width: 8px;
-    background-color: #4caf50 !important; /* Color del punto verde */
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 5px;
-  }
-  
-  .navbar-icon {
-    margin-left: 20px; /* Espaciado entre links y el icono */
-  }
-  
-  .icon-profile {
-    width: 35px;
-    height: 35px;
-    background-color: #31be35 !important; /* Color del icono verde */
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  
+.navbar-logo {
+  cursor: pointer; /* Cambia el cursor al pasar sobre el logo */
+}
+
+.navbar-logo img {
+  width: 70px; /* Tamaño del logo */
+  transition: transform 0.3s ease, filter 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1); /* Aumenta el tamaño del logo al pasar el ratón */
+  filter: drop-shadow(0 0 2em #1c27f0f6); /* Añade un efecto de sombra al pasar el ratón */
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 30px; /* Espaciado entre elementos de la lista */
+}
+
+.navbar-links li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar-links a:hover {
+  color: #2c5041; /* Mantén el color igual */
+  text-decoration: underline; /* Añade subrayado al pasar el ratón */
+}
+
+.navbar-links .active {
+  font-weight: bold;
+}
+
+.status-dot {
+  height: 8px;
+  width: 8px;
+  background-color: #4caf50 !important; /* Color del punto verde */
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.navbar-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre el icono y el botón de cerrar sesión */
+}
+
+.icon-profile {
+  width: 35px;
+  height: 35px;
+  background-color: #31be35 !important; /* Color del icono verde */
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre la foto y el nombre del usuario */
+  font-weight: bold;
+}
+
+.navbar-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbar-user-name {
+  color: #2c3e50; /* Color del nombre del usuario */
+  font-size: 16px;
+}
+
+.navbar-user-photo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover; /* Asegura que la imagen se ajuste al contenedor */
+}
+
+.navbar-logout-button {
+  background: none;
+  border: none;
+  color: #2c3e50;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-logout-button:hover {
+  background-color: #31be35 ; /* Añade un fondo al pasar el ratón */
+}
+
+.navbar-login-button  {
+  background: none;
+  border: none;
+  color: #2c3e50;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
