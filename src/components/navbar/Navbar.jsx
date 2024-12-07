@@ -2,21 +2,37 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../pages/login/login-context/AuthContext"; // Importa el contexto de autenticación
 import "./Navbar.css";
+import { useLocation } from "react-router-dom";
 
 export const Navbar = () => {
-  const [activeLink, setActiveLink] = useState("Home");
+  const [activeLink, setActiveLink] = useState("");
   const { authUser, logout } = useAuth(); // Usa el contexto de autenticación
   const navigate = useNavigate(); // Hook para redirigir
+  const location = useLocation();
+  const routeToTabName = {
+    "/home": "Home",
+    "/quiz": "Quiz",
+    "/nosotros": "Nosotros"
+  }
 
   useEffect(() => {
-    if (authUser) {
-      console.log("User photo URL:", authUser.photoURL);
-    }
+    // if (authUser) {
+    //   console.log("User photo URL:", authUser.photoURL);
+    // }
   }, [authUser]);
+
+  useEffect(() => {
+    // Sincronizar la ruta activa con el estado
+    const currentPath = location.pathname.toLowerCase();
+    const activeTab = routeToTabName[currentPath] || "";
+    setActiveLink(activeTab);
+  }, [location]);
 
   // Función para manejar el cambio de link activo
   const handleLinkClick = (link) => {
-    setActiveLink(link);
+    const targetLink = `/${link.toLowerCase()}`; // Conviértelo en una ruta uniforme (por ejemplo, "Quiz" -> "/quiz") // Muestra la ruta final
+    setActiveLink(link); // Actualiza el estado para reflejar la pestaña activa
+    navigate(targetLink); // Navega a la ruta fija
   };
 
   // Función para manejar el click en el icono de login
@@ -42,7 +58,7 @@ export const Navbar = () => {
         <li>
           {activeLink === "Home" && <span className="status-dot"></span>}
           <a
-            href={'#'}
+            href={"#"}
             className={activeLink === "Home" ? "active" : ""}
             onClick={() => handleLinkClick("Home")}
           >
@@ -95,7 +111,11 @@ export const Navbar = () => {
           </div>
         ) : (
           <button className="navbar-login-button" onClick={handleLoginClick}>
-            <img src="/assets/icons/icon-profile.png" alt="Profile Icon" className="icon-profile" />
+            <img
+              src="/assets/icons/icon-profile.png"
+              alt="Profile Icon"
+              className="icon-profile"
+            />
           </button>
         )}
       </div>

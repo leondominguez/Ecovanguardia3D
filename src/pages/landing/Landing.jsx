@@ -61,34 +61,39 @@ function Landing() {
   }, []);
 
   return (
-
     <div className="landing">
-      
       <div className="contenedor0">
-        <Canvas className="canvas-logo3d"
-        
-          camera={{ position: [0, 0, 15], fov:35 }}>
-    <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={true} />
-    <SetPixelRatio ratio={window.devicePixelRatio} />
+        <Canvas
+          className="canvas-logo3d"
+          camera={{ position: [0, 0, 15], fov: 35 }}
+        >
+          <WebGLSettings
+            pixelRatio={window.devicePixelRatio}
+            powerPreference="high-performance"
+            antialias={true}
+          />
+          <SetPixelRatio ratio={window.devicePixelRatio} />
           <LightWithHelper />
           <ambientLight position={[0, 0, 0]} intensity={0.5} />
           <Suspense>
-            
             <OrbitControls enableZoom={false} enableRotate={false} />
             <Drop ref={dropRef} />
           </Suspense>
         </Canvas>
       </div>
-        <div className="contenedor1">
-          <h1 className="titulo">
-            <span className="eco">ECO</span>
-            <span className="vanguardia">VANGUARDIA</span>
-          </h1>
-          <h2 className="eslogan">Pequeños Cambios, Grandes Impactos</h2>
-          <p><br /></p>
-          <p><br /></p>
-          <p></p>
-        
+      <div className="contenedor1">
+        <h1 className="titulo">
+          <span className="eco">ECO</span>
+          <span className="vanguardia">VANGUARDIA</span>
+        </h1>
+        <h2 className="eslogan">Pequeños Cambios, Grandes Impactos</h2>
+        <p>
+          <br />
+        </p>
+        <p>
+          <br />
+        </p>
+        <p></p>
       </div>
 
       {/* <div className="contenedor2">
@@ -101,7 +106,7 @@ function Landing() {
             powerPreference="high-performance"
             antialias={false}
           /> */}
-        
+
           <Suspense fallback={null}>
             {/* <directionalLight position={[10, 10, -5]} intensity={15} /> */}
           </Suspense>

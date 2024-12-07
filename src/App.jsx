@@ -5,6 +5,7 @@ import Landing from './pages/landing/Landing';
 import SeaSimulationTester from './pages/test/SeaSimulationTester'; 
 import TestSchoolFish from './pages/test/TestSchoolFish'; 
 import DoryTest from './pages/test/DoryTest';
+import Quiz from './pages/quiz/Quiz';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Route path="/seasimulation" element={<SeaSimulationTester />} /> {/* Nueva ruta */}
       <Route path="/testfish" element={<TestSchoolFish />}/>
       <Route path="/testdory" element={<DoryTest />}/>
+      <Route path="/quiz" element={<Quiz/>} />
+
     </Routes>
   );
 }
