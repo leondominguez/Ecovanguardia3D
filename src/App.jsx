@@ -5,7 +5,7 @@ import Landing from './pages/landing/Landing';
 import SeaSimulationTester from './pages/test/SeaSimulationTester'; 
 import TestSchoolFish from './pages/test/TestSchoolFish'; 
 import DoryTest from './pages/test/DoryTest';
-import Quiz from './pages/quiz/quiz';
+import Quiz from './pages/quiz/Quiz';
 
 function App() {
   return (
