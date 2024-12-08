@@ -64,6 +64,7 @@ const WaterAcidification = () => {
           sideColor={"#ff8f47"} // Color del resto
           size={6}
           depth={0.5}
+          fontPath="/fonts/oceans_world/Oceans_World_Regular.json" // Ruta de la fuente
         />
         <HtmlTextDrei //texto de bienvenida
           position={[74.8, -8.45, 82.5]}
@@ -241,15 +242,15 @@ const WaterAcidification = () => {
           <KeyboardControl
             colliders
             cameraRef={cameraRef}
-            movementSpeed={1.1}
+            movementSpeed={0.2}
             enabled={keyboardEnabled}
           />
         
           <SoundComponent
             url="./audios/village-at-morning-78119.mp3"
             position={[75, -8, 74]}
-            maxDistance={35}
-            refDistance={20}
+            maxDistance={107}
+            refDistance={1}
             rolloffFactor={20}
             volume={100} //ajuste volumene
             showHelper={false} // Muestra un helper visual para el sonido
@@ -258,7 +259,7 @@ const WaterAcidification = () => {
           <SoundComponent
             url="./audios/001467_mud-volcanos-53411.mp3"
             position={[75, -10, 6.6]}
-            maxDistance={70}
+            maxDistance={78}
             refDistance={10}
             rolloffFactor={6}
             volume={30} //ajuste volumenen
@@ -271,7 +272,7 @@ const WaterAcidification = () => {
             maxDistance={92.3}
             refDistance={20}
             rolloffFactor={50}
-            volume={140} //ajuste volumenen
+            volume={80} //ajuste volumenen
             showHelper={false} // Muestra un helper visual para el sonido
             helperScale={[5, 5, 5]} // Escala del helper visual
           />

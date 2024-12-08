@@ -9,6 +9,8 @@ const DirectionalLight = forwardRef(({
   showHelper = false,
   castShadow = false,
   shadowProps = {},
+  
+  
   ...props
 }, ref) => {
   const lightRef = ref || useRef();
@@ -56,6 +58,7 @@ const DirectionalLight = forwardRef(({
       position={position}
       intensity={intensity}
       color={color}
+      helperSize={1}
       {...props}
     />
   );

@@ -24,6 +24,7 @@ const HtmlTextDrei = ({ position, distanceFactor, title, content }) => {
           fontSize: "24px", // Tamaño del texto title
           margin: "20px 0",
           color: "white",
+          userSelect: "none",
         }}
       >
         {title}
@@ -31,6 +32,7 @@ const HtmlTextDrei = ({ position, distanceFactor, title, content }) => {
       <button // Botón para abrir el tooltip con el contenido
         onClick={handleButtonClick}
         style={{
+          userSelect: "none",
           display: "flex",
           margin: "10px auto",
           padding: "10px",
@@ -51,13 +53,14 @@ const HtmlTextDrei = ({ position, distanceFactor, title, content }) => {
       {tooltipVisible && (
         <div
           style={{
+            userSelect: "none",
             fontSize: "8px", // Tamaño del texto del tooltip
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             padding: "20px",
-            backgroundColor: "white", 
+            backgroundColor: "#d6e7f2", 
             border: "1px solid #ccc",
             borderRadius: "8px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
