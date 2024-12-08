@@ -1,14 +1,18 @@
 
 import { useGLTF } from '@react-three/drei'
+import { RigidBody } from '@react-three/rapier';
 
 const IsleDelfino = (props) => {
-    const { nodes, materials } = useGLTF('/models-3d/acidficationModels/isle_delfino.glb')
+    const { nodes, materials } = useGLTF('/models-3d/acidficationModels/deflino2.glb')
     return (
+    
       <group {...props} dispose={null}>
         <group name="Sketchfab_Scene">
-          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 2.7]}>
+          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
             <group name="Collada_visual_scene_group">
-              <group name="SEA">
+
+              <group name="SEA"> // agua mar
+             
                 <mesh
                   name="SEA_sea01-material"
                   castShadow
@@ -16,7 +20,9 @@ const IsleDelfino = (props) => {
                   geometry={nodes['SEA_sea01-material'].geometry}
                   material={materials.Merged_materials}
                 />
+                
               </group>
+              <RigidBody type="fixed" colliders="hull" density={0.1} restitution={9.8}>
               <group name="ILE">
                 <mesh
                   name="ILE_cliff04-material"
@@ -138,6 +144,7 @@ const IsleDelfino = (props) => {
                   material={materials.ILE_sand01}
                 />
               </group>
+              </RigidBody>
               <group name="NOK">
                 <mesh
                   name="NOK_shadow01-material"
@@ -1584,7 +1591,9 @@ const IsleDelfino = (props) => {
             </group>
           </group>
         </group>
+      
       </group>
+    
     )
   };
 

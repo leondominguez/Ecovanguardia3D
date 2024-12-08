@@ -40,19 +40,32 @@
   align-items: center; 
   padding-top: 19px;
   height: 20vh;
+  z-index: 1;
+
   
 }
 
 .background-video {
-
+  margin-top: -5%;
   bottom: 0;
   left: 0;
   width: 100vw; /* Ajusta el video para que ocupe el 100% del viewport */
-  height: 60vh; /* Ajusta el video para que ocupe el 60% del viewport */
+  height: 70vh; /* Ajusta el video para que ocupe el 60% del viewport */
   object-fit: cover; /* Asegura que el video esté detrás del contenido */
+  z-index: 0 ;
 }
 
 .CopyHome, .horizontal-container {
   position: relative;/* Mantener estos elementos sobre el video */
   
+}
+.Circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #23566e;
+  clip-path: circle(50% at 50% 50%);
+  z-index: 1;
 }

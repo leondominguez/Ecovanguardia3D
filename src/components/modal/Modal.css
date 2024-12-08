@@ -8,17 +8,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 }
 
 .modal-content {
   color: #23566e;
   position: relative;
-  width: 97%; /* Ajusta el ancho del modal */
-  height: 97vh; /* Ajusta la altura del modal */
+  width: 98%; /* Ajusta el ancho del modal */
+  height: 97%; /* Ajusta la altura del modal */
   background: white;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
+  font-size: 14px; /* Ajusta el tamaño de la fuente */
 }
 
 .close-button {
@@ -39,21 +41,23 @@
 }
 
 .modal-3d-view {
-  width: 75%; /* La mitad para el modelo 3D */
+  width: 100%; /* La mitad para el modelo 3D */
   height: 100%; /* Ocupa toda la altura disponible */
   background-color: #e6f7f8; /* Asegúrate de cambiar la ruta a la imagen real */
 }
 
 .modal-text {
-  width: 40%; /* La otra mitad para el texto */
+  width: 15%; /* La otra mitad para el texto */
   padding: 20px;
   background-color: #e6f7f8;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .modal-text p {
   font-weight: normal; /* Asegúrate de que los párrafos tengan un peso de fuente normal */
+  font-size: 12px; /* Ajusta el tamaño de la fuente */
 }
 
 .modal-text h3 {
