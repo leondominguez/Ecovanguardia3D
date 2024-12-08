@@ -1,0 +1,56 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.lobby-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.lobby-canvas {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.lobby-resumen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%; /* Ajusta el ancho del contenedor */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    min-width: 900px;
+    min-height: 200px;
+    color: white; /* Ajusta el color del texto */
+    background-color: rgba(16, 39, 49, 0.295); /* Ajusta el color de fondo */
+    padding: 10px; /* Añade padding para mejorar la legibilidad */
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: left; /* Alinea el texto a la izquierda */
+    margin: auto; /* Centra el contenedor */
+    font-size: 24px; /* Tamaño de fuente */
+    user-select: none;
+}
+
+.lobby-resumen p {
+    margin: 10px 0; /* Espaciado vertical entre párrafos */
+    font-weight: normal;
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    
+}
+.lobby-resumen h2 {
+    margin: 5px 0; /* Espaciado vertical entre párrafos */
+    font-weight: strong;
+    color: white;
+    text-align: left;
+}

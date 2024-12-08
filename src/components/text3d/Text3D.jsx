@@ -6,13 +6,13 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 extend({ TextGeometry });
 
-const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, size = 1, depth = 0.2 }) => {
+const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, size = 1, depth = 0.2, fontPath }) => {
   const meshRef = useRef();
   const { scene } = useThree();
 
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/oceans_world/Oceans_World_Regular.json', (font) => {
+    loader.load(fontPath, (font) => {
       const textGeometry = new TextGeometry(text, {
         font: font,
         size: size,
@@ -43,7 +43,7 @@ const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, s
         meshRef.current.add(textMesh);
       }
     });
-  }, [text, position, frontColor, sideColor, size, depth]);
+  }, [text, position, frontColor, sideColor, size, depth, fontPath]);
 
   // Animar el texto para crear un efecto de ola
   useFrame(({ clock }) => {
