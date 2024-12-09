@@ -322,12 +322,12 @@ const Lobby = () => {
           />
 
           <SoundComponent
-            url="./audios/underwater-ambience.mp3"
+            url="./audios/bubbles-14830.mp3"
             position={[0, 0, 0]}
-            maxDistance={120}
-            refDistance={100}
-            rolloffFactor={100}
-            volume={80} //ajuste volumenen
+            maxDistance={50}
+            refDistance={1}
+            rolloffFactor={50}
+            volume={0.5} //ajuste volumenen
             showHelper={false} // Muestra un helper visual para el sonido
             helperScale={[5, 5, 5]} // Escala del helper visual
           />
