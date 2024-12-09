@@ -16,6 +16,8 @@ import Text3D from "../../components/text3d/Text3D";
 import HtmlTextDrei from "../../components/html-3d-drei/TextHtmlDrei";
 import { Html,Text } from '@react-three/drei';
 import FishSchool3 from "../../components/models-3d-component/lobbyModels/FishSchool3";
+import Fishlowpoly from "../../components/models-3d-component/lobbyModels/Fishlowpoly";
+
 
 
 const Lobby = () => {
@@ -247,7 +249,7 @@ const Lobby = () => {
             scale={[1, 1, 1]} // Ajustar la escala
           />
             <FishSchool3
-            position={[0, 0.05, 0]}
+            position={[0, 0.05, 5]}
             receiveShadow
             animationName="Take 01"
             showAnimationsList={false}
@@ -255,6 +257,17 @@ const Lobby = () => {
             rotation={[0, Math.PI / 2, 0]}
             scale={[0.001, 0.001, 0.001]} // Ajustar la escala
           />
+       <Fishlowpoly
+            position={[-4, 0.05, 2]}
+            receiveShadow
+            animationName=""
+            showAnimationsList={true}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[0.001, 0.001, 0.001]} // Ajustar la escala
+          />
+
+
           <PerspectiveCamera
             ref={cameraRef}
             makeDefault
