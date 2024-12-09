@@ -74,44 +74,37 @@ const FishSchool3 = forwardRef(
     
 
     return (
-      <group ref={group} {...props} dispose={null}>
-        <group>
-          <group name="RootNode0" scale={0.001}>
+        <group ref={group} {...props} dispose={null}>
+        <group name="Scene">
+          <group name="RootNode0" scale={0.00091}>
             <group name="geo1">
-              <group name="all_fish12">
-                <skinnedMesh
-                  name="mesh_0"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.mesh_0.geometry}
-                  material={nodes.mesh_0.material}
-                  skeleton={nodes.mesh_0.skeleton}
-                />
-                <skinnedMesh
-                   castShadow
-                   receiveShadow
-                  name="mesh_1"
-                  geometry={nodes.mesh_1.geometry}
-                  material={nodes.mesh_1.material}
-                  skeleton={nodes.mesh_1.skeleton}
-                />
-                <skinnedMesh
-                   castShadow
-                   receiveShadow
-                  name="mesh_2"
-                  geometry={nodes.mesh_2.geometry}
-                  material={nodes.mesh_2.material}
-                  skeleton={nodes.mesh_2.skeleton}
-                />
-                <skinnedMesh
-                  name="mesh_3"
-                  geometry={nodes.mesh_3.geometry}
-                  material={nodes.mesh_3.material}
-                  skeleton={nodes.mesh_3.skeleton}
-                />
-              </group>
+              <group name="all_fish12" />
             </group>
             <group name="skeletal3">
+              <skinnedMesh
+                name="Mesh_0"
+                geometry={nodes.Mesh_0.geometry}
+                material={materials.Material_0}
+                skeleton={nodes.Mesh_0.skeleton}
+              />
+              <skinnedMesh
+                name="Mesh_1"
+                geometry={nodes.Mesh_1.geometry}
+                material={materials.Material_1}
+                skeleton={nodes.Mesh_1.skeleton}
+              />
+              <skinnedMesh
+                name="Mesh_2"
+                geometry={nodes.Mesh_2.geometry}
+                material={materials.Material_2}
+                skeleton={nodes.Mesh_2.skeleton}
+              />
+              <skinnedMesh
+                name="Mesh_3"
+                geometry={nodes.Mesh_3.geometry}
+                material={materials.Material_3}
+                skeleton={nodes.Mesh_3.skeleton}
+              />
               <primitive object={nodes.root4} />
             </group>
           </group>

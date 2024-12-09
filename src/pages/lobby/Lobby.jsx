@@ -1,10 +1,9 @@
 import React, { useRef, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera,Loader } from "@react-three/drei";
 import "./Lobby.css";
 import SeaTop from "../../components/models-3d-component/lobbyModels/SeaTop";
 import AmbientLight from "../../components/lights/AmbientLight";
-import CubeSea from "../../components/models-3d-component/lobbyModels/CubeSea";
 import DeepOcean from "../../components/models-3d-component/lobbyModels/DeepOcean";
 import DirectionalLight from "../../components/lights/DirectionalLight";
 import PointLight from "../../components/lights/PointLight";
@@ -16,10 +15,21 @@ import Text3D from "../../components/text3d/Text3D";
 import HtmlTextDrei from "../../components/html-3d-drei/TextHtmlDrei";
 import { Html,Text } from '@react-three/drei';
 import FishSchool3 from "../../components/models-3d-component/lobbyModels/FishSchool3";
+import Fishlowpoly from "../../components/models-3d-component/lobbyModels/Fishlowpoly";
+import Calamar from "../../components/models-3d-component/lobbyModels/Calamar";
+import Tiburon from "../../components/models-3d-component/lobbyModels/Tiburon";
+import Letrero from "../../components/models-3d-component/lobbyModels/Letrero";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import SoundComponent from "../../components/sounds/SoundComponent"; 
+import { Physics } from "@react-three/rapier";
+
+
+
 
 
 const Lobby = () => {
   const cameraRef = useRef();
+
 
 
   return (
@@ -30,7 +40,7 @@ const Lobby = () => {
         gl={{ alpha: false }}
         style={{ background: "blue", width: "100%", height: "100%" }} // Color de fondo
       >
-        <Html  position={[0.5, 1.7, -8]}  transform distanceFactor={6}>
+        {/* <Html position={[0.5, 1.7, -8]}  transform distanceFactor={6}>
           <div className="lobby-resumen">
             <p>
               Ecovanguardia es un equipo apasionado y comprometido con la defensa
@@ -47,25 +57,56 @@ const Lobby = () => {
               un impacto positivo y duradero en nuestro planeta.
             </p>
           </div>
-        </Html>
+        </Html> */}
+          <group position={[0.5, 1.7, -1.2]} scale={[0.1, 0.1, 0.1]}>//grupo te texto
+          <Text
+            position={[0, 9, 0]}
+            fontSize={2.7}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={112} // Ancho máximo antes de envolver el texto
+            lineHeight={1.2} // Altura de la línea
+            letterSpacing={0.02} // Espaciado entre letras
+            textAlign="left" // Alineación del texto
+            overflowWrap="break-word" // Controla cómo se envuelve el texto
+          >
+            <mesh position={[0, 0, -1.5]}>
+            <planeGeometry args={[115, 13]} />
+            <meshBasicMaterial color="#23566e" transparent opacity={0.7}/>
+          </mesh>
+            Ecovanguardia es un equipo apasionado y comprometido con la defensa
+            del medio ambiente. Nuestro objetivo principal es abordar y resolver
+            los desafíos medioambientales más urgentes de nuestro tiempo, con un
+            enfoque especial en la preservación y protección de nuestros recursos
+            hídricos.
+          </Text>
+          <Text
+             position={[0, -6, 0]}
+            fontSize={2.7}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={112} // Ancho máximo antes de envolver el texto
+            lineHeight={1.2} // Altura de la línea
+            letterSpacing={0.02} // Espaciado entre letras
+            textAlign="left" // Alineación del texto
+            overflowWrap="break-word" // Controla cómo se envuelve el texto
+          >
+                  <mesh position={[0, 0, -1.5]}>
+            <planeGeometry args={[115, 17]} />
+            <meshBasicMaterial color="#23566e" transparent opacity={0.7}/>
+          </mesh>
+            Nuestro equipo Conformado por expertos en medio ambiente,
+            investigadores y voluntarios dedicados, nuestro equipo trabaja
+            incansablemente para generar conciencia y promover soluciones
+            sostenibles. Cada miembro de Ecovanguardia aporta su conocimiento y
+            experiencia para crear un impacto positivo y duradero en nuestro
+            planeta.
+          </Text>
+        </group>
 
-        <Text> </Text>
-
-        <HtmlTextDrei //encuentra al sabio
-          position={[0, 0, 0]}
-          distanceFactor={10}
-          title="¿Que es Ecovanguardia?"
-          content={
-            <p>
-              {" "}
-              Aveces queremos saber mas cosas y aprender de los sabios, si
-              quieres saber mas sobre la acidificacion de los oceanos, ve y
-              busca al sabio de la isla, el te enseñara mas sobre este tema.
-            </p>
-          }
-        />
-
-        <group position={[-5.8, 4.15, -5]}>
+        <group position={[-5.8, 4.15, -1]}>
           <Text3D
             className="text3d"
             text="Eco"
@@ -88,8 +129,7 @@ const Lobby = () => {
           />
         </group>
 
-        {/* <SkyBackground /> */}
-        {/* <BackgroundImage/> */}
+      
         <Suspense fallback={null}>
           <StagginLoader
             position={[0, 0, 0]}
@@ -104,7 +144,7 @@ const Lobby = () => {
             background={true}
           />
           <AmbientLight
-            intensity={0.5} // Intensidad de la luz ambiental
+            intensity={0.1} // Intensidad de la luz ambiental
             color="#ffffff" // Color de la luz ambiental
           />
           <HemisphereLight
@@ -112,55 +152,15 @@ const Lobby = () => {
             groundColor="white" // Color del suelo
             intensity={1.1} // Intensidad de la luz hemisférica
             position={[0, 10.5, 0]} // Posición de la luz en el espacio 3D
-            showHelper={true} // Muestra un helper visual para la luz
+            showHelper={false} // Muestra un helper visual para la luz
           
           />
           <DirectionalLight //luz sobre el mar
             position={[10, 11, -7]} // Define la posición de la luz en el espacio 3D
-            intensity={100} // Define la intensidad de la luz
-            color="white" // Define el color de la luz
-            castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-            showHelper={true} // Muestra un helper visual para la luz direccional
-            shadowProps={{
-              shadowMapWidth: 6000, // Define el ancho del mapa de sombras
-              shadowMapHeight: 0, // Define la altura del mapa de sombras
-              shadowCameraNear: 0.1, // Define la distancia mínima desde la cámara de sombras en la que se renderizan las sombras
-              shadowCameraFar: 5000, // Define la distancia máxima desde la cámara de sombras en la que se renderizan las sombras
-              shadowCameraLeft: -300, // Define el límite izquierdo de la cámara de sombras
-              shadowCameraRight: 300, // Define el límite derecho de la cámara de sombras
-              shadowCameraTop: 300, // Define el límite superior de la cámara de sombras
-              shadowCameraBottom: -300, // Define el límite inferior de la cámara de sombras
-              shadowBias: -0.001, // Ajusta el sesgo de las sombras para evitar artefactos de auto-sombreado
-              shadowRadius: 100, // Suaviza los bordes de las sombras
-            }}
-          />
-
-        <DirectionalLight //debajo del mar 1
-            position={[10, -11, -10]} // Define la posición de la luz en el espacio 3D
-            intensity={1000} // Define la intensidad de la luz
-            color="white" // Define el color de la luz
-            castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-            showHelper={true} // Muestra un helper visual para la luz direccional
-            shadowProps={{
-              shadowMapWidth: 6000, // Define el ancho del mapa de sombras
-              shadowMapHeight: 0, // Define la altura del mapa de sombras
-              shadowCameraNear: 0.1, // Define la distancia mínima desde la cámara de sombras en la que se renderizan las sombras
-              shadowCameraFar: 5000, // Define la distancia máxima desde la cámara de sombras en la que se renderizan las sombras
-              shadowCameraLeft: -300, // Define el límite izquierdo de la cámara de sombras
-              shadowCameraRight: 300, // Define el límite derecho de la cámara de sombras
-              shadowCameraTop: 300, // Define el límite superior de la cámara de sombras
-              shadowCameraBottom: -300, // Define el límite inferior de la cámara de sombras
-              shadowBias: -0.001, // Ajusta el sesgo de las sombras para evitar artefactos de auto-sombreado
-              shadowRadius: 100, // Suaviza los bordes de las sombras
-            }}
-          />
-          
-        <DirectionalLight //debajo del mar 2
-            position={[-10, -11, -20]} // Define la posición de la luz en el espacio 3D
             intensity={10} // Define la intensidad de la luz
             color="white" // Define el color de la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-            showHelper={true} // Muestra un helper visual para la luz direccional
+            showHelper={false} // Muestra un helper visual para la luz direccional
             shadowProps={{
               shadowMapWidth: 6000, // Define el ancho del mapa de sombras
               shadowMapHeight: 0, // Define la altura del mapa de sombras
@@ -171,22 +171,25 @@ const Lobby = () => {
               shadowCameraTop: 300, // Define el límite superior de la cámara de sombras
               shadowCameraBottom: -300, // Define el límite inferior de la cámara de sombras
               shadowBias: -0.001, // Ajusta el sesgo de las sombras para evitar artefactos de auto-sombreado
-              shadowRadius: 100, // Suaviza los bordes de las sombras
+              shadowRadius: 1, // Suaviza los bordes de las sombras
             }}
-          />        
+          />
+
+
+    
           
           <DirectionalLight //debajo del mar 3 rayos
-          position={[35,30, 0]} // Define la posición de la luz en el espacio 3D
-          intensidad={100} // Define la intensidad de la luz
+          position={[5,15, -8]} // Define la posición de la luz en el espacio 3D
+          intensidad={10} // Define la intensidad de la luz
           color="white" // Define el color de la luz
           castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-          showHelper={true} // Muestra un helper visual para la luz direccional
+          showHelper={false} // Muestra un helper visual para la luz direccional
          
           shadowProps={{
             shadowMapWidth: 4096, // Define el ancho del mapa de sombras
             shadowMapHeight: 4096, // Define la altura del mapa de sombras
             shadowCameraNear: 0.01, // Define la distancia mínima desde la cámara de sombras en la que se renderizan las sombras
-            shadowCameraFar: 500, // Define la distancia máxima desde la cámara de sombras en la que se renderizan las sombras
+            shadowCameraFar: 50000, // Define la distancia máxima desde la cámara de sombras en la que se renderizan las sombras
             shadowCameraLeft: -3000, // Define el límite izquierdo de la cámara de sombras
             shadowCameraRight: 3000, // Define el límite derecho de la cámara de sombras
             shadowCameraTop: 5000, // Define el límite superior de la cámara de sombras
@@ -195,59 +198,72 @@ const Lobby = () => {
             shadowRadius: 1, // Suaviza los bordes de las sombras
           }}
         />
-          {/* <PointLight 
-            position={[10, 5.5, 0]} // sobre el mar rayos
-            intensity={80} // Intensidad de la luz
+          <PointLight 
+            position={[2.5, 1.95, 2.3]} // sobre el mar rayos
+            intensity={3.8} // Intensidad de la luz
             color="#bfd9ec" // Color de la luz
-            distance={100000} // Distancia máxima de la luz
-            decay={1.5} // Decaimiento de la luz con la distancia
-            showHelper={true} // Muestra un helper visual para la luz
+            distance={5} // Distancia máxima de la luz
+            decay={1} // Decaimiento de la luz con la distancia
+            showHelper={false} // Muestra un helper visual para la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
             helperSize={0.5} // Tamaño del helper
-          /> */}
+          />
+
+          <PointLight  //peces del medio
+            position={[0, 2.1, 0]} // sobre el mar rayos
+            intensity={3.8} // Intensidad de la luz
+            color="white" // Color de la luz
+            distance={4.8} // Distancia máxima de la luz
+            decay={1} // Decaimiento de la luz con la distancia
+            showHelper={false} // Muestra un helper visual para la luz
+            castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
+            helperSize={0.5} // Tamaño del helper
+          />
             <PointLight //point light sobre el mar centrado
             position={[0, 12.0, -5]} // Posición de la luz en el espacio 3D
-            intensity={1000000} // Intensidad de la luz
+            intensity={100} // Intensidad de la luz
             color="white" // Color de la luz
             distance={100000} // Distancia máxima de la luz
             decay={1.5} // Decaimiento de la luz con la distancia
-            showHelper={true} // Muestra un helper visual para la luz
+            showHelper={false} // Muestra un helper visual para la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
             helperSize={0.5} // Tamaño del helper
           />
 
         <PointLight //luz sobre titulo debajo del mar
-            position={[0, 5.3, -4.95]} // Posición de la luz en el espacio 3D
-            intensity={150} // Intensidad de la luz
+            position={[0, 5.49, -1.0]} // Posición de la luz en el espacio 3D
+            intensity={30} // Intensidad de la luz
             color="white" // Color de la luz
             distance={10} // Distancia máxima de la luz
             decay={2} // Decaimiento de la luz con la distancia
-            showHelper={true} // Muestra un helper visual para la luz
+            showHelper={false} // Muestra un helper visual para la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
             helperSize={0.5} // Tamaño del helper
           />
 
         <PointLight //debajo sobre del mar izquierda
             position={[10, 9, -6]} // Posición de la luz en el espacio 3D
-            intensity={1000} // Intensidad de la luz
+            intensity={100} // Intensidad de la luz
             color="white" // Color de la luz
             distance={1000} // Distancia máxima de la luz
             decay={0} // Decaimiento de la luz con la distancia
-            showHelper={true} // Muestra un helper visual para la luz
+            showHelper={false} // Muestra un helper visual para la luz
             castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
             helperSize={0.5} // Tamaño del helper
           />
+
+          <Physics>
           <DeepOcean
             position={[0, 0.05, 0]}
             receiveShadow
-            animationName="Take 01"
+            animationName=""
             showAnimationsList={false}
             activateAllAnimations={true}
             rotation={[0, Math.PI / 2, 0]}
             scale={[1, 1, 1]} // Ajustar la escala
           />
             <FishSchool3
-            position={[0, 0.05, 0]}
+            position={[0, 0.05, 5]}
             receiveShadow
             animationName="Take 01"
             showAnimationsList={false}
@@ -255,13 +271,67 @@ const Lobby = () => {
             rotation={[0, Math.PI / 2, 0]}
             scale={[0.001, 0.001, 0.001]} // Ajustar la escala
           />
+       <Fishlowpoly
+            position={[-4, 0.05, 2]}
+            castShadow
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[0.001, 0.001, 0.001]} // Ajustar la escala
+          />
+       <Calamar
+            position={[-4, 0, 2]}
+            castShadow
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[0.001, 0.001, 0.001]} // Ajustar la escala
+          />
+          <Tiburon
+            position={[0, 3, -4]}
+            castShadow
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[0.001, 0.001, 0.001]} // Ajustar la escala
+          />
+            <Letrero
+            position={[0, 0, 4]}
+            castShadow
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[0.0001, 0.0001, 0.0001]} // Ajustar la escala
+          />
+
+          </Physics>
+
           <PerspectiveCamera
             ref={cameraRef}
             makeDefault
             position={[-0.3, 4.2, 8.8]}
             fov={75}
           />
-          <axesHelper args={[200]} />
+
+          <SoundComponent
+            url="./audios/underwater-ambience.mp3"
+            position={[0, 0, 0]}
+            maxDistance={120}
+            refDistance={100}
+            rolloffFactor={100}
+            volume={80} //ajuste volumenen
+            showHelper={false} // Muestra un helper visual para el sonido
+            helperScale={[5, 5, 5]} // Escala del helper visual
+          />
+          {/* <axesHelper args={[200]} /> */}
         </Suspense>
         <OrbitControls
           enableZoom
@@ -269,6 +339,23 @@ const Lobby = () => {
           maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
         />
       </Canvas>
+
+      <Loader
+        containerStyles={{
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          width: "100%",
+          height: "100%",
+        }} // Estilos para el contenedor del loader
+        innerStyles={{ width: "300px", height: "10px" }} // Estilos para el contenedor interno del loader
+        barStyles={{
+          backgroundColor: "#63c548",
+          height: "10px",
+          borderRadius: 5,
+        }} // Estilos para la barra de progreso
+        dataStyles={{ color: "#63c548", fontSize: "26px" }} // Estilos para el texto de datos
+        dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
+        initialState={(active) => active} // Estado inicial del loader
+      />
     </div>
   );
 };
