@@ -331,7 +331,7 @@ const Lobby = () => {
             showHelper={false} // Muestra un helper visual para el sonido
             helperScale={[5, 5, 5]} // Escala del helper visual
           />
-          <axesHelper args={[200]} />
+          {/* <axesHelper args={[200]} /> */}
         </Suspense>
         <OrbitControls
           enableZoom
