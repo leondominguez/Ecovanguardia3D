@@ -7,18 +7,21 @@ import TestSchoolFish from './pages/test/TestSchoolFish';
 import DoryTest from './pages/test/DoryTest';
 import Quiz from './pages/quiz/Quiz';
 import Lobby from './pages/lobby/Lobby'; 
+import LoaderPreview from './pages/test/LoaderPreview'; // Importa LoaderPreview
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />}/>
       <Route path="/home" element={<Home />} />
+      <Route path="/lobby" element={<Lobby />} /> {/* Nueva ruta */}
       <Route path="/login" element={<Login />} />
       <Route path="/seasimulation" element={<SeaSimulationTester />} /> {/* Nueva ruta */}
       <Route path="/testfish" element={<TestSchoolFish />}/>
       <Route path="/testdory" element={<DoryTest />}/>
       <Route path="/quiz" element={<Quiz/>} />
-      <Route path="/lobby" element={<Lobby />} /> {/* Nueva ruta */}
+      <Route path="/loader-preview" element={<LoaderPreview />} />
+     
 
     </Routes>
   );

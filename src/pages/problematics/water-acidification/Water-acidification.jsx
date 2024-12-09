@@ -287,14 +287,14 @@ const WaterAcidification = () => {
           width: "100%",
           height: "100%",
         }} // Estilos para el contenedor del loader
-        innerStyles={{ width: "50px", height: "50px" }} // Estilos para el contenedor interno del loader
+        innerStyles={{ width: "300px", height: "10px" }} // Estilos para el contenedor interno del loader
         barStyles={{
-          backgroundColor: "white",
-          height: "20px",
+          backgroundColor: "#63c548",
+          height: "10px",
           borderRadius: 5,
         }} // Estilos para la barra de progreso
-        dataStyles={{ color: "white", fontSize: "26px" }} // Estilos para el texto de datos
-        dataInterpolation={(p) => `Cargando ${p.toFixed(2)}%`} // Función para interpolar los datos de carga
+        dataStyles={{ color: "#63c548", fontSize: "26px" }} // Estilos para el texto de datos
+        dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
         initialState={(active) => active} // Estado inicial del loader
       />
     </>

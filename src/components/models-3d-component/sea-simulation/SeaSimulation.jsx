@@ -96,45 +96,7 @@ const SeaSimulation = () => {
 
   return (
     <div ref={containerRef} id="container">
-      <div className="burbujas-mar">
-        <Canvas className="canvas-burbujas">
-        <WebGLSettings pixelRatio={window.devicePixelRatio} powerPreference="high-performance" antialias={true} />
-          <ambientLight />
-          <pointLight position={[10, 10, -1000]} />
-          {/* <BubblesSimulation distance={1800} position={[0, 10, -5000]} /> */}
 
-          <Text3D className="text3d"
-            text="Sumérgete En Esta Aventura"
-            position={[-20, -6, -30]}
-            frontColor={"#40E0D0"} // Color del frente
-            sideColor={"#5C677D"} // Color del resto
-            size={3}
-            depth={0.5}
-          />
-
-          <directionalLight
-            color={"white"}
-            //castShadow
-            position={[10, 5, 20]}
-            intensity={0.8}
-            // shadow-mapSize-width={1024}
-            // shadow-mapSize-height={1024}
-            // shadow-camera-far={50}
-            // shadow-camera-left={-50}
-            // shadow-camera-right={10}
-            // shadow-camera-top={10}
-            // shadow-camera-bottom={-10} //se comentan para probar mejor rendimiento
-          />
-        </Canvas>
-      </div>
-      {/* <div className="overlay-3dtext-landing">
-        Nuestro portal aborda las problemáticas ambientales urgentes,
-        enfocándose en la contaminación del agua, la escasez de recursos
-        hídricos y la acidificación de los océanos. Con investigaciones
-        profundas y soluciones innovadoras, buscamos concienciar y ofrecer
-        respuestas viables para preservar este valioso recurso. Únete a nosotros
-        para asegurar un futuro sostenible para las generaciones venideras.
-      </div> */}
     </div>
   );
 };

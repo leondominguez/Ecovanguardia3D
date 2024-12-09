@@ -65,7 +65,7 @@ const Fishlowpoly = forwardRef(
     useEffect(() => {
       if (showAnimationsList && animations) {
         console.log(
-          "Animaciones de DeepOcean disponibles:",
+          "Animaciones de fischlowpoly disponibles:",
           animations.map((anim) => anim.name)
         );
       }
