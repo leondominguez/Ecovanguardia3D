@@ -1,5 +1,12 @@
 import { Navbar } from "../../components/navbar/Navbar";
 import React, { useState } from "react";
+import SkyBackground from "../lobby/SkyBackground";
+import { Canvas } from "@react-three/fiber";
+import "./Quiz.css";
+import { OrbitControls } from "@react-three/drei";
+import DeepOcean from "./DeepOceanQuiz";
+import AmbientLight from "../../components/lights/AmbientLight";
+
 function Quiz() {
     //Preguntas del Quiz
   const questions = [
@@ -44,9 +51,47 @@ function Quiz() {
     }
   };
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="quiz-container">
+
+      <div style={{height: "100vh"}}>
+      <Canvas >
+      <SkyBackground
+      distance={550000} // Define la distancia del cielo
+      sunPosition={[-0.065, 0.025, -0.1]} // Coloca el sol en una posición alta en el cielo
+      inclination={0.2} // Ajusta la inclinación para simular la puesta del sol
+      azimuth={180} // Ajusta el ángulo azimutal para cambiar la dirección de la luz
+      mieCoefficient={0.48} // Ajusta la dispersión de Mie
+      mieDirectionalG={0.3} // Ajusta el brillo del sol
+      rayleigh={0.095} // Ajusta la dispersión de Rayleigh
+      turbidity={-0.048} // Ajusta la cantidad de partículas en el aire
+      
+    />
+  <AmbientLight intensity={3.5}/>
+  <DeepOcean
+            position={[0, 0.05, 0]}
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[1, 1, 1]} // Ajustar la escala
+          />
+
+
+      <OrbitControls />
+      </Canvas>
+
+      </div>
+
+    </>
+  );
+}
+
+export default Quiz;
+
+
+      {/* <div className="quiz-container">
         {showScore ? (
           <div className="score-section">
             <h2>¡Terminaste el quiz!</h2>
@@ -73,9 +118,4 @@ function Quiz() {
             </div>
           </div>
         )}
-      </div>
-    </div>
-  );
-}
-
-export default Quiz;
+      </div> */}
