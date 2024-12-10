@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { DirectionalLightHelper } from 'three';
 import { useLoader } from '@react-three/fiber';
-import { CubeTextureLoader } from 'three';
+import CubeMapBackground from '../../components/CubeMapBackground/CubeMapBackground';
 import SubmarineModel from '../../components/models-3d-component/submarine/Submarine';
 import Rock from '../../components/rock/Rock';
 
@@ -13,14 +13,7 @@ import Rock from '../../components/rock/Rock';
 const Scene = () => {
   const directionalLightRef = useRef();
 
-  const cubeTexture = useLoader(CubeTextureLoader, [
-    '/textures/cubemap/right.jpg',   // Lado derecho
-    '/textures/cubemap/left.jpg',    // Lado izquierdo
-    '/textures/cubemap/top.jpg',     // Lado superior
-    '/textures/cubemap/bottom.jpg',  // Lado inferior
-    '/textures/cubemap/front.jpg',   // Lado frontal
-    '/textures/cubemap/back.jpg',    // Lado trasero
-  ]);
+
 
   // Definir posiciones de las rocas
   const rockPositions = [
@@ -33,8 +26,7 @@ const Scene = () => {
   return (
     <>
 
-      {/* Asignar el cube map como fondo de la escena */}
-      <primitive attach="background" object={cubeTexture} />
+      <CubeMapBackground />
 
 
       {/* Luces en la escena */}
@@ -113,7 +105,7 @@ const WaterShortage = () => {
       <Canvas
         shadows
         dpr={[1, 1.5]}
-        camera={{ position: [0, 5, 15], fov: 50 }}
+        camera={{ position: [0, 5, 15], fov: 85 }}
         style={{ width: '100%', height: '100%' }}
       >
         <Scene />
