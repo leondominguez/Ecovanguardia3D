@@ -16,24 +16,19 @@ import { isWebGL2Available } from 'three-stdlib';
 import { HalfFloatType, NoToneMapping } from 'three';
 import {
   Bloom,
-  DepthOfField,
   Vignette,
   ChromaticAberration,
   BrightnessContrast,
   ColorAverage,
   DotScreen,
   Glitch,
-  GodRays,
   Grid,
   HueSaturation,
   Noise,
-  Outline,
   Pixelation,
   Scanline,
-  SelectiveBloom,
   Sepia,
   SMAA,
-  SSAO,
   ToneMapping
 } from '@react-three/postprocessing';
 
@@ -140,26 +135,22 @@ const PostProcessing = forwardRef(({ effects, children, ...props }, ref) => {
   return (
     <EffectComposerContext.Provider value={state}>
       <group ref={group}>
-        {effects.includes('bloom') && <Bloom intensity={1.5} luminanceThreshold={0.3} luminanceSmoothing={0.9} height={300} />}
-        {effects.includes('depthOfField') && <DepthOfField focusDistance={0.02} focalLength={0.02} bokehScale={2} height={480} />}
-        {effects.includes('vignette') && <Vignette eskil={false} offset={0.1} darkness={1.1} blendFunction={BlendFunction.NORMAL} />}
-        {effects.includes('chromaticAberration') && <ChromaticAberration offset={[0.001, 0.001]} />}
-        {effects.includes('brightnessContrast') && <BrightnessContrast brightness={0.1} contrast={0.1} />}
-        {effects.includes('colorAverage') && <ColorAverage />}
-        {effects.includes('dotScreen') && <DotScreen angle={Math.PI * 0.25} scale={1.0} />}
-        {effects.includes('glitch') && <Glitch delay={[1.5, 3.5]} duration={[0.6, 1.0]} strength={[0.3, 1.0]} mode={GlitchMode.SPORADIC} />}
-        {effects.includes('godRays') && <GodRays sunPosition={[0, 0, 0]} density={0.96} decay={0.93} weight={0.4} exposure={0.6} samples={60} clampMax={1.0} />}
-        {effects.includes('grid') && <Grid scale={1.0} lineWidth={0.1} />}
-        {effects.includes('hueSaturation') && <HueSaturation hue={0.1} saturation={0.1} />}
-        {effects.includes('noise') && <Noise premultiply blendFunction={BlendFunction.ADD} />}
-        {effects.includes('outline') && <Outline edgeStrength={10.0} blendFunction={BlendFunction.SCREEN} />}
-        {effects.includes('pixelation') && <Pixelation granularity={8.0} />}
-        {effects.includes('scanline') && <Scanline density={1.25} />}
-        {effects.includes('selectiveBloom') && <SelectiveBloom intensity={1.0} luminanceThreshold={0.3} luminanceSmoothing={0.9} height={300} />}
-        {effects.includes('sepia') && <Sepia intensity={0.95} />}
-        {effects.includes('smaa') && <SMAA />}
-        {effects.includes('ssao') && <SSAO samples={30} radius={0.1} intensity={20} luminanceInfluence={0.9} color="black" />}
-        {effects.includes('toneMapping') && <ToneMapping adaptive resolution={256} middleGrey={0.6} maxLuminance={16.0} averageLuminance={1.0} adaptationRate={1.0} />}
+        {effects.bloom && <Bloom {...effects.bloom} />}
+        {effects.chromaticAberration && <ChromaticAberration {...effects.chromaticAberration} />}
+        {effects.vignette && <Vignette {...effects.vignette} />}
+        {effects.brightnessContrast && <BrightnessContrast {...effects.brightnessContrast} />}
+        {effects.colorAverage && <ColorAverage {...effects.colorAverage} />}
+        {effects.dotScreen && <DotScreen {...effects.dotScreen} />}
+        {effects.glitch && <Glitch {...effects.glitch} />}
+        {effects.grid && <Grid {...effects.grid} />}
+        {effects.noise && <Noise {...effects.noise} />}
+        {effects.hueSaturation && <HueSaturation {...effects.hueSaturation} />}
+        {effects.pixelation && <Pixelation {...effects.pixelation} />}
+        {effects.scanline && <Scanline {...effects.scanline} />}
+        {effects.sepia && <Sepia {...effects.sepia} />}
+        {effects.smaa && <SMAA {...effects.smaa} />}
+        {effects.toneMapping && <ToneMapping {...effects.toneMapping} />}
+        {children}
       </group>
     </EffectComposerContext.Provider>
   );
@@ -171,51 +162,38 @@ export default PostProcessing;
 uso 
 ejemplo
 
-<PostProcessing effects={['bloom', 'depthOfField', 'vignette', 'chromaticAberration']} />
-
-ejemplo completo
-        <PostProcessing effects={[
-            'bloom',
-            'depthOfField',
-            'vignette',
-            'chromaticAberration',
-            'brightnessContrast',
-            'colorAverage',
-            'dotScreen',
-            'glitch',
-            'godRays',
-            'grid',
-            'hueSaturation',
-            'noise',
-            'outline',
-            'pixelation',
-            'scanline',
-            'selectiveBloom',
-            'sepia',
-            'smaa',
-            'ssao',
-            'toneMapping'
-          ]} />
+<PostProcessing effects={{
+  bloom: { intensity: 1.5, luminanceThreshold: 0.3, luminanceSmoothing: 0.9, height: 300 },
+  chromaticAberration: { offset: [0.001, 0.001] },
+  vignette: { offset: 0.1, darkness: 0.5 },
+  brightnessContrast: { brightness: 0.1, contrast: 0.1 },
+  colorAverage: { color: "#23566e" },
+  dotScreen: { angle: Math.PI * 0.25, scale: 1.0 },
+  glitch: { active: true, duration: 1.0, strength: 0.5 },
+  grid: { scale: 1.0, lineWidth: 0.1 },
+  noise: { intensity: 0.1 },
+  hueSaturation: { hue: 0.1, saturation: 0.1 },
+  pixelation: { granularity: 8.0 },
+  scanline: { density: 1.25 },
+  sepia: { intensity: 0.95 },
+  smaa: { dfs: 0, kernelSize: 1, output: 1 },
+  toneMapping: { adaptive: true, resolution: 256, middleGrey: 0.6, maxLuminance: 16.0, averageLuminance: 1.0, adaptationRate: 1.0 }
+}} />
 
 Explicación de cada efecto
 Bloom: Crea un resplandor alrededor de las áreas brillantes de la escena.
-DepthOfField: Ajusta el enfoque de la cámara, permitiendo que algunos objetos estén más nítidos y otros desenfocados.
-Vignette: Oscurece los bordes de la imagen, dirigiendo la atención del espectador hacia el centro de la escena.
 ChromaticAberration: Simula la aberración cromática, creando un desbordamiento de colores en los bordes de los objetos.
+Vignette: Oscurece los bordes de la imagen, dirigiendo la atención del espectador hacia el centro de la escena.
 BrightnessContrast: Permite ajustar el brillo y el contraste de la imagen.
 ColorAverage: Promedia los colores de toda la escena y los aplica de manera uniforme.
 DotScreen: Aplica un patrón de puntos sobre la imagen, simulando un efecto de impresión de trama de puntos.
 Glitch: Simula errores digitales o interferencias, generando distorsiones visuales.
-GodRays: Simula los rayos de luz que pasan a través de objetos, creando un efecto volumétrico.
 Grid: Superpone una cuadrícula en la escena.
-HueSaturation: Permite ajustar el tono y la saturación de los colores en la escena.
 Noise: Añade ruido o grano a la imagen.
-Outline: Resalta los contornos de los objetos en la escena.
+HueSaturation: Permite ajustar el tono y la saturación de los colores en la escena.
 Pixelation: Aplica un efecto de pixelación a la imagen.
 Scanline: Añade líneas de escaneo a la imagen.
-SelectiveBloom: Permite aplicar el efecto de Bloom de forma selectiva.
 Sepia: Aplica un filtro sepia a la imagen.
 SMAA: Técnica de anti-aliasing que suaviza los bordes de los objetos en la imagen.
-SSAO: Añade sombras suaves en las áreas donde los objetos están muy cerca entre sí.
 ToneMapping: Ajusta el rango dinámico de la imagen.
 */

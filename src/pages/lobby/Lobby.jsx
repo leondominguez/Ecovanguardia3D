@@ -22,6 +22,7 @@ import Letrero from "../../components/models-3d-component/lobbyModels/Letrero";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import SoundComponent from "../../components/sounds/SoundComponent"; 
 import { Physics } from "@react-three/rapier";
+import PostProcessing from "../../components/performance/PostProcessing";
 
 
 
@@ -40,6 +41,8 @@ const Lobby = () => {
         gl={{ alpha: false }}
         style={{ background: "blue", width: "100%", height: "100%" }} // Color de fondo
       >
+
+
         {/* <Html position={[0.5, 1.7, -8]}  transform distanceFactor={6}>
           <div className="lobby-resumen">
             <p>
@@ -334,12 +337,31 @@ const Lobby = () => {
           {/* <axesHelper args={[200]} /> */}
         </Suspense>
         <OrbitControls
-          enableZoom
-          minPolarAngle={Math.PI / 6} // Limita el ángulo mínimo para evitar que la cámara pase por debajo del suelo
-          maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
-        />
+  enableZoom
+  minPolarAngle={Math.PI / 6} // Limita el ángulo mínimo para evitar que la cámara pase por debajo del suelo
+  maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
+  enableRotate={true} // Habilita la rotación con el botón izquierdo del ratón
+  enablePan={false} // Habilita el desplazamiento con el botón derecho del ratón
+/>
+<PostProcessing effects={{
+  bloom: { intensity: 1.5, luminanceThreshold: 0.3, luminanceSmoothing: 0.9, height: 300 },
+  chromaticAberration: { offset: [0.001, 0.001] },
+  vignette: { offset: 0.1, darkness: 0.5 },
+  brightnessContrast: { brightness: 0.1, contrast: 0.1 },
+  colorAverage: { color: "#23566e" },
+  dotScreen: { angle: Math.PI * 0.25, scale: 1.0 },
+  glitch: { active: true, duration: 1.0, strength: 0.5 },
+  grid: { scale: 1.0, lineWidth: 0.1 },
+  noise: { intensity: 0.1 },
+  hueSaturation: { hue: 0.1, saturation: 0.1 },
+  pixelation: { granularity: 8.0 },
+  scanline: { density: 1.25 },
+  sepia: { intensity: 0.95 },
+  smaa: { dfs: 0, kernelSize: 1, output: 1 },
+  toneMapping: { adaptive: true, resolution: 256, middleGrey: 0.6, maxLuminance: 16.0, averageLuminance: 1.0, adaptationRate: 1.0 }
+}} />
       </Canvas>
-
+          
       <Loader
         containerStyles={{
           backgroundColor: "rgba(0, 0, 0, 0.8)",

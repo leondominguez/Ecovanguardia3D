@@ -116,7 +116,7 @@ function Landing() {
               />
             </group>
           </Suspense>
-          <PostProcessing effects={['bloom', 'vignette', 'chromaticAberration']} />
+          
         </Canvas>
         <div className="seaContainer">
           <SeaSimulation />
