@@ -98,7 +98,7 @@ const SubmarineModel = (props) => {
       // Crear caja delimitadora del submarino
       const submarineBox = new THREE.Box3().setFromObject(group.current);
 
-      console.log("SubmarineBox:", submarineBox);
+      
     
       // Restaurar la posición original del submarino
       group.current.position.copy(originalPosition);
@@ -116,7 +116,7 @@ const SubmarineModel = (props) => {
           new THREE.Vector3(mx, animatedY, mz),
           new THREE.Vector3(mineSize * 2, mineSize * 2, mineSize * 2)
         );
-        console.log("MineBox:", mineBox, "at position", mx, animatedY, mz);
+        
     
         if (submarineBox.intersectsBox(mineBox)) {
           collision = true;
