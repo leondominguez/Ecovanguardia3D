@@ -8,6 +8,7 @@ import { useLoader } from '@react-three/fiber';
 import CubeMapBackground from '../../components/CubeMapBackground/CubeMapBackground';
 import SubmarineModel from '../../components/models-3d-component/submarine/Submarine';
 import Rock from '../../components/rock/Rock';
+import Text3D from '../../components/Text3D/Text3D';
 
 
 const Scene = () => {
@@ -61,9 +62,22 @@ const Scene = () => {
       <Suspense fallback={null}>
         <SubmarineModel
           castShadow
-          scale={1}
+          scale={1} 
           position={[0, 0, 0]}
           rockPositions={rockPositions} // Pasar posiciones de las rocas
+        />
+      </Suspense>
+
+       {/* Añadir el texto 3D */}
+       <Suspense fallback={null}>
+        <Text3D
+          text="Profundidades Del mundo Marino "
+          position={[-8, 6, 0]} // Ajusta la posición según tus necesidades
+          frontColor={0x04D9D9} // Color frontal del texto
+          sideColor={0x0000ff}  // Color de los lados del texto
+          size={1}
+          depth={0.2}
+          fontPath="/fonts/carterOne/Carter One_Regular.json" 
         />
       </Suspense>
 
