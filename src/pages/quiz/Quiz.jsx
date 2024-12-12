@@ -116,6 +116,12 @@ function Quiz() {
   enableRotate={true} // Habilita la rotación con el botón izquierdo del ratón
   enablePan={false} // Habilita el desplazamiento con el botón derecho del ratón
 />
+
+//modelos 3d adicionales
+
+
+
+
       </Canvas>
 
       </div>
