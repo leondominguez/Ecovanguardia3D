@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
 export function Mine(props) {
   const group = useRef();
@@ -9,7 +8,16 @@ export function Mine(props) {
 
   useFrame(() => {
     const t = performance.now() / 1000;
-    group.current.position.y = Math.sin(t) * 0.5; 
+    if (group.current && props.position) {
+      const [px, py, pz] = props.position;
+
+      // Supongamos que el modelo de la mina está muy arriba visualmente
+      // Le restamos 5 unidades a py para bajarlo constantemente:
+      const adjustedY = py - 5; 
+      
+      // Luego le sumamos la oscilación:
+      group.current.position.set(px, adjustedY + Math.sin(t) * 0.5, pz);
+    }
   });
 
   return (

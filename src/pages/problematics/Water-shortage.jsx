@@ -13,11 +13,11 @@ const Scene = () => {
 
   // Definir posiciones de las minas (antes eran rocas)
   const minePositions = [
-    [0, 0, 0],
-    [3, 0, 0],
-    [-3, 0, 0],
-    [0, 0, 3],
-    [0, 0, -3]
+    [-10, -5, 0],
+    [-10, 0, 6],
+    [10, 0, 0],
+    [10, 0, 0],
+    [10, 0, 0]
   ];
 
   return (
@@ -60,7 +60,7 @@ const Scene = () => {
           castShadow
           scale={1} 
           position={[0, 0, 0]}
-          rockPositions={minePositions} // Ahora representando las minas
+          minePositions={minePositions} // Ahora representando las minas
         />
       </Suspense>
 

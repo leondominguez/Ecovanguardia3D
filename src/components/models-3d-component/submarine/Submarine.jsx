@@ -8,7 +8,7 @@ import * as THREE from 'three';
 const SubmarineModel = (props) => {
   // Antes: const { rockPositions } = props;  
   // Ahora: Renombramos a minePositions
-  const { minePositions } = props; 
+  const { minePositions = [] } = props; 
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/models-3d/submarine/atlantic_explorer_submarine.glb');
   const { actions } = useAnimations(animations, group);
@@ -24,6 +24,12 @@ const SubmarineModel = (props) => {
       }
     });
   }, [materials]);
+
+  useEffect(() => {
+    if (group.current) {
+      //group.current.position.y += 13; // Ajusta el valor según sea necesario
+    }
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -46,7 +52,7 @@ const SubmarineModel = (props) => {
 
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
-    group.current.position.y = Math.sin(t) * 0.2; // Efecto de flotación
+    group.current.position.y = 0; // Efecto de flotación
     group.current.rotation.z = Math.sin(t) * 0.05; // Balanceo
 
     const moveSpeed = 5;
@@ -75,57 +81,72 @@ const SubmarineModel = (props) => {
     const moveVector = new THREE.Vector3(0, 0, moveDirection.z * moveDistance);
     moveVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), group.current.rotation.y);
 
-    // Posición tentativa
-    const tentativePosition = new THREE.Vector3().copy(group.current.position).add(moveVector);
+   
+    
+      // ... Lógica de movimiento del submarino (keys, rotación, etc.)
+    
+      // Posición tentativa
+      const tentativePosition = new THREE.Vector3().copy(group.current.position).add(moveVector);
+    
+      // Guardar la posición original
+      const originalPosition = group.current.position.clone();
+    
+      // Actualizar posición para detección de colisión
+      group.current.position.copy(tentativePosition);
+      group.current.updateMatrixWorld();
+    
+      // Crear caja delimitadora del submarino
+      const submarineBox = new THREE.Box3().setFromObject(group.current);
 
-    // Guardar la posición original
-    const originalPosition = group.current.position.clone();
+      console.log("SubmarineBox:", submarineBox);
+    
+      // Restaurar la posición original del submarino
+      group.current.position.copy(originalPosition);
+    
+      // Detección de colisiones con las minas
+      let collision = false;
+      minePositions.forEach((minePosition) => {
+        const mineSize = 1; // Radio de la mina
+        const [mx, my, mz] = minePosition;
+    
+        // Aplicamos el mismo offset vertical que las minas tienen en su animación
+        const animatedY = my + Math.sin(t) * 0.5;
+    
+        const mineBox = new THREE.Box3().setFromCenterAndSize(
+          new THREE.Vector3(mx, animatedY, mz),
+          new THREE.Vector3(mineSize * 2, mineSize * 2, mineSize * 2)
+        );
+        console.log("MineBox:", mineBox, "at position", mx, animatedY, mz);
+    
+        if (submarineBox.intersectsBox(mineBox)) {
+          collision = true;
+        }
+      });
 
-    // Actualizar posición para detección de colisión
-    group.current.position.copy(tentativePosition);
-    group.current.updateMatrixWorld();
-
-    // Crear caja delimitadora del submarino
-    const submarineBox = new THREE.Box3().setFromObject(group.current);
-
-    // Restaurar la posición original
-    group.current.position.copy(originalPosition);
-
-    // Detección de colisiones con las minas
-    let collision = false;
-    minePositions.forEach((minePosition) => {
-      const mineSize = 1; // Radio de la mina
-      const mineBox = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(...minePosition),
-        new THREE.Vector3(mineSize * 2, mineSize * 2, mineSize * 2)
-      );
-
-      if (submarineBox.intersectsBox(mineBox)) {
-        collision = true;
+        
+    
+      if (!collision) {
+        // Actualizar la posición si no hay colisión
+        group.current.position.copy(tentativePosition);
+    
+        // Restaurar los colores emisivos originales
+        Object.entries(materials).forEach(([name, material]) => {
+          if (material.emissive) {
+            material.emissive.copy(originalEmissiveColors.current[name]);
+            material.emissiveIntensity = 1;
+          }
+        });
+      } else {
+        // Cambiar color emisivo a rojo en caso de colisión
+        Object.values(materials).forEach((material) => {
+          if (material.emissive) {
+            material.emissive.set('#ff0000');
+            material.emissiveIntensity = 1;
+          }
+        });
       }
     });
-
-    if (!collision) {
-      // Actualizar la posición si no hay colisión
-      group.current.position.copy(tentativePosition);
-
-      // Restaurar los colores emisivos originales
-      Object.entries(materials).forEach(([name, material]) => {
-        if (material.emissive) {
-          material.emissive.copy(originalEmissiveColors.current[name]);
-          material.emissiveIntensity = 1;
-        }
-      });
-    } else {
-      // Cambiar color emisivo a rojo en caso de colisión
-      Object.values(materials).forEach((material) => {
-        if (material.emissive) {
-          material.emissive.set('#ff0000');
-          material.emissiveIntensity = 1;
-        }
-      });
-    }
-  });
+    
 
   // Función para manejar el click
   const handleClick = () => {
