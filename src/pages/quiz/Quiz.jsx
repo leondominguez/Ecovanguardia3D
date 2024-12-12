@@ -10,7 +10,8 @@ import HemisphereLight from "../../components/lights/HemisphereLight";
 import PointLight from "../../components/lights/PointLight";
 import { Html, Text } from "@react-three/drei";
 import Text3dQuiz from "../../components/text3d/Text3dQuiz";
-
+import { useAuth } from "../../pages/login/login-context/AuthContext";
+import { Navigate } from "react-router-dom";
 
   // Preguntas del Quiz
 import Barril1 from "./Barril1.jsx";
@@ -21,35 +22,75 @@ import CoralSub from "./CoralSub.jsx";
 import Coral2 from "./Coral2.jsx";
 
 function Quiz() {
+    const { authUser } = useAuth();
+    if (authUser==null) {
+        return <Navigate to="/login" replace />;
+    }
+    
   //Preguntas del Quiz
   const questions = [
     {
-      question: "¿Cuál es el lenguaje de programación más popular en 2024?",
-      options: ["Java", "Python", "JavaScript", "C++"],
-      answer: "JavaScript",
+      question: "¿Qué es la contaminación del agua?",
+      options: [
+        "La presencia de sustancias tóxicas en el agua que afectan a los ecosistemas y la salud humana",
+        "El uso excesivo de agua potable en las ciudades",
+        "La evaporación del agua en grandes masas",
+        "El cambio del color del agua debido a la luz solar",
+      ],
+      answer: "La presencia de sustancias tóxicas en el agua que afectan a los ecosistemas y la salud humana",
     },
     {
-      question: "¿Qué significa HTML?",
+      question: "¿Cuál de los siguientes es un efecto de la escasez de agua?",
       options: [
-        "HyperText Markup Language",
-        "Home Tool Markup Language",
-        "Hyperlinks and Text Markup Language",
-        "High Text Machine Language",
+        "Mayor acceso a agua limpia",
+        "Conflictos por recursos hídricos",
+        "Disminución de la contaminación del agua",
+        "Aumento de las lluvias en áreas urbanas",
       ],
-      answer: "HyperText Markup Language",
+      answer: "Conflictos por recursos hídricos",
     },
     {
-      question: "¿Quién creó Linux?",
+      question: "¿Qué provoca la acidificación de los océanos?",
       options: [
-        "Bill Gates",
-        "Linus Torvalds",
-        "Steve Jobs",
-        "Mark Zuckerberg",
+        "El aumento de dióxido de carbono (CO2) en la atmósfera que se disuelve en el agua",
+        "La reducción de oxígeno en las aguas profundas",
+        "El aumento de residuos plásticos en los océanos",
+        "La sobrepesca en los ecosistemas marinos",
       ],
-      answer: "Linus Torvalds",
+      answer: "El aumento de dióxido de carbono (CO2) en la atmósfera que se disuelve en el agua",
+    },
+    {
+      question: "¿Qué actividad humana es una de las principales causas de la contaminación del agua?",
+      options: [
+        "El consumo de agua embotellada",
+        "La descarga de desechos industriales y químicos en ríos y lagos",
+        "La pesca en aguas profundas",
+        "El uso de energía eólica",
+      ],
+      answer: "La descarga de desechos industriales y químicos en ríos y lagos",
+    },
+    {
+      question: "¿Qué consecuencias puede tener la escasez de agua en la agricultura?",
+      options: [
+        "Un aumento en la producción de cultivos",
+        "Menor necesidad de sistemas de riego",
+        "Pérdida de cultivos y aumento de los precios de los alimentos",
+        "Mayor disponibilidad de agua para la ganadería",
+      ],
+      answer: "Pérdida de cultivos y aumento de los precios de los alimentos",
+    },
+    {
+      question: "¿Qué ecosistema marino es más afectado por la acidificación de los océanos?",
+      options: [
+        "Los arrecifes de coral",
+        "Las zonas polares",
+        "Los manglares",
+        "Las playas tropicales",
+      ],
+      answer: "Los arrecifes de coral",
     },
   ];
-
+ 
   // Estados
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -74,8 +115,7 @@ function Quiz() {
   return (
     <>
       <Navbar />
-      
-      <div style={{ height: "100vh" }}>
+      {authUser && (<div style={{ height: "100vh" }}>
         <Canvas>
           <SkyBackground
             distance={300} // Define la distancia del cielo
@@ -274,7 +314,8 @@ function Quiz() {
           dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
           initialState={(active) => active} // Estado inicial del loader
         />
-      </div>
+      </div>)
+    }
     </>
   );
 }

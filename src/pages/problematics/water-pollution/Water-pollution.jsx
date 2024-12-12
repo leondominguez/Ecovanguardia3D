@@ -8,6 +8,7 @@ import StagginLoader from "../../../components/staggings/StagginLoader";
 import ThreeDText from "../../../components/text3d/ThreeDText";
 import { Physics } from "@react-three/rapier";
 import PostProcessing from "./post-processing/PostprocessingWaterProcessing";
+import SoundComponent from "../../../components/sounds/SoundComponent";
 const WaterPollution = () => {
   const camera = useRef();
   const [showTooltip, setShowTooltip] = useState(false);
@@ -30,15 +31,25 @@ const WaterPollution = () => {
         position={[0.2, 1.5, 2.1]}
         fov={75} // Ajusta el campo de visión de la cámara
       />
+      <SoundComponent
+        url="./audios/bubbles-underwater-258281.mp3"
+        position={[0, 0, 0]}
+        maxDistance={50}
+        refDistance={1}
+        rolloffFactor={50}
+        volume={0.25} //ajuste volumenen
+        showHelper={false} // Muestra un helper visual para el sonido
+        helperScale={[5, 5, 5]} // Escala del helper visual
+      />
       <WebGLSettings
         pixelRatio={window.devicePixelRatio}
         powerPreference="high-performance"
         antialias={false}
       />
       <Suspense>
-      <PostProcessing/>
-      
-      <Physics gravity={[0, 0, 0]}  >
+        <PostProcessing />
+
+        <Physics gravity={[0, 0, 0]}>
           <directionalLight
             position={[5, 3, -5]}
             intensity={2}
