@@ -15,6 +15,7 @@ import ChatComponent from "../../../components/chat-ia/ChatComponent";
 import LogCameraPosition from "../../../components/Debug/LogCameraPosition";
 import MovementInstructions from "../../../components/config/controls/motion-controls/MovementInstructions";
 import SoundComponent from "../../../components/sounds/SoundComponent"; 
+import PostProcessing from "../../../components/performance/PostProcessing";
 
 const content = (
   <div>
@@ -55,6 +56,26 @@ const WaterAcidification = () => {
           powerPreference="high-performance"
           antialias={true}
         />
+      <PostProcessing effects={{
+  bloom: { intensity: 1.5, luminanceThreshold: 0.3, luminanceSmoothing: 0.9, height: 300 },
+  chromaticAberration: { offset: [0.001, 0.001] },  
+  vignette: { offset: 0.1, darkness: 0.5 },
+  brightnessContrast: { brightness: 0.1, contrast: 0.1 },
+  colorAverage: { color: "#23566e" },
+  dotScreen: { angle: Math.PI * 0.25, scale: 1.0 },
+  lensflare: { flareIntensity: 0.5, haloWidth: 0.4, haloIntensity: 0.6, haloSize: 0.6, flareColor: "#ffffff" },
+  glitch: { active: true, duration: 1.0, strength: 0.5 },
+  grid: { scale: 1.0, lineWidth: 0.1 },
+  noise: { intensity: 0.1 },  
+  hueSaturation: { hue: 0.1, saturation: 0.1 },
+  pixelation: { granularity: 8.0 },
+  scanline: { density: 1.25 },
+  sepia: { intensity: 0.95 },  
+  smaa: { dfs: 0, kernelSize: 1, output: 1 },  
+  toneMapping: { adaptive: true, resolution: 256, middleGrey: 0.6, maxLuminance: 16.0, averageLuminance: 1.0, adaptationRate: 1.0 }
+}} />
+
+
         /// zona de textos
         <Text3D
           className="text3d"

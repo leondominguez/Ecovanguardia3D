@@ -1,5 +1,14 @@
 import { Navbar } from "../../components/navbar/Navbar";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import SkyBackground from "../lobby/SkyBackground";
+import { Canvas } from "@react-three/fiber";
+import "./Quiz.css";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import DeepOceanQuiz from "./DeepOceanQuiz";
+import AmbientLight from "../../components/lights/AmbientLight";
+import HemisphereLight from "../../components/lights/HemisphereLight";
+import PointLight from "../../components/lights/PointLight";
+
 function Quiz() {
     //Preguntas del Quiz
   const questions = [
@@ -24,7 +33,7 @@ function Quiz() {
       answer: "Linus Torvalds",
     },
   ];
-
+ 
   // Estados
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -43,10 +52,88 @@ function Quiz() {
       setShowScore(true);
     }
   };
+
+  const cameraRef = useRef();
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="quiz-container">
+
+      <div style={{height: "100vh"}}>
+      <Canvas >
+      <SkyBackground
+      distance={300} // Define la distancia del cielo
+      sunPosition={[-0.065, 0.025, -0.1]} // Coloca el sol en una posición alta en el cielo
+      inclination={0.2} // Ajusta la inclinación para simular la puesta del sol
+      azimuth={180} // Ajusta el ángulo azimutal para cambiar la dirección de la luz
+      mieCoefficient={0.48} // Ajusta la dispersión de Mie
+      mieDirectionalG={0.0} // Ajusta el brillo del sol
+      rayleigh={0.095} // Ajusta la dispersión de Rayleigh
+      turbidity={-0.048} // Ajusta la cantidad de partículas en el aire
+      
+    />
+  <AmbientLight intensity={3.5}/>
+  <DeepOceanQuiz
+            position={[0, 0.05, 0]}
+            receiveShadow
+            animationName=""
+            showAnimationsList={false}
+            activateAllAnimations={true}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[1, 1, 1]} // Ajustar la escala
+          />
+
+<PointLight  //peces del medio
+            position={[0,8, 0]} // sobre el mar rayos
+            intensity={8.8} // Intensidad de la luz
+            color="white" // Color de la luz
+            distance={100} // Distancia máxima de la luz
+            decay={1} // Decaimiento de la luz con la distancia
+            showHelper={true} // Muestra un helper visual para la luz
+            castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
+            helperSize={0.5} // Tamaño del helper
+          />
+       <HemisphereLight
+            skyColor="white" // Color del cielo
+            groundColor="white" // Color del suelo
+            intensity={1.1} // Intensidad de la luz hemisférica
+            position={[0, 10.5, 0]} // Posición de la luz en el espacio 3D
+            showHelper={true} // Muestra un helper visual para la luz
+          
+          />
+          
+          <PerspectiveCamera
+            ref={cameraRef}
+            makeDefault
+            position={[-0.3, 3.0, 4.8]}
+            fov={75}
+          />
+        <axesHelper args={[200]} />
+
+<OrbitControls
+  enableZoom
+  minPolarAngle={Math.PI / 6} // Limita el ángulo mínimo para evitar que la cámara pase por debajo del suelo
+  maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
+  enableRotate={true} // Habilita la rotación con el botón izquierdo del ratón
+  enablePan={false} // Habilita el desplazamiento con el botón derecho del ratón
+/>
+
+//modelos 3d adicionales
+
+
+
+
+      </Canvas>
+
+      </div>
+
+    </>
+  );
+}
+
+export default Quiz;
+
+
+      {/* <div className="quiz-container">
         {showScore ? (
           <div className="score-section">
             <h2>¡Terminaste el quiz!</h2>
@@ -73,9 +160,4 @@ function Quiz() {
             </div>
           </div>
         )}
-      </div>
-    </div>
-  );
-}
-
-export default Quiz;
+      </div> */}
