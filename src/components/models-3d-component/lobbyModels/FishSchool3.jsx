@@ -71,10 +71,8 @@ const FishSchool3 = forwardRef(
       }
     }, [animations, showAnimationsList]);
 
-    
-
     return (
-        <group ref={group} {...props} dispose={null}>
+      <group ref={group} {...props} dispose={null} scale={scale}>
         <group name="Scene">
           <group name="RootNode0" scale={0.00091}>
             <group name="geo1">
