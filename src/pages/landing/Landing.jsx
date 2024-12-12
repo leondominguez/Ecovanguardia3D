@@ -9,6 +9,7 @@ import Drop from "../../components/models-3d-component/drop/Drop.jsx";
 import SeaSimulation from "../../components/models-3d-component/sea-simulation/SeaSimulation.jsx";
 import Text3D from "../../components/text3d/Text3D.jsx";
 import AmbientLight from "../../components/lights/AmbientLight.jsx";
+import PostProcessing from "../../components/performance/PostProcessing.jsx";
 
 function LightWithHelper() {
   const lightRef = useRef();
@@ -115,6 +116,7 @@ function Landing() {
               />
             </group>
           </Suspense>
+          
         </Canvas>
         <div className="seaContainer">
           <SeaSimulation />
