@@ -17,3 +17,39 @@ html, body {
  
 }
 
+.quiz-container {
+  background: rgba(255, 255, 255, 0.2); /* Fondo blanco translúcido */
+  backdrop-filter: blur(px); /* Efecto de desenfoque */
+  -webkit-backdrop-filter: blur(10px); /* Soporte para navegadores WebKit */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde tenue */
+  padding: 20px;
+  border-radius: 15px; /* Bordes redondeados */
+  color: white; /* Asegúrate de que el texto sea visible */
+  width: 400px; /* Ajusta según tu diseño */
+  margin: auto;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra tenue para realzar */
+}
+
+.question-section h2, p
+.score-section h2 {
+}
+
+.options-section {
+  margin-top: 10px;
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-button:hover {
+  background-color: #0056b3;
+}

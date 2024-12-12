@@ -97,7 +97,7 @@ const WaterPollution = () => {
                     cursor: "pointer",
                   }}
                 >
-                  Sensibilizate
+                  Descontamina el agua
                 </button>
                 {showTooltip && (
                   <div
