@@ -1,34 +1,28 @@
-
-
+// Scene.js
 import React, { Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { DirectionalLightHelper } from 'three';
-import { useLoader } from '@react-three/fiber';
 import CubeMapBackground from '../../components/CubeMapBackground/CubeMapBackground';
 import SubmarineModel from '../../components/models-3d-component/submarine/Submarine';
-import Rock from '../../components/rock/Rock';
-import Text3D from '../../components/Text3D/Text3D';
-
+import Mine from "../../components/models-3d-component/seaMine/SeaMIne" 
+import Text3D from '../../components/text3d/Text3D';
 
 const Scene = () => {
   const directionalLightRef = useRef();
 
-
-
-  // Definir posiciones de las rocas
-  const rockPositions = [
-    [2, -2.5, -5],
-    [-3, -2.5, -10],
-    [1, -2.5, -8],
-    [0, -2.5, -12],
+  // Definir posiciones de las minas (antes eran rocas)
+  const minePositions = [
+    [0, 0, 0],
+    [3, 0, 0],
+    [-3, 0, 0],
+    [0, 0, 3],
+    [0, 0, -3]
   ];
 
   return (
     <>
-
       <CubeMapBackground />
-
 
       {/* Luces en la escena */}
       <ambientLight intensity={0.3} />
@@ -37,7 +31,7 @@ const Scene = () => {
         position={[5, 10, 5]}
         intensity={1}
         castShadow
-        shadow-mapSize-width={1024} // Reducido para mejor performance
+        shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
       {directionalLightRef.current && (
@@ -53,28 +47,30 @@ const Scene = () => {
       {/* Añadir partículas (estrellas) para simular burbujas pequeñas */}
       <Stars radius={30} depth={10} count={300} factor={4} saturation={0} fade speed={1} />
 
-      {/* Añadir rocas a la escena con texturas */}
-      {rockPositions.map((position, index) => (
-        <Rock key={index} position={position} />
+      {/* Añadir minas en vez de rocas */}
+      {minePositions.map((position, index) => (
+        <Suspense fallback={null} key={index}>
+          <Mine position={position} />
+        </Suspense>
       ))}
 
-      {/* Carga del modelo del submarino y pasar las posiciones de las rocas */}
+      {/* Carga del modelo del submarino y pasar las posiciones de las minas (antes rocas) */}
       <Suspense fallback={null}>
         <SubmarineModel
           castShadow
           scale={1} 
           position={[0, 0, 0]}
-          rockPositions={rockPositions} // Pasar posiciones de las rocas
+          rockPositions={minePositions} // Ahora representando las minas
         />
       </Suspense>
 
-       {/* Añadir el texto 3D */}
-       <Suspense fallback={null}>
+      {/* Añadir el texto 3D */}
+      <Suspense fallback={null}>
         <Text3D
           text="Profundidades Del mundo Marino "
-          position={[-8, 6, 0]} // Ajusta la posición según tus necesidades
-          frontColor={0x04D9D9} // Color frontal del texto
-          sideColor={0x0000ff}  // Color de los lados del texto
+          position={[-8, 6, 0]}
+          frontColor={0x04D9D9}
+          sideColor={0x0000ff}
           size={1}
           depth={0.2}
           fontPath="/fonts/carterOne/Carter One_Regular.json" 
