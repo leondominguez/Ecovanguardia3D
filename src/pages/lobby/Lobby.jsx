@@ -25,9 +25,6 @@ import { Physics } from "@react-three/rapier";
 import PostProcessing from "../../components/performance/PostProcessing";
 
 
-
-
-
 const Lobby = () => {
   const cameraRef = useRef();
 
@@ -335,6 +332,7 @@ const Lobby = () => {
             helperScale={[5, 5, 5]} // Escala del helper visual
           />
           {/* <axesHelper args={[200]} /> */}
+          {/* <LogCameraPosition cameraRef={cameraRef} />  */}
         </Suspense>
         <OrbitControls
   enableZoom
