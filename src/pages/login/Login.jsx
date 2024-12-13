@@ -1,6 +1,12 @@
-import React, { useRef, Suspense, useEffect, useState, useCallback } from "react";
+import React, {
+  useRef,
+  Suspense,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Loader } from "@react-three/drei";
 import TurtleCarey from "../../components/models-3d-component/turtle/Turtle-carey";
 import DeepSea from "../../components/staggings/deepsea/DeepSea";
 import WebGLSettings from "../../components/performance/WebGLSettings"; // Importa el nuevo componente
@@ -16,10 +22,12 @@ import "./Login.css";
 import useAuthStore from "../../components/stores/use-auth-store.js";
 import { useNavigate } from "react-router-dom";
 import UserDao from "../../components/daos/UserDAO.js";
-import Modal from"./login-context/ModalLogin.jsx";
+import Modal from "./login-context/ModalLogin.jsx";
+import SoundComponent from "../../components/sounds/SoundComponent";
 
 const Login = () => {
-  const { user, observeAuthState, loginGoogleWithPopUp, logout, loading } = useAuthStore();
+  const { user, observeAuthState, loginGoogleWithPopUp, logout, loading } =
+    useAuthStore();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -47,9 +55,13 @@ const Login = () => {
         .then((exists) => {
           if (exists) {
             console.log("creado?:", exists);
-            setModalMessage("Ya tienes una cuenta.<br />Serás redirigido al Home.");
+            setModalMessage(
+              "Ya tienes una cuenta.<br />Serás redirigido al Home."
+            );
           } else {
-            setModalMessage("Cuenta creada exitosamente.<br />Serás redirigido Home");
+            setModalMessage(
+              "Cuenta creada exitosamente.<br />Serás redirigido Home"
+            );
           }
           console.log("el mensaje de modal es:", modalMessage);
           setShowModal(true);
@@ -94,7 +106,9 @@ const Login = () => {
         {user ? (
           <>
             <p className="welcome-text">Bienvenido, {user.displayName}</p>
-            <button className="button-logout" onClick={handleLogout}>Cerrar sesión</button>
+            <button className="button-logout" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
           </>
         ) : (
           <button onClick={handleLogin}>Iniciar sesión con Google</button>
@@ -205,9 +219,35 @@ const Login = () => {
               position={[0, 0, -200]}
               scale={[20, 20, 20]}
             />
+            <SoundComponent
+              url="./audios/underwater-loop.mp3"
+              position={[0, 0, 0]}
+              maxDistance={50}
+              refDistance={1}
+              rolloffFactor={50}
+              volume={0.25} //ajuste volumenen
+              showHelper={false} // Muestra un helper visual para el sonido
+              helperScale={[5, 5, 5]} // Escala del helper visual
+            />
             <OrbitControls enableRotate={true} target={[0, 0, 0]} />
           </Suspense>
         </Canvas>
+        <Loader
+          containerStyles={{
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            width: "100%",
+            height: "100%",
+          }} // Estilos para el contenedor del loader
+          innerStyles={{ width: "300px", height: "10px" }} // Estilos para el contenedor interno del loader
+          barStyles={{
+            backgroundColor: "#63c548",
+            height: "10px",
+            borderRadius: 5,
+          }} // Estilos para la barra de progreso
+          dataStyles={{ color: "#63c548", fontSize: "26px" }} // Estilos para el texto de datos
+          dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
+          initialState={(active) => active} // Estado inicial del loader
+        />
       </div>
       <Modal
         show={showModal}

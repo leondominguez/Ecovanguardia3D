@@ -1,6 +1,6 @@
 import { Suspense, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei"; // Importa el modelo de contaminación del agua
+import { OrbitControls, PerspectiveCamera, Loader } from "@react-three/drei"; // Importa el modelo de contaminación del agua
 import Buzo from "../../../components/models-3d-component/buzo/Buzo";
 import WebGLSettings from "../../../components/performance/WebGLSettings";
 import { Html } from "@react-three/drei";
@@ -10,7 +10,7 @@ import { Physics } from "@react-three/rapier";
 import PostProcessing from "./post-processing/PostprocessingWaterProcessing";
 import SoundComponent from "../../../components/sounds/SoundComponent";
 const WaterPollution = () => {
-  const camera = useRef();
+  // const camera = useRef();
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleButtonClick = () => {
@@ -21,7 +21,9 @@ const WaterPollution = () => {
   };
 
   return (
-    <Canvas
+  
+    <>
+        <Canvas
       shadows
       camera={{ position: [0, 0, 15], fov: 50 }} // Ajusta la posición de la cámara según necesites
       style={{ width: "100%", height: "100%" }}
@@ -167,6 +169,24 @@ const WaterPollution = () => {
         </Physics>
       </Suspense>
     </Canvas>
+
+      <Loader
+              containerStyles={{
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                width: "100%",
+                height: "100%",
+              }} // Estilos para el contenedor del loader
+              innerStyles={{ width: "300px", height: "10px" }} // Estilos para el contenedor interno del loader
+              barStyles={{
+                backgroundColor: "#63c548",
+                height: "10px",
+                borderRadius: 5,
+              }} // Estilos para la barra de progreso
+              dataStyles={{ color: "#63c548", fontSize: "26px" }} // Estilos para el texto de datos
+              dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
+              initialState={(active) => active} // Estado inicial del loader
+            />
+    </>
   );
 };
 

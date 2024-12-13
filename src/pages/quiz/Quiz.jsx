@@ -217,7 +217,7 @@ function Quiz() {
             )}
           </Html>
           <Barril1
-            position={[0, 0.1, 0.5]}
+            position={[2, 0.1, 0.5]}
             castShadow
             receiveShadow
             animationName=""
@@ -237,14 +237,14 @@ function Quiz() {
             scale={[0.0051, 0.0051, 0.0051]} // Ajustar la escala
           />
           <Langosta
-            position={[0, 10, 2.5]}
+            position={[0, 7, 2.5]}
             castShadow
             receiveShadow
             animationName=""
             showAnimationsList={false}
             activateAllAnimations={true}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={[1, 1, 1]} // Ajustar la escala
+            scale={[0.71, 0.71, 0.71]} // Ajustar la escala
           />
           <Coral1
             position={[5, 0, 2.5]}
