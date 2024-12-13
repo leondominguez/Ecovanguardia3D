@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { extend, useThree, useFrame } from '@react-three/fiber';
+import { extend, useFrame } from '@react-three/fiber';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 extend({ TextGeometry });
 
 const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, size = 1, depth = 0.2, fontPath }) => {
+  const [textMesh, setTextMesh] = useState(null);
   const meshRef = useRef();
-  const { scene } = useThree();
 
   useEffect(() => {
     const loader = new FontLoader();
@@ -32,29 +32,23 @@ const Text3D = ({ text, position, frontColor = 0xffffff, sideColor = 0x888888, s
       // Crear un array de materiales
       const materials = [frontMaterial, sideMaterial];
 
-      const textMesh = new THREE.Mesh(textGeometry, materials);
-      textMesh.position.set(...position);
-      textMesh.castShadow = true; // Habilita sombras para el texto
-      textMesh.receiveShadow = true; // Habilita recepción de sombras para el texto
+      const mesh = new THREE.Mesh(textGeometry, materials);
+      mesh.position.set(...position);
+      mesh.castShadow = true; // Habilita sombras para el texto
+      mesh.receiveShadow = true; // Habilita recepción de sombras para el texto
 
-      // Limpiar el contenido anterior del grupo
-      if (meshRef.current) {
-        meshRef.current.clear();
-        meshRef.current.add(textMesh);
-      }
+      setTextMesh(mesh);
     });
   }, [text, position, frontColor, sideColor, size, depth, fontPath]);
 
   // Animar el texto para crear un efecto de ola
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.children.forEach((child, index) => {
-        child.position.y = position[1] + Math.sin(clock.getElapsedTime() + index) * 0.5;
-      });
+      meshRef.current.position.y = position[1] + Math.sin(clock.getElapsedTime()) * 0.5;
     }
   });
 
-  return <group ref={meshRef} />;
+  return textMesh ? <primitive object={textMesh} ref={meshRef} /> : null;
 };
 
 export default Text3D;

@@ -1,20 +1,19 @@
 // SubmarineModel.jsx
 
 import React, { useRef, useEffect } from 'react';
-import { useGLTF, useAnimations, Html } from '@react-three/drei';
+import { useGLTF, useAnimations } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const SubmarineModel = (props) => {
-  const { rockPositions } = props; // Recibir las posiciones de las rocas
+  // Antes: const { rockPositions } = props;  
+  // Ahora: Renombramos a minePositions
+  const { minePositions = [] } = props; 
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/models-3d/submarine/atlantic_explorer_submarine.glb');
   const { actions } = useAnimations(animations, group);
 
-  // Objeto para rastrear teclas presionadas
   const keysPressed = {};
-
-  // Almacenar los colores emisivos originales
   const originalEmissiveColors = useRef({});
 
   useEffect(() => {
@@ -25,6 +24,12 @@ const SubmarineModel = (props) => {
       }
     });
   }, [materials]);
+
+  useEffect(() => {
+    if (group.current) {
+      //group.current.position.y += 13; // Ajusta el valor según sea necesario
+    }
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -47,7 +52,7 @@ const SubmarineModel = (props) => {
 
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
-    group.current.position.y = Math.sin(t) * 0.2; // Efecto de flotación
+    group.current.position.y = 0; // Efecto de flotación
     group.current.rotation.z = Math.sin(t) * 0.05; // Balanceo
 
     const moveSpeed = 5;
@@ -72,62 +77,76 @@ const SubmarineModel = (props) => {
 
     moveDirection.normalize();
 
-    // Calcular el vector de movimiento
     const moveDistance = moveSpeed * delta;
     const moveVector = new THREE.Vector3(0, 0, moveDirection.z * moveDistance);
     moveVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), group.current.rotation.y);
 
-    // Posición tentativa
-    const tentativePosition = new THREE.Vector3().copy(group.current.position).add(moveVector);
+   
+    
+      // ... Lógica de movimiento del submarino (keys, rotación, etc.)
+    
+      // Posición tentativa
+      const tentativePosition = new THREE.Vector3().copy(group.current.position).add(moveVector);
+    
+      // Guardar la posición original
+      const originalPosition = group.current.position.clone();
+    
+      // Actualizar posición para detección de colisión
+      group.current.position.copy(tentativePosition);
+      group.current.updateMatrixWorld();
+    
+      // Crear caja delimitadora del submarino
+      const submarineBox = new THREE.Box3().setFromObject(group.current);
 
-    // Guardar la posición original
-    const originalPosition = group.current.position.clone();
+      
+    
+      // Restaurar la posición original del submarino
+      group.current.position.copy(originalPosition);
+    
+      // Detección de colisiones con las minas
+      let collision = false;
+      minePositions.forEach((minePosition) => {
+        const mineSize = 1; // Radio de la mina
+        const [mx, my, mz] = minePosition;
+    
+        // Aplicamos el mismo offset vertical que las minas tienen en su animación
+        const animatedY = my + Math.sin(t) * 0.5;
+    
+        const mineBox = new THREE.Box3().setFromCenterAndSize(
+          new THREE.Vector3(mx, animatedY, mz),
+          new THREE.Vector3(mineSize * 2, mineSize * 2, mineSize * 2)
+        );
+        
+    
+        if (submarineBox.intersectsBox(mineBox)) {
+          collision = true;
+        }
+      });
 
-    // Actualizar posición para detección de colisión
-    group.current.position.copy(tentativePosition);
-    group.current.updateMatrixWorld();
-
-    // Crear caja delimitadora del submarino
-    const submarineBox = new THREE.Box3().setFromObject(group.current);
-
-    // Restaurar la posición original
-    group.current.position.copy(originalPosition);
-
-    // Detección de colisiones
-    let collision = false;
-    rockPositions.forEach((rockPosition) => {
-      const rockSize = 1; // Radio de la roca
-      const rockBox = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(...rockPosition),
-        new THREE.Vector3(rockSize * 2, rockSize * 2, rockSize * 2)
-      );
-
-      if (submarineBox.intersectsBox(rockBox)) {
-        collision = true;
+        
+    
+      if (!collision) {
+        // Actualizar la posición si no hay colisión
+        group.current.position.copy(tentativePosition);
+    
+        // Restaurar los colores emisivos originales
+        Object.entries(materials).forEach(([name, material]) => {
+          if (material.emissive) {
+            material.emissive.copy(originalEmissiveColors.current[name]);
+            material.emissiveIntensity = 1;
+          }
+        });
+      } else {
+        // Cambiar color emisivo a rojo en caso de colisión
+        Object.values(materials).forEach((material) => {
+          if (material.emissive) {
+            material.emissive.set('#ff0000');
+            material.emissiveIntensity = 1;
+          }
+        });
       }
     });
-
-    if (!collision) {
-      // Actualizar la posición si no hay colisión
-      group.current.position.copy(tentativePosition);
-
-      // Restaurar los colores emisivos originales
-      Object.entries(materials).forEach(([name, material]) => {
-        if (material.emissive) {
-          material.emissive.copy(originalEmissiveColors.current[name]);
-          material.emissiveIntensity = 1; // Restaurar la intensidad emisiva si fue modificada
-        }
-      });
-    } else {
-      // Cambiar color emisivo a rojo en caso de colisión
-      Object.values(materials).forEach((material) => {
-        if (material.emissive) {
-          material.emissive.set('#ff0000'); // Cambia el color emisivo a rojo
-          material.emissiveIntensity = 1; // Asegurar que la intensidad emisiva sea suficiente para notar el cambio
-        }
-      });
-    }
-  });
+    
 
   // Función para manejar el click
   const handleClick = () => {
@@ -136,16 +155,14 @@ const SubmarineModel = (props) => {
 
   // Función para manejar hover
   const handlePointerOver = (event) => {
-    // Evitar modificar material.color directamente si tiene mapas de textura
     if (event.object.material && !event.object.material.map) {
-      event.object.material.color.set('#ff6347'); // Cambia el color al pasar el mouse
+      event.object.material.color.set('#ff6347'); 
     }
   };
 
   const handlePointerOut = (event) => {
-    // Evitar modificar material.color directamente si tiene mapas de textura
     if (event.object.material && !event.object.material.map) {
-      event.object.material.color.set('#ffffff'); // Regresa al color original
+      event.object.material.color.set('#ffffff'); 
     }
   };
 
@@ -176,7 +193,6 @@ const SubmarineModel = (props) => {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      {/* Modelo 3D cargado desde el GLTF */}
       <group
         name="Sketchfab_Scene"
         onClick={handleClick}
@@ -273,7 +289,6 @@ const SubmarineModel = (props) => {
         </group>
       </group>
 
-      {/* Efecto de burbujas */}
       <Bubbles />
     </group>
   );

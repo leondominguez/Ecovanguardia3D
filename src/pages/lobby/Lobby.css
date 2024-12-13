@@ -46,6 +46,7 @@ html, body {
     font-weight: normal;
     color: rgb(255, 255, 255);
     font-size: 22px;
+    z-index: -1;
     
 }
 .lobby-resumen h2 {
