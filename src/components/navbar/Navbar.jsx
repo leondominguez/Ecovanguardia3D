@@ -77,8 +77,6 @@ export const Navbar = () => {
         <li>
           {activeLink === "Nosotros" && <span className="status-dot"></span>}
           <a
-            className={activeLink === "Nosotros" ? "active" : ""}
-            onClick={() => handleLinkClick("Nosotros")}
           >
             Nosotros
           </a>
@@ -86,8 +84,6 @@ export const Navbar = () => {
         <li>
           {activeLink === "Recursos" && <span className="status-dot"></span>}
           <a
-            className={activeLink === "Recursos" ? "active" : ""}
-            onClick={() => handleLinkClick("Recursos")}
           >
             Recursos
           </a>
