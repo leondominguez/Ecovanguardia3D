@@ -8,6 +8,12 @@ import DeepOceanQuiz from "./DeepOceanQuiz";
 import AmbientLight from "../../components/lights/AmbientLight";
 import HemisphereLight from "../../components/lights/HemisphereLight";
 import PointLight from "../../components/lights/PointLight";
+import { Html, Text } from "@react-three/drei";
+import Text3dQuiz from "../../components/text3d/Text3dQuiz";
+import { useAuth } from "../../pages/login/login-context/AuthContext";
+import { Navigate } from "react-router-dom";
+
+  // Preguntas del Quiz
 import Barril1 from "./Barril1.jsx";
 import Langosta from "./Langosta.jsx";
 import Barril2 from "./Barril2.jsx";
@@ -16,35 +22,75 @@ import CoralSub from "./CoralSub.jsx";
 import Coral2 from "./Coral2.jsx";
 
 function Quiz() {
+    const { authUser } = useAuth();
+    if (authUser==null) {
+        return <Navigate to="/login" replace />;
+    }
+    
   //Preguntas del Quiz
   const questions = [
     {
-      question: "¿Cuál es el lenguaje de programación más popular en 2024?",
-      options: ["Java", "Python", "JavaScript", "C++"],
-      answer: "JavaScript",
+      question: "¿Qué es la contaminación del agua?",
+      options: [
+        "La presencia de sustancias tóxicas en el agua que afectan a los ecosistemas y la salud humana",
+        "El uso excesivo de agua potable en las ciudades",
+        "La evaporación del agua en grandes masas",
+        "El cambio del color del agua debido a la luz solar",
+      ],
+      answer: "La presencia de sustancias tóxicas en el agua que afectan a los ecosistemas y la salud humana",
     },
     {
-      question: "¿Qué significa HTML?",
+      question: "¿Cuál de los siguientes es un efecto de la escasez de agua?",
       options: [
-        "HyperText Markup Language",
-        "Home Tool Markup Language",
-        "Hyperlinks and Text Markup Language",
-        "High Text Machine Language",
+        "Mayor acceso a agua limpia",
+        "Conflictos por recursos hídricos",
+        "Disminución de la contaminación del agua",
+        "Aumento de las lluvias en áreas urbanas",
       ],
-      answer: "HyperText Markup Language",
+      answer: "Conflictos por recursos hídricos",
     },
     {
-      question: "¿Quién creó Linux?",
+      question: "¿Qué provoca la acidificación de los océanos?",
       options: [
-        "Bill Gates",
-        "Linus Torvalds",
-        "Steve Jobs",
-        "Mark Zuckerberg",
+        "El aumento de dióxido de carbono (CO2) en la atmósfera que se disuelve en el agua",
+        "La reducción de oxígeno en las aguas profundas",
+        "El aumento de residuos plásticos en los océanos",
+        "La sobrepesca en los ecosistemas marinos",
       ],
-      answer: "Linus Torvalds",
+      answer: "El aumento de dióxido de carbono (CO2) en la atmósfera que se disuelve en el agua",
+    },
+    {
+      question: "¿Qué actividad humana es una de las principales causas de la contaminación del agua?",
+      options: [
+        "El consumo de agua embotellada",
+        "La descarga de desechos industriales y químicos en ríos y lagos",
+        "La pesca en aguas profundas",
+        "El uso de energía eólica",
+      ],
+      answer: "La descarga de desechos industriales y químicos en ríos y lagos",
+    },
+    {
+      question: "¿Qué consecuencias puede tener la escasez de agua en la agricultura?",
+      options: [
+        "Un aumento en la producción de cultivos",
+        "Menor necesidad de sistemas de riego",
+        "Pérdida de cultivos y aumento de los precios de los alimentos",
+        "Mayor disponibilidad de agua para la ganadería",
+      ],
+      answer: "Pérdida de cultivos y aumento de los precios de los alimentos",
+    },
+    {
+      question: "¿Qué ecosistema marino es más afectado por la acidificación de los océanos?",
+      options: [
+        "Los arrecifes de coral",
+        "Las zonas polares",
+        "Los manglares",
+        "Las playas tropicales",
+      ],
+      answer: "Los arrecifes de coral",
     },
   ];
-
+ 
   // Estados
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -65,11 +111,11 @@ function Quiz() {
   };
 
   const cameraRef = useRef();
+
   return (
     <>
       <Navbar />
-
-      <div style={{ height: "100vh" }}>
+      {authUser && (<div style={{ height: "100vh" }}>
         <Canvas>
           <SkyBackground
             distance={300} // Define la distancia del cielo
@@ -89,18 +135,19 @@ function Quiz() {
             showAnimationsList={false}
             activateAllAnimations={true}
             rotation={[0, Math.PI / 2, 0]}
-            scale={[1, 1, 1]} // Ajustar la escala
+            scale={[1, 1, 1]}
           />
-          <PointLight //peces del medio
-            position={[0, 8, 0]} // sobre el mar rayos
-            intensity={8.8} // Intensidad de la luz
-            color="white" // Color de la luz
-            distance={100} // Distancia máxima de la luz
-            decay={1} // Decaimiento de la luz con la distancia
-            showHelper={true} // Muestra un helper visual para la luz
-            castShadow={true} // Habilita la capacidad de la luz para proyectar sombras
-            helperSize={0.5} // Tamaño del helper
+          <PointLight
+            position={[0, 8, 0]}
+            intensity={8.8}
+            color="white"
+            distance={100}
+            decay={1}
+            showHelper={true}
+            castShadow={true}
+            helperSize={0.5}
           />
+          
           <HemisphereLight
             skyColor="white" // Color del cielo
             groundColor="white" // Color del suelo
@@ -114,15 +161,61 @@ function Quiz() {
             position={[-0.3, 3.0, 4.8]}
             fov={75}
           />
-          <axesHelper args={[200]} />
+          
           <OrbitControls
             enableZoom
-            minPolarAngle={Math.PI / 6} // Limita el ángulo mínimo para evitar que la cámara pase por debajo del suelo
-            maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
-            enableRotate={true} // Habilita la rotación con el botón izquierdo del ratón
-            enablePan={false} // Habilita el desplazamiento con el botón derecho del ratón
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 2.1}
+            enableRotate={true}
+            enablePan={false}
+            minAzimuthAngle={-Math.PI / 4} // -45 grados 
+            maxAzimuthAngle={Math.PI / 4} // 45 grados
           />
-          //modelos 3d adicionales
+
+          <Text3dQuiz
+            text={
+              showScore
+                ? `Puntaje final: ${score}/${questions.length}`
+                : `Puntaje actual: ${score}`
+            }
+            fontPath="/fonts/carterOne/Carter One_Regular.json"
+            position={[-1.5, 2.5, 0]} // Posición en el espacio 3D
+            frontColor={"#007bff"} // Color del frente
+            sideColor={"#bfd9ec"} // Color del resto
+            size={0.2}
+            depth={-1} // Anclar verticalmente al centro
+          ></Text3dQuiz>
+
+          {/* Quiz UI */}
+          <Html
+            position={[-1.8, 2, -1]}
+            distanceFactor={8}
+            className="quiz-container"
+          >
+            {showScore ? (
+              <div className="score-section">
+                <h2>¡Terminaste el quiz!</h2>
+              </div>
+            ) : (
+              <div className="question-section">
+                <h2>
+                  Pregunta {currentQuestion + 1}/{questions.length}
+                </h2>
+                <p>{questions[currentQuestion].question}</p>
+                <div className="options-section">
+                  {questions[currentQuestion].options.map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => handleAnswer(option)}
+                      className="option-button"
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </Html>
           <Barril1
             position={[0, 0.1, 0.5]}
             castShadow
@@ -221,40 +314,10 @@ function Quiz() {
           dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`} // Función para interpolar los datos de carga
           initialState={(active) => active} // Estado inicial del loader
         />
-      </div>
+      </div>)
+    }
     </>
   );
 }
 
 export default Quiz;
-
-{
-  /* <div className="quiz-container">
-        {showScore ? (
-          <div className="score-section">
-            <h2>¡Terminaste el quiz!</h2>
-            <p>
-              Obtuviste {score} de {questions.length} respuestas correctas.
-            </p>
-          </div>
-        ) : (
-          <div className="question-section">
-            <h2>
-              Pregunta {currentQuestion + 1}/{questions.length}
-            </h2>
-            <p>{questions[currentQuestion].question}</p>
-            <div className="options-section">
-              {questions[currentQuestion].options.map((option) => (
-                <button
-                  key={option}
-                  onClick={() => handleAnswer(option)}
-                  className="option-button"
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div> */
-}
