@@ -1641,7 +1641,7 @@ const DeepOcean = forwardRef(
                 material={materials.petitpoisson}
               />
             </group>
-            <group name="rayons"  position={[-0.387, -6.663, 1]} scale={[1, 0.025, 1]}>
+            {/* <group name="rayons"  position={[-0.387, -6.663, 1]} scale={[1, 0.025, 1]}>
               <mesh
                 name="rayons_0"
                 castShadow
@@ -1649,7 +1649,7 @@ const DeepOcean = forwardRef(
                 geometry={nodes.rayons_0.geometry}
                 material={materials.rayons}
               />
-            </group>
+            </group> */}
             <group name="sol" position={[0, 0, 0.029]} scale={[15.42, 15.42, 9]}>
               <mesh
                 name="sol_0"

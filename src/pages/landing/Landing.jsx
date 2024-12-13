@@ -1,22 +1,19 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import "./Landing.css";
-// import Logoimage from "/images/logos/gotaLogo.png";
-import { OrbitControls } from "@react-three/drei";
-// import BubblesSimulation from "../../components/html-3d-example/BubblesSimulation";
+import { OrbitControls, Loader } from "@react-three/drei";
 import WebGLSettings from "../../components/performance/WebGLSettings.jsx";
 import SetPixelRatio from "../../components/performance/SetPixelRatio.jsx";
 import { useNavigate } from "react-router-dom";
 import Drop from "../../components/models-3d-component/drop/Drop.jsx";
 import SeaSimulation from "../../components/models-3d-component/sea-simulation/SeaSimulation.jsx";
-// // import { DirectionalLightHelper } from "three";
-// // import { useHelper } from "@react-three/drei";
+import Text3D from "../../components/text3d/Text3D.jsx";
+import AmbientLight from "../../components/lights/AmbientLight.jsx";
+import PostProcessing from "../../components/performance/PostProcessing.jsx";
 
 function LightWithHelper() {
   const lightRef = useRef();
   const target = useRef();
-
-  // useHelper(lightRef, DirectionalLightHelper, 5, "red");
 
   return (
     <>
@@ -31,30 +28,26 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/home");
+    navigate("/lobby");
   };
 
   const [counter, setCounter] = useState(0);
   const dropRef = useRef();
   useEffect(() => {
-    // Función para manejar el evento wheel
     const handleWheel = (event) => {
-      event.preventDefault(); // Evita el scroll predeterminado
+      event.preventDefault();
       if (dropRef.current) {
-        // Ajusta la velocidad de rotación aquí
         const rotationSpeed = 0.65;
         if (event.deltaY < 0) {
-          dropRef.current.rotation.y -= rotationSpeed; // Rota hacia la izquierda
+          dropRef.current.rotation.y -= rotationSpeed;
         } else {
-          dropRef.current.rotation.y += rotationSpeed; // Rota hacia la derecha
+          dropRef.current.rotation.y += rotationSpeed;
         }
       }
     };
 
-    // Añadir el listener al evento wheel
     window.addEventListener("wheel", handleWheel, { passive: false });
 
-    // Eliminar el listener cuando el componente se desmonte
     return () => {
       window.removeEventListener("wheel", handleWheel);
     };
@@ -96,28 +89,57 @@ function Landing() {
         <p></p>
       </div>
 
-      {/* <div className="contenedor2">
-      </div>
-       */}
       <div className="canvas-container">
         <Canvas id="myCanvas">
-          {/* <WebGLSettings
+          <WebGLSettings
             pixelRatio={window.devicePixelRatio}
             powerPreference="high-performance"
             antialias={false}
-          /> */}
-
+          />
+          <AmbientLight intensity={1.5} color="white" />
           <Suspense fallback={null}>
-            {/* <directionalLight position={[10, 10, -5]} intensity={15} /> */}
+            <directionalLight position={[10, 10, -5]} intensity={15} />
+            <group
+              onPointerOver={(e) => (document.body.style.cursor = 'pointer')}
+              onPointerOut={(e) => (document.body.style.cursor = 'default')}
+              onClick={handleButtonClick}
+            >
+              <Text3D
+                className="text3d"
+                text="Sumérgete En Esta Aventura"
+                position={[-46, -12, -30]}
+                frontColor={"#23566e"}
+                sideColor={"#bfd9ec"}
+                size={5}
+                depth={-0.71}
+                fontPath="/fonts/carterOne/Carter One_Regular.json"
+              />
+            </group>
           </Suspense>
+          
         </Canvas>
         <div className="seaContainer">
           <SeaSimulation />
         </div>
-
-        <button className="boton" onClick={handleButtonClick}>
-          Continuar
-        </button>
+        
+        <Loader
+          containerStyles={{
+            backgroundColor: "#23566e",
+            width: "100%",
+            height: "100%",
+            opacity: 0.9,
+          }}
+          innerStyles={{ width: "300px", height: "10px" }}
+          barStyles={{
+            backgroundColor: "#63c548",
+            height: "10px",
+            borderRadius: 5,
+          }}
+          dataStyles={{ color: "#63c548", fontSize: "26px" }}
+          dataInterpolation={(p) => `Cargando ${p.toFixed(0)}%`}
+          initialState={(active) => active}
+        />
+     
       </div>
     </div>
   );
