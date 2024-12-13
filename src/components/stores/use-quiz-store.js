@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import '../pages/logical-components/Quiz';
+
 
 const useQuizStore = create((set) => ({
   quiz: {
