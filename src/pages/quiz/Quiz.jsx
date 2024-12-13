@@ -186,8 +186,8 @@ function Quiz() {
             <PerspectiveCamera
               ref={cameraRef}
               makeDefault
-              position={[-0.3, 3.0, 4.8]}
-              fov={75}
+              position={[-0.3, 3.3, 7]}
+              fov={70}
             />
             <OrbitControls
               enableZoom
@@ -205,7 +205,7 @@ function Quiz() {
                   : `Puntaje actual: ${score}`
               }
               fontPath="/fonts/carterOne/Carter One_Regular.json"
-              position={[-1.5, 2.5, 0]} // Posición en el espacio 3D
+              position={[-1.5, 4, 0]} // Posición en el espacio 3D
               frontColor={"#007bff"} // Color del frente
               sideColor={"#bfd9ec"} // Color del resto
               size={0.2}
@@ -214,7 +214,7 @@ function Quiz() {
             {/* Quiz UI */}
             <Html
               scale={1.5}
-              position={[-0.3, 1.5, 0]}
+              position={[-0.3, 2.5, 0]}
               distanceFactor={2}
               className="quiz-container"
               transform={true} // Deshabilitar la rotación del HTML
@@ -325,7 +325,7 @@ function Quiz() {
               scale={[0.51, 0.51, 0.51]} // Ajustar la escala
             />
             <Leaderboard 
-              position={[4.3, 4, -2]}
+              position={[4.3, 3.5, 0]}
               distanceFactor={2}
               className="leaderboard-container"
             />
