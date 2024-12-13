@@ -27,7 +27,7 @@ import Birds from "../../../components/models-3d-component/birds/Birds.jsx";
 
 const content = (
   <div>
-    w
+    
     <p style={{ textAlign: "left" }}>
       La acidificación de los océanos es el proceso por el cual los océanos se
       vuelven más ácidos debido al aumento de dióxido de carbono (CO₂) en la
