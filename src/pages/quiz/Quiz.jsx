@@ -161,7 +161,7 @@ function Quiz() {
             position={[-0.3, 3.0, 4.8]}
             fov={75}
           />
-          <axesHelper args={[200]} />
+          
           <OrbitControls
             enableZoom
             minPolarAngle={Math.PI / 6}
