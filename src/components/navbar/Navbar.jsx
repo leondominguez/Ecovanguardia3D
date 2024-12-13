@@ -74,7 +74,7 @@ export const Navbar = () => {
             Quiz
           </a>
         </li>
-        <li>
+        {/* <li>
           {activeLink === "Nosotros" && <span className="status-dot"></span>}
           <a
           >
@@ -87,7 +87,7 @@ export const Navbar = () => {
           >
             Recursos
           </a>
-        </li>
+        </li> */}
       </ul>
       <div className="navbar-icon">
         {authUser ? (
