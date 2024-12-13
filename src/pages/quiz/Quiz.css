@@ -6,20 +6,16 @@ html, body {
   overflow: hidden;
 }
 
+/* Nuevos estilos */
 
-  /*nuevos*/
-
-.Canvas-Quiz-container
-{
-
-    height: 100%;
-    width: 100%;
- 
+.Canvas-Quiz-container {
+  height: 100%;
+  width: 100%;
 }
 
 .quiz-container {
   background: rgba(255, 255, 255, 0.2); /* Fondo blanco translúcido */
-  backdrop-filter: blur(px); /* Efecto de desenfoque */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
   -webkit-backdrop-filter: blur(10px); /* Soporte para navegadores WebKit */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Borde tenue */
   padding: 20px;
@@ -30,8 +26,10 @@ html, body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra tenue para realzar */
 }
 
-.question-section h2, p
+.question-section h2, p,
 .score-section h2 {
+  margin: 0;
+  padding: 0;
 }
 
 .options-section {
@@ -52,4 +50,30 @@ html, body {
 
 .option-button:hover {
   background-color: #0056b3;
+}
+
+/* Estilos para la tabla de puntajes */
+.score-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.score-section th, .score-section td {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  text-align: left;
+  color: white;
+}
+
+.score-section th {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.score-section tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.score-section tr:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

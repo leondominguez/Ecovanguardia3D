@@ -1,0 +1,54 @@
+.leaderboard-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leaderboard-container button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .leaderboard-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .leaderboard-table {
+    margin-top: 20px;
+  }
+  
+  .leaderboard-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .leaderboard-table th, .leaderboard-table td {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    text-align: left;
+    color: white;
+  }
+  
+  .leaderboard-table th {
+    background-color: rgba(0, 123, 255, 0.5);
+  }
+  
+  .leaderboard-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .leaderboard-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }

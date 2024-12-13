@@ -329,6 +329,8 @@ const Lobby = () => {
           maxPolarAngle={Math.PI / 2.1} // Limita el ángulo máximo para evitar que la cámara pase por encima
           enableRotate={true} // Habilita la rotación con el botón izquierdo del ratón
           enablePan={false} // Habilita el desplazamiento con el botón derecho del ratón
+          minAzimuthAngle={-Math.PI / 2.5} // -45 grados
+          maxAzimuthAngle={Math.PI / 2.5} // 45 grados
         />
         <PostProcessing
           effects={{
